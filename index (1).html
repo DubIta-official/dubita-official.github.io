@@ -306,7 +306,7 @@ footer a{color:var(--muted)}
     </div>
   </section>
 
-  <footer>Dati e immagini: <a href="https://anilist.co" target="_blank" rel="noopener">AniList</a>. Doppiaggi: archivio verificato a mano. Le librerie sono salvate solo in questo browser.</footer>
+  <footer><span style="opacity:.6">Versione 25.10-2 ·</span> Dati e immagini: <a href="https://anilist.co" target="_blank" rel="noopener">AniList</a>. Doppiaggi: archivio verificato a mano. Le librerie sono salvate solo in questo browser.</footer>
 </div>
 
 <div class="overlay" id="overlay" hidden></div>
@@ -578,14 +578,29 @@ function canReport(){
   const today = new Date().toDateString();
   return reports.filter(r => new Date(r.t).toDateString() === today).length < REPORT_DAY_LIMIT;
 }
-async function postReport(r){
-  if (!REPORT_FORM) return false;
-  const body = new URLSearchParams();
-  body.set(REPORT_FORM.TIPO, r.kind === "missing" ? "Anime mancante" : "Errore doppiaggio");
-  body.set(REPORT_FORM.ANIME, r.title);
-  body.set(REPORT_FORM.TESTO, reportText(r));
-  if (REPORT_FORM.FONTE) body.set(REPORT_FORM.FONTE, r.src || "");
-  try { await fetch(REPORT_FORM.url, {method: "POST", mode: "no-cors", body}); return true; } catch (e) { return false; }
+// invio come un normale modulo web, dentro una cornice nascosta: il visitatore non lascia la pagina
+function postReport(r){
+  if (!REPORT_FORM) return Promise.resolve(false);
+  return new Promise(resolve => {
+    let sink = document.getElementById("rep-sink");
+    if (!sink) {
+      sink = document.createElement("iframe");
+      sink.name = sink.id = "rep-sink"; sink.title = "Invio segnalazioni"; sink.hidden = true;
+      document.body.appendChild(sink);
+    }
+    const f = document.createElement("form");
+    f.method = "POST"; f.action = REPORT_FORM.url; f.target = "rep-sink"; f.hidden = true;
+    const add = (k, v) => { const i = document.createElement("input"); i.type = "hidden"; i.name = k; i.value = v; f.appendChild(i); };
+    add(REPORT_FORM.TIPO, r.kind === "missing" ? "Anime mancante" : "Errore doppiaggio");
+    add(REPORT_FORM.ANIME, r.title);
+    add(REPORT_FORM.TESTO, reportText(r));
+    if (REPORT_FORM.FONTE) add(REPORT_FORM.FONTE, r.src || "");
+    document.body.appendChild(f);
+    let done = false;
+    const finish = () => { if (done) return; done = true; f.remove(); resolve(true); };
+    sink.onload = finish; setTimeout(finish, 5000);
+    f.submit();
+  });
 }
 function sendReport(r){
   if (!canReport()) return false;
