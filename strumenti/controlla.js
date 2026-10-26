@@ -23,6 +23,7 @@ DUBDB.forEach((e, i) => {
   if (!ST.includes(e.st)) errors.push(`${where}: st deve essere uno di ${ST.join(", ")}`);
   if (typeof e.n !== "string" || !e.n.trim()) errors.push(`${where}: manca la nota n`);
   if (!/^https:\/\//.test(e.src || "")) errors.push(`${where}: manca la fonte src (link https)`);
+  if (e.v !== undefined && !/^\d{1,2} (gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre) \d{4}$/.test(e.v)) errors.push(`${where}: v scritto male: "${e.v}" (formato: "26 ottobre 2026")`);
   for (const f of ["s", "pt"]) if (e[f] !== undefined && !(Array.isArray(e[f]) && e[f].every(Number.isInteger))) errors.push(`${where}: ${f} deve essere un elenco di numeri`);
 });
 STAGIONE_SUB.forEach(([ks, p], i) => {

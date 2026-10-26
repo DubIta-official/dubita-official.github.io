@@ -93,6 +93,7 @@ h2 .n{font-family:var(--mono);font-size:13px;color:var(--accent2)}
 .dubtag{position:absolute;left:8px;bottom:8px;z-index:1;font-family:var(--mono);font-size:11px;font-weight:600;border-radius:8px;padding:3px 8px;color:#fff;background:rgba(9,10,28,.8);border:1px solid rgba(255,255,255,.18)}
 .dubtag.ita{background:var(--green);color:#06281a;border-color:transparent;box-shadow:0 4px 12px rgba(47,220,150,.35)}
 .dubtag.soon{background:var(--amber);color:#2e1a00;border-color:transparent}
+.dubtag.unk{background:rgba(9,10,28,.6);color:var(--muted);border-style:dashed}
 .dubbox select.chip,.dubbox input.chip{cursor:pointer;color:var(--ink)}
 .card .body{padding:10px 11px 12px;display:flex;flex-direction:column;gap:3px;min-width:0}
 .card .t{font-weight:700;font-size:14px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -219,7 +220,7 @@ footer a{color:var(--muted)}
       <li><b>Librerie</b>: le tue liste di anime, salvate in questo browser.</li>
       <li><b>Doppiaggi ITA</b>: cosa è doppiato questa settimana, cosa è in arrivo, e dove segnalare un errore.</li>
     </ul>
-    <p class="legend">Le etichette sulle copertine: <span class="fact"><b>ITA</b></span> doppiato · <span class="fact"><b>ITA in corso</b></span> doppiaggio in uscita · <span class="fact"><b>ITA in arrivo</b></span> annunciato · <span class="fact"><b>SUB ITA</b></span> solo sottotitolato · <span class="fact"><b>No ITA</b></span> nessun doppiaggio. Tocca una copertina per i dettagli.</p>
+    <p class="legend">Le etichette sulle copertine: <span class="fact"><b>ITA</b></span> doppiato · <span class="fact"><b>ITA in corso</b></span> doppiaggio in uscita · <span class="fact"><b>ITA in arrivo</b></span> annunciato · <span class="fact"><b>SUB ITA</b></span> solo sottotitolato · <span class="fact"><b>No ITA</b></span> nessun doppiaggio · <span class="fact"><b>Nessun annuncio</b></span> per ora nessun doppiaggio annunciato · <span class="fact"><b>ITA ?</b></span> non ancora verificato. Ogni dato ha la sua fonte: tocca una copertina per vederla.</p>
   </details>
 
   <!-- SETTIMANA -->
@@ -335,7 +336,7 @@ footer a{color:var(--muted)}
     </div>
   </section>
 
-  <footer><span style="opacity:.6">Versione 26.10-1 ·</span> Dati e immagini: <a href="https://anilist.co" target="_blank" rel="noopener">AniList</a>. Doppiaggi: archivio verificato a mano. Le librerie sono salvate solo in questo browser.</footer>
+  <footer><span style="opacity:.6">Versione 26.10-2 ·</span> Dati e immagini: <a href="https://anilist.co" target="_blank" rel="noopener">AniList</a>. Doppiaggi: archivio verificato a mano. Le librerie sono salvate solo in questo browser.</footer>
 </div>
 
 <div class="overlay" id="overlay" hidden></div>
@@ -405,7 +406,7 @@ function dubTag(id){
   const e = dubData(m);
   if ((!e || e.rule) && newsFor(m).some(isDubNews)) return `<span class="dubtag soon">ITA? notizia</span>`;
   if (e) { const L = DUB_LABEL[e.st]; return `<span class="dubtag ${L[1]}">${L[0]}</span>`; }
-  return "";
+  return `<span class="dubtag unk" title="Doppiaggio italiano non ancora verificato">ITA ?</span>`;
 }
 function card(m, opts = {}){
   mediaCache.set(m.id, m);
@@ -970,11 +971,11 @@ function renderDubBox(m){
   let archHtml;
   if (e) {
     const L = DUB_LABEL[e.st];
-    archHtml = `<div class="next" style="margin:0;${e.st === "none" || e.st === "sub" ? "background:var(--bg);border:1px solid var(--line)" : ""}">
+    archHtml = `<div class="next" style="margin:0;${["none", "noann", "sub"].includes(e.st) ? "background:var(--bg);border:1px solid var(--line)" : ""}">
       <b>${L[2]}</b>${e.p ? " · " + esc(e.p) : ""}<div style="margin-top:4px">${esc(e.n || "")}</div>
-      <div style="margin-top:6px;font-size:13px;color:var(--muted)">Verificato il ${DUB_CHECKED} · <a href="${esc(e.src)}" target="_blank" rel="noopener" style="color:var(--accent2)">fonte</a></div></div>`;
+      <div style="margin-top:6px;font-size:13px;color:var(--muted)">${e.rule ? `Dedotto dalla panoramica della stagione, non confermato da un annuncio · archivio aggiornato il ${DUB_CHECKED}` : e.v ? `Confermato da una fonte · voce verificata il ${esc(e.v)}` : `Confermato da una fonte · archivio aggiornato il ${DUB_CHECKED}`} · <a href="${esc(e.src)}" target="_blank" rel="noopener" style="color:var(--accent2)">fonte</a></div></div>`;
   } else {
-    archHtml = `<div class="next" style="margin:0;background:var(--bg);border:1px solid var(--line)">Questo anime non è ancora nel nostro archivio dei doppiaggi, quindi non possiamo dirti se è doppiato.
+    archHtml = `<div class="next" style="margin:0;background:var(--bg);border:1px solid var(--line)"><b>Non verificato</b><div style="margin-top:4px">Questo anime non è ancora nel nostro archivio dei doppiaggi: non sappiamo se è doppiato, e preferiamo dirtelo piuttosto che tirare a indovinare.</div>
       <a href="https://www.animeclick.it/cerca?name=${encodeURIComponent(m.title.romaji)}" target="_blank" rel="noopener" style="color:var(--accent2)">Controlla su AnimeClick</a></div>`;
   }
   const mine = reports.find(r => r.id === m.id);

@@ -6,7 +6,8 @@
 /* ---------- ARCHIVIO DOPPIAGGI ITALIANI (verificato a mano) ----------
    Ogni voce: k = titoli (inizio del titolo, già normalizzato), s = stagioni, pt = parti, y/yx = anno minimo/massimo,
    ex = parole che escludono, inc = basta che il titolo contenga la chiave.
-   st: "dub" doppiato · "partial" doppiaggio in corso · "soon" annunciato · "none" nessun doppiaggio annunciato */
+   st: "dub" doppiato · "partial" doppiaggio in corso · "soon" annunciato · "sub" solo sottotitolato · "none" nessun doppiaggio (confermato)
+   v = data in cui la voce è stata verificata (facoltativa, es. "26 ottobre 2026") */
 const DUB_CHECKED = "25 ottobre 2026";
 const SRC = {
   rag: "https://www.antoniogenna.net/doppiaggio/anim/rentagirlfriend.htm",
@@ -199,7 +200,7 @@ function seasonRule(m){
   const ts = [m.title.english, m.title.romaji].filter(Boolean).map(norm);
   const hit = STAGIONE_SUB.find(([ks]) => ks.some(k => ts.some(t => t === k || t.startsWith(k + " "))));
   if (hit) return {rule: true, st: "sub", p: hit[1], n: `Disponibile in Italia solo sottotitolato: non compare tra i doppiaggi annunciati per ${STAGIONE.nome}.`, src: STAGIONE.listone};
-  return {rule: true, st: "none", p: "", n: `Nessun doppiaggio italiano in uscita questa stagione: non compare tra i doppiaggi annunciati per ${STAGIONE.nome}, su nessuna piattaforma.`, src: STAGIONE.panoramica};
+  return {rule: true, st: "noann", p: "", n: `Finora non è stato annunciato nessun doppiaggio italiano: non compare tra i doppiaggi annunciati per ${STAGIONE.nome}, su nessuna piattaforma. Se arriva un annuncio, la scheda si aggiorna.`, src: STAGIONE.panoramica};
 }
 const ROMAN = {II: 2, III: 3, IV: 4, V: 5, VI: 6};
 function seasonOf(m){
@@ -249,7 +250,8 @@ function dubData(m){
 }
 const DUB_LABEL = {dub: ["ITA", "ita", "Doppiato in italiano"], partial: ["ITA in corso", "ita", "Doppiaggio italiano in corso"],
   soon: ["ITA in arrivo", "soon", "Doppiaggio italiano annunciato"], sub: ["SUB ITA", "sub", "Solo sottotitolato in italiano"],
-  none: ["No ITA", "sub", "Nessun doppiaggio italiano"]};
+  none: ["No ITA", "sub", "Nessun doppiaggio italiano"],
+  noann: ["Nessun annuncio", "sub", "Nessun doppiaggio annunciato"]};
 
 /* ---------- TRAME TRADOTTE A MANO ---------- */
 const TRAME = [

@@ -47,7 +47,7 @@ Non sono fonti valide: commenti degli utenti, forum, video, ipotesi, la segnalaz
 
 ```js
 {k: ["titolo romaji", "titolo inglese"], s: [2], st: "dub", p: "Crunchyroll",
- n: "Doppiata, disponibile dal 1 aprile 2026.", src: "https://link-della-fonte"}
+ n: "Doppiata, disponibile dal 1 aprile 2026.", src: "https://link-della-fonte", v: "26 ottobre 2026"}
 ```
 
 - `k`: inizio dei titoli come li scrive AniList, **normalizzati**: minuscole, senza accenti, ogni segno
@@ -56,8 +56,11 @@ Non sono fonti valide: commenti degli utenti, forum, video, ipotesi, la segnalaz
 - `y` / `yx`: anno minimo / massimo della stagione su AniList, per non confondere serie con lo stesso titolo.
 - `ex`: parole che escludono (es. titoli di film o spin-off). `inc: true`: basta che il titolo contenga la chiave.
 - `st`: `dub` (doppiato), `partial` (doppiaggio in corso), `soon` (annunciato), `sub` (solo sottotitolato),
-  `none` (nessun doppiaggio).
+  `none` (nessun doppiaggio, **confermato** da una fonte). Gli anime della stagione che non compaiono nella panoramica
+  ricevono da soli l'etichetta "Nessun annuncio": non serve scriverli nell'archivio.
 - `p`: piattaforma. `n`: una frase in italiano, con la data se c'è. `src`: il link della fonte aperta.
+- `v`: la data di oggi in italiano (es. `"26 ottobre 2026"`). Va messa su ogni voce che aggiungi o cambi: sul sito
+  compare come "voce verificata il …".
 
 Quando un doppiaggio annunciato esce davvero, la voce passa da `soon` a `dub` (o `partial`) e si aggiornano `n` e `src`.
 
