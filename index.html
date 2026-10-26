@@ -167,6 +167,16 @@ footer a{color:var(--muted)}
   form.dub #d-title{grid-column:1/-1}
 }
 
+/* come funziona */
+.intro{border:1px solid var(--line);border-radius:18px;background:rgba(26,28,66,.7);padding:4px 18px;color:var(--muted);font-size:14px}
+.intro summary{cursor:pointer;color:var(--ink);font-weight:700;padding:10px 0;list-style-position:inside}
+.intro[open] summary{border-bottom:1px solid var(--line);margin-bottom:6px}
+.intro b{color:var(--ink)}
+.intro ul{margin:8px 0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.intro p{margin:8px 0}
+.intro .legend{line-height:2}
+.intro .fact{white-space:nowrap}
+
 /* consigli */
 .rcard{--c:#9b7bff;display:grid;grid-template-columns:220px minmax(0,1fr);gap:22px;align-items:start;border-radius:22px;padding:20px;border:1px solid var(--line);
   background:linear-gradient(120deg,color-mix(in srgb,var(--c) 26%,var(--surface)) 0%,var(--surface) 55%)}
@@ -197,6 +207,20 @@ footer a{color:var(--muted)}
       <button data-view="dubs" aria-pressed="false">Doppiaggi ITA</button>
     </nav>
   </header>
+
+  <details class="intro" id="intro" open>
+    <summary>Come funziona DubITA</summary>
+    <p>DubITA ti dice cosa esce, quando e soprattutto <b>se è doppiato in italiano</b>. I dati sugli anime arrivano da AniList; i doppiaggi da un archivio controllato con le fonti ufficiali e aggiornato ogni giorno.</p>
+    <ul>
+      <li><b>Settimana</b>: gli episodi in uscita giorno per giorno, con l'orario italiano.</li>
+      <li><b>Esplora</b>: cerca qualsiasi anime, oppure guarda quelli di tendenza, della stagione o i più amati.</li>
+      <li><b>Consigli</b>: un anime a sorpresa, oppure scrivi cosa ti va (es. «romantico a scuola» o «simile a Jujutsu Kaisen»). Il titolo non deve essere scritto perfetto.</li>
+      <li><b>Notizie</b>: le ultime novità, anche solo sui doppiaggi o sulle tue serie.</li>
+      <li><b>Librerie</b>: le tue liste di anime, salvate in questo browser.</li>
+      <li><b>Doppiaggi ITA</b>: cosa è doppiato questa settimana, cosa è in arrivo, e dove segnalare un errore.</li>
+    </ul>
+    <p class="legend">Le etichette sulle copertine: <span class="fact"><b>ITA</b></span> doppiato · <span class="fact"><b>ITA in corso</b></span> doppiaggio in uscita · <span class="fact"><b>ITA in arrivo</b></span> annunciato · <span class="fact"><b>SUB ITA</b></span> solo sottotitolato · <span class="fact"><b>No ITA</b></span> nessun doppiaggio. Tocca una copertina per i dettagli.</p>
+  </details>
 
   <!-- SETTIMANA -->
   <section id="week" class="stack">
@@ -311,7 +335,7 @@ footer a{color:var(--muted)}
     </div>
   </section>
 
-  <footer><span style="opacity:.6">Versione 25.10-2 ·</span> Dati e immagini: <a href="https://anilist.co" target="_blank" rel="noopener">AniList</a>. Doppiaggi: archivio verificato a mano. Le librerie sono salvate solo in questo browser.</footer>
+  <footer><span style="opacity:.6">Versione 26.10-1 ·</span> Dati e immagini: <a href="https://anilist.co" target="_blank" rel="noopener">AniList</a>. Doppiaggi: archivio verificato a mano. Le librerie sono salvate solo in questo browser.</footer>
 </div>
 
 <div class="overlay" id="overlay" hidden></div>
@@ -1096,7 +1120,7 @@ const KW = [
 ];
 const FLAG_IT = {short: "Massimo 13 episodi", long: "Più di 50 episodi", done: "Concluso", airing: "In corso", recent: "Usciti negli ultimi anni",
   old: "Classici (prima del 2005)", movie: "Film", dub: "Doppiato in italiano (archivio verificato)"};
-const SIMILAR_RE = /(?:^|\s)(?:simile a|simili a|come|tipo|stile|sullo stile di|alla)\s+(.+?)(?=\s+(?:ma|pero|però|e|con|che|ed)\s|$)/;
+const SIMILAR_RE = /(?:^|\s)(?:simile a|simili a|simile|simili|come|tipo|stile|sullo stile di|alla)\s+(.+?)(?=\s+(?:ma|pero|però|e|con|che|ed)\s|$)/;
 const NEG_RE = /(?:^|\s)(?:no|non|niente|senza|zero|evita|evitare)\s+(?:troppo\s+|di\s+|il\s+|lo\s+|la\s+|i\s+|gli\s+|le\s+|l\s+)?([a-z]+(?:\s[a-z]+)?)/g;
 function matchKw(text){
   const hay = " " + text + " ";
@@ -1160,8 +1184,45 @@ async function fetchWish(w, page){
   }
   return best;
 }
-async function similarTo(name){
-  const d = await anilist(`query($s:String){Media(type:ANIME,search:$s,isAdult:false){id title{romaji english} recommendations(sort:RATING_DESC,perPage:25){nodes{rating mediaRecommendation{${MEDIA}}}}}}`, {s: name});
+// distanza di modifica tra due parole (quante lettere vanno cambiate, aggiunte o tolte)
+function lev(a, b){
+  let prev = Array.from({length: b.length + 1}, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    for (let j = 1; j <= b.length; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    prev = cur;
+  }
+  return prev[b.length];
+}
+// quanto un titolo somiglia a quello scritto: 1 = uguale, 0 = per niente
+function titleScore(q, m){
+  let best = 0;
+  for (const t of [m.title.romaji, m.title.english, ...(m.synonyms || [])].filter(Boolean).map(norm)) {
+    if (q.length >= 4 && (" " + t + " ").includes(" " + q + " ")) return 1;
+    for (const c of [t, t.slice(0, q.length)]) best = Math.max(best, 1 - lev(q, c) / Math.max(q.length, c.length, 1));
+  }
+  return best;
+}
+// trova l'anime anche se il titolo è scritto in modo approssimativo (es. «jujutzu kaisen», «frieran»)
+async function findAnime(name, strict){
+  const q = norm(name); if (!q) return null;
+  const words = q.split(" ").filter(w => w.length >= 3);
+  const tries = [...new Set([q, ...words, ...words.filter(w => w.length >= 6).map(w => w.slice(0, 4))])].slice(0, 8);
+  const defs = tries.map((_, i) => `$s${i}:String`).join(","), vars = {};
+  const body = tries.map((s, i) => { vars["s" + i] = s; return `r${i}:Page(perPage:8){media(type:ANIME,isAdult:false,search:$s${i},sort:[SEARCH_MATCH]){id title{romaji english} synonyms popularity}}`; }).join(" ");
+  const d = await anilist(`query(${defs}){${body}}`, vars);
+  const seen = new Map();
+  tries.forEach((_, i) => (d["r" + i]?.media || []).forEach(m => { if (!seen.has(m.id)) seen.set(m.id, {m, s: titleScore(q, m)}); }));
+  const ranked = [...seen.values()].sort((a, b) => b.s - a.s || (b.m.popularity || 0) - (a.m.popularity || 0));
+  if (ranked[0] && ranked[0].s >= 0.7) return ranked[0].m;
+  // con «simile a» mi fido anche del primo risultato di AniList per il testo intero (es. titoli italiani)
+  const first = d.r0?.media?.[0];
+  return !strict && first ? first : null;
+}
+async function similarTo(name, strict){
+  const found = await findAnime(name, strict);
+  if (!found) return null;
+  const d = await anilist(`query($id:Int){Media(id:$id){id title{romaji english} synonyms recommendations(sort:RATING_DESC,perPage:25){nodes{rating mediaRecommendation{${MEDIA}}}}}}`, {id: found.id});
   return d.Media;
 }
 function showWish(list, append){
@@ -1179,11 +1240,13 @@ async function runWish(){
   try {
     const nothing = !w.g.size && !w.t.size && !w.flags.size && !w.gn.size && !w.tn.size;
     if (w.similar || nothing) {
-      let base = await similarTo(w.similar || raw).catch(() => null);
-      // senza "simile a" accetto il titolo solo se corrisponde davvero a quello scritto
-      if (base && !w.similar) { const n = norm(raw), ts = [base.title.romaji, base.title.english].filter(Boolean).map(norm); if (!ts.some(t => t.includes(n) || n.includes(t))) base = null; }
+      // senza "simile a" accetto il titolo solo se somiglia davvero a quello scritto
+      const typed = w.similar || raw;
+      const base = await similarTo(typed, !w.similar).catch(() => null);
       if (base) {
         w.similarTitle = base.title.english || base.title.romaji;
+        const exact = [base.title.romaji, base.title.english, ...(base.synonyms || [])].filter(Boolean).map(norm).includes(norm(typed));
+        const guess = exact ? "" : `Hai scritto «${typed}»: ho capito ${w.similarTitle}. `;
         let list = base.recommendations.nodes.map(n => n.mediaRecommendation).filter(m => m && !m.isAdult);
         if (w.g.size) list = list.filter(m => [...w.g].every(g => m.genres?.includes(g)));
         if (w.flags.has("short")) list = list.filter(m => m.episodes && m.episodes <= 13);
@@ -1191,9 +1254,10 @@ async function runWish(){
         if (w.flags.has("movie")) list = list.filter(m => m.format === "MOVIE");
         if (w.flags.has("dub")) list = list.filter(isDubbed);
         wishChips(w, "");
-        if (list.length) { showWish(list.slice(0, 24)); $("cstatus").textContent = `${list.length} anime consigliati da chi ha amato ${w.similarTitle}.`; return; }
-        $("cstatus").textContent = `Ho trovato ${w.similarTitle}, ma nessun consiglio simile con questi filtri. Prova a toglierne qualcuno.`; return;
+        if (list.length) { showWish(list.slice(0, 24)); $("cstatus").textContent = `${guess}${list.length} anime consigliati da chi ha amato ${w.similarTitle}.`; return; }
+        $("cstatus").textContent = `${guess}Ho trovato ${w.similarTitle}, ma nessun consiglio simile con questi filtri. Prova a toglierne qualcuno.`; return;
       }
+      if (w.similar && nothing) { $("cstatus").textContent = `Non ho trovato nessun anime che somigli a «${w.similar}». Controlla il titolo, anche in inglese o in giapponese.`; return; }
       if (nothing) { $("cstatus").textContent = "Non ho capito cosa cerchi. Prova con parole come romantico, azione, scuola, corto, oppure «simile a» e il titolo di un anime che ti è piaciuto."; return; }
     }
     const r = await fetchWish(w, 1);
@@ -1249,6 +1313,10 @@ function show(v){
 }
 function refresh(){ if (view === "week") renderWeek(); if (view === "lists") renderLists(false); if (view === "news") renderNews(); if (view === "dubs") renderDubs(); }
 document.querySelector("nav").addEventListener("click", e => { const b = e.target.closest("button"); if (b) show(b.dataset.view); });
+
+// «Come funziona»: aperto alla prima visita, poi ricorda se l'hai chiuso
+if (store.get("dubita-intro-closed", false)) $("intro").open = false;
+$("intro").addEventListener("toggle", () => store.set("dubita-intro-closed", !$("intro").open));
 
 renderWeek(); renderDubs(); renderNews();
 // all'apertura: palinsesto, librerie e notizie; poi tutto si riaggiorna da solo
