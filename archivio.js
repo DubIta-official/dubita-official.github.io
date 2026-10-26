@@ -8,7 +8,7 @@
    ex = parole che escludono, inc = basta che il titolo contenga la chiave.
    st: "dub" doppiato · "partial" doppiaggio in corso · "soon" annunciato · "sub" solo sottotitolato · "none" nessun doppiaggio (confermato)
    v = data in cui la voce è stata verificata (facoltativa, es. "26 ottobre 2026") */
-const DUB_CHECKED = "25 ottobre 2026";
+const DUB_CHECKED = "26 ottobre 2026";
 const SRC = {
   rag: "https://www.antoniogenna.net/doppiaggio/anim/rentagirlfriend.htm",
   ragNews: "https://www.animeclick.it/news/107762-rent-a-girlfriend-su-crunchyroll-la-prima-stagione-doppiata",
@@ -70,6 +70,9 @@ const DUBDB = [
   {k: ["tongari boushi no atelier", "witch hat atelier", "atelier of witch hat"], st: "dub", p: "Crunchyroll", n: "Doppiato (primavera 2026).", src: SRC.spring},
   {k: ["dr stone science future"], pt: [3], st: "soon", p: "Crunchyroll", n: "Doppiaggio annunciato per la terza parte.", src: SRC.spring},
   {k: ["dr stone"], s: [1], yx: 2019, ex: ["science future", "new world", "stone wars", "ryuusui", "ryusui"], st: "dub", p: "Crunchyroll", n: "Prima stagione doppiata.", src: SRC.crCat},
+
+  // Film
+  {k: ["koe no katachi", "a silent voice", "la forma della voce"], y: 2016, yx: 2016, st: "dub", p: "Cinema · DVD e Blu-ray Dynit", n: "Film doppiato in italiano (La forma della voce): al cinema il 24-25 ottobre 2017 con Dynit e Nexo Digital, poi in DVD e Blu-ray Dynit con audio italiano.", src: "https://www.animeclick.it/news/71861-la-forma-della-voce-i-dettagli-delledizione-home-video-dynit", v: "26 ottobre 2026"},
 
   // Altre piattaforme (Netflix, Prime Video, Disney+, Yamato, Dynit)
   {k: ["jojo no kimyou na bouken stardust crusaders", "jojo s bizarre adventure stardust crusaders",
