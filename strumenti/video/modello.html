@@ -26,6 +26,26 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0b0820;font-fam
 .stamp{display:inline-block;font-weight:900;font-size:150px;letter-spacing:-.01em;padding:10px 54px;border-radius:36px;border:12px solid currentColor;line-height:1.05}
 .info{display:inline-block;font-weight:800;font-size:46px;padding:18px 36px;border-radius:24px;background:rgba(255,255,255,.1);margin:10px}
 .mark{position:absolute;left:70px;top:1540px;font-weight:900;font-size:40px;opacity:.55}
+.slot{position:absolute;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.07);border:3px solid rgba(255,255,255,.16);display:flex;align-items:center}
+.slot img{height:100%;width:100%;object-fit:cover;display:block}
+.slot .th{height:100%;flex:none;width:68px;background:#2a2060 center/cover}
+.slot .nm{flex:1;padding:0 10px;font-weight:900;line-height:1.02;white-space:normal}
+.slot .q{width:100%;text-align:center;font-weight:900;font-size:40px;opacity:.35}
+.slot.cur{border-color:#fff;box-shadow:0 0 0 4px #ff4fa3,0 0 40px #ff4fa3}
+.slot.lose{opacity:.38;filter:grayscale(1)}
+.slot.win{border-color:#2ee59d;box-shadow:0 0 26px #2ee59d88}
+.xx{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#ff3b4a;font-weight:900;font-size:90px;text-shadow:0 0 20px #000}
+.cover{position:absolute;left:0;right:0;overflow:hidden}
+.cover .im{position:absolute;inset:-40px;background:#2a2060 center/cover;filter:saturate(1.15)}
+.cover .sh{position:absolute;inset:0}
+.vsname{position:absolute;left:60px;right:60px;font-weight:900;letter-spacing:-.02em;line-height:1;text-shadow:0 6px 30px rgba(0,0,0,.8);white-space:normal}
+.vs{font-weight:900;font-size:260px;line-height:1;font-style:italic;letter-spacing:-.04em;-webkit-text-stroke:6px #0b0820;paint-order:stroke fill}
+.tile{position:absolute;border-radius:28px;overflow:hidden;background:#2a2060;border:3px solid rgba(255,255,255,.18)}
+.tile .im{position:absolute;inset:0;background:#2a2060 center/cover}
+.tile .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,8,32,0) 35%,rgba(11,8,32,.92) 100%)}
+.tile .tx{position:absolute;left:18px;right:18px;bottom:16px;font-weight:900;font-size:34px;line-height:1.05;white-space:normal}
+.tile .ep{display:inline-block;margin-top:8px;font-weight:800;font-size:26px;opacity:.85}
+.tile .pl{position:absolute;top:14px;left:14px;font-weight:900;font-size:24px;padding:8px 14px;border-radius:12px;color:#0b0820}
 </style></head>
 <body><div id="stage"></div>
 <script>
@@ -122,6 +142,116 @@ B.outro = (d, s) => {
     const lp = prog(lt, .7, .5); set(logo, clamp(lp * 2), 0, 0, (.4 + .6 * E.back(lp)) * (lt > 1.3 ? 1 + Math.sin((lt - 1.3) * 5) * .02 : 1), (1 - E.out(lp)) * 20);
     const up = E.back(prog(lt, 1.2, .4)); url.style.opacity = clamp(up * 2); url.style.transform = `translateX(-50%) scale(${.6 + .4 * up})`;
     set(follow, prog(lt, 1.6, .4), 0, (1 - E.out(prog(lt, 1.6, .4))) * 30);
+  }};
+};
+
+
+const imgUrl = x => x ? (x.startsWith("http") || x.startsWith("file:") ? x : "file://" + x) : "";
+// senza copertina: sfumatura colorata diversa per ogni nome
+const tinta = n => { let h = 0; for (const c of String(n)) h = (h * 31 + c.charCodeAt(0)) % 360; return h; };
+const bgImg = (x, n) => x ? `background-image:url('${imgUrl(x)}')` : `background:linear-gradient(135deg,hsl(${tinta(n)},85%,55%),hsl(${(tinta(n) + 60) % 360},80%,30%))`;
+const iniz = n => String(n).replace(/[^A-Za-z0-9 ]/g, "").split(" ").filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
+
+/* tabellone a 16: d.slots = [r0 (16), r1 (8), r2 (4), r3 (2), r4 (1)], ogni posto {n, img, esito: "win"|"lose"} o null;
+   d.cur = [round, indice sfida] da evidenziare; d.title, d.label */
+B.bracket = (d, s) => {
+  const top = 430, step = 130, H = 96;
+  const ys = [[...Array(16)].map((_, i) => top + (i % 8) * step + H / 2)];
+  for (let r = 1; r <= 3; r++) ys[r] = [...Array(16 >> r)].map((_, i) => { const h = 8 >> r, side = Math.floor(i / h), j = i % h; return (ys[r - 1][side * (h * 2) + 2 * j] + ys[r - 1][side * (h * 2) + 2 * j + 1]) / 2; });
+  const XL = [24, 252, 350, 448], W = [214, 84, 84, 84];
+  const pos = (r, i) => { if (r === 4) return {x: 490, y: 700, w: 100, h: 120};
+    const per = 8 >> r, right = i >= per, w = W[r], x = right ? 1080 - XL[r] - w : XL[r]; return {x, y: ys[r][i] - H / 2, w, h: H}; };
+  const title = el("div", "abs c", esc(d.title || "TORNEO ANIME"), s); title.style.cssText += "top:220px;font-weight:900;font-size:84px;letter-spacing:-.01em";
+  const lab = el("div", "abs c", esc(d.label || ""), s); lab.style.cssText += "top:320px;font-weight:800;font-size:36px;letter-spacing:.12em;opacity:.75";
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.setAttribute("width", 1080); svg.setAttribute("height", 1920); svg.style.cssText = "position:absolute;left:0;top:0"; s.appendChild(svg);
+  const lines = [];
+  const line = (pts, hot) => { const pl = document.createElementNS("http://www.w3.org/2000/svg", "polyline"); pl.setAttribute("points", pts.map(p => p.join(",")).join(" "));
+    pl.setAttribute("fill", "none"); pl.setAttribute("stroke", hot ? "#2ee59d" : "rgba(255,255,255,.28)"); pl.setAttribute("stroke-width", hot ? 6 : 4); pl.setAttribute("stroke-linejoin", "round"); svg.appendChild(pl);
+    const L = pts.reduce((a, p, i) => i ? a + Math.hypot(p[0] - pts[i - 1][0], p[1] - pts[i - 1][1]) : 0, 0); pl.style.strokeDasharray = L; lines.push({pl, L}); };
+  for (let r = 0; r < 4; r++) for (let i = 0; i < (16 >> r); i++) {
+    const a = pos(r, i), b = r < 3 ? pos(r + 1, i >> 1) : pos(4, 0), right = i >= (8 >> r), win = d.slots[r + 1] && d.slots[r + 1][r < 3 ? i >> 1 : 0] && d.slots[r][i] && d.slots[r][i].esito === "win";
+    if (r < 3) { const x1 = right ? a.x : a.x + a.w, x2 = right ? b.x + b.w : b.x, xm = (x1 + x2) / 2; line([[x1, a.y + H / 2], [xm, a.y + H / 2], [xm, b.y + H / 2], [x2, b.y + H / 2]], win); }
+    else line([[a.x + a.w / 2, a.y], [a.x + a.w / 2, b.y + b.h + 20], [b.x + b.w / 2, b.y + b.h + 20], [b.x + b.w / 2, b.y + b.h]], win);
+  }
+  const boxes = [];
+  for (let r = 0; r <= 4; r++) for (let i = 0; i < (r === 4 ? 1 : 16 >> r); i++) {
+    const p = pos(r, i), x = d.slots[r] && d.slots[r][i], b = el("div", "slot", "", s);
+    b.style.cssText += `left:${p.x}px;top:${p.y}px;width:${p.w}px;height:${p.h}px`;
+    if (r === 4) b.style.borderColor = "#ffc53d";
+    if (!x) b.innerHTML = `<div class="q">${r === 4 ? "🏆" : "?"}</div>`;
+    else if (r === 0) b.innerHTML = `<div class="th" style="${bgImg(x.img, x.n)};display:flex;align-items:center;justify-content:center;font-weight:900;font-size:30px">${x.img ? "" : esc(iniz(x.n))}</div><div class="nm" style="font-size:${Math.max(17, Math.min(30, Math.floor(132 / (Math.max(...x.n.split(" ").map(w => w.length)) * .64)), Math.floor(132 * 2.2 / (x.n.length * .6))))}px">${esc(x.n)}</div>`;
+    else b.innerHTML = x.img ? `<img src="${imgUrl(x.img)}">` : `<div class="q" style="${bgImg("", x.n)};height:100%;display:flex;align-items:center;justify-content:center;font-size:34px;opacity:1">${esc(iniz(x.n))}</div>`;
+    if (x && x.esito === "lose") { b.classList.add("lose"); el("div", "xx", "✕", b); }
+    if (x && x.esito === "win" && r === 4) b.classList.add("win");
+    const cur = d.cur && d.cur[0] === r && (i >> 1) === d.cur[1];
+    if (cur) b.classList.add("cur");
+    boxes.push({b, r, cur});
+  }
+  return {dur: d.dur || 3.6, draw(lt) {
+    set(title, prog(lt, 0, .3), 0, (1 - E.out(prog(lt, 0, .4))) * -40); set(lab, prog(lt, .15, .3));
+    lines.forEach(({pl, L}, i) => { pl.style.strokeDashoffset = L * (1 - E.out(prog(lt, .35 + (i % 16) * .015, .6))); });
+    boxes.forEach(({b, r, cur}, i) => { const k = prog(lt, .1 + r * .18 + (i % 8) * .025, .35);
+      let sc = .5 + .5 * E.back(k); if (cur && lt > 1.2) sc *= 1 + Math.sin((lt - 1.2) * 7) * .06;
+      b.style.opacity = clamp(k * 2); b.style.transform = `scale(${sc})`; });
+  }};
+};
+
+/* sfida: d.a, d.b = {n, img}; d.chip; d.cta */
+B.vs = (d, s) => {
+  const half = (x, top, col) => { const c = el("div", "cover", `<div class="im" style="${bgImg(x.img, x.n)}">${x.img ? "" : `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:420px;opacity:.22">${esc(iniz(x.n))}</div>`}</div><div class="sh"></div>`, s);
+    c.style.cssText += `top:${top}px;height:960px`; c.querySelector(".sh").style.background = top ? `linear-gradient(0deg,rgba(11,8,32,.15),rgba(11,8,32,.85) 92%), linear-gradient(0deg,${col}55,transparent)` : `linear-gradient(180deg,rgba(11,8,32,.15),rgba(11,8,32,.85) 92%), linear-gradient(180deg,${col}55,transparent)`; return c; };
+  const A = half(d.a, 0, "#ff4fa3"), Bc = half(d.b, 960, "#4d8bff");
+  const fa = Math.max(70, Math.min(150, Math.floor(960 / (Math.max(...d.a.n.split(" ").map(w => w.length)) * .62)))), fb = Math.max(70, Math.min(150, Math.floor(960 / (Math.max(...d.b.n.split(" ").map(w => w.length)) * .62))));
+  const na = el("div", "vsname", esc(d.a.n), s); na.style.cssText += `top:560px;font-size:${fa}px`;
+  const nb = el("div", "vsname", esc(d.b.n), s); nb.style.cssText += `top:1080px;font-size:${fb}px;text-align:right`;
+  const cut = el("div", "abs", "", s); cut.style.cssText += "left:-100px;right:-100px;top:950px;height:20px;background:linear-gradient(90deg,#ff4fa3,#b44dff,#4d8bff);transform:rotate(-6deg);box-shadow:0 0 40px #b44dff";
+  const vs = el("div", "abs c vs grad", "VS", s); vs.style.cssText += "top:820px";
+  const chip = el("div", "abs chip", esc(d.chip || ""), s); chip.style.cssText += "left:50%;top:240px;background:rgba(11,8,32,.6)";
+  const cta = el("div", "abs c", esc(d.cta || "VOTA NEI COMMENTI 👇"), s); cta.style.cssText += "top:1420px;font-weight:900;font-size:60px;text-shadow:0 4px 20px #000";
+  const flash = el("div", "abs", "", s); flash.style.cssText += "inset:0;background:#fff;opacity:0";
+  return {dur: d.dur || 5, draw(lt) {
+    const ka = E.out(prog(lt, 0, .5)), kb = E.out(prog(lt, .25, .5));
+    A.style.transform = `translateX(${(1 - ka) * -1080}px)`; Bc.style.transform = `translateX(${(1 - kb) * 1080}px)`;
+    A.querySelector(".im").style.transform = `scale(${1.15 - lt * .02})`; Bc.querySelector(".im").style.transform = `scale(${1.05 + lt * .02})`;
+    set(na, prog(lt, .35, .3), (1 - E.back(prog(lt, .35, .4))) * -300); set(nb, prog(lt, .6, .3), (1 - E.back(prog(lt, .6, .4))) * 300);
+    cut.style.opacity = prog(lt, .8, .1); cut.style.transform = `rotate(-6deg) scaleX(${E.out(prog(lt, .8, .3))})`;
+    const v = prog(lt, 1.05, .3); set(vs, v > 0 ? 1 : 0, 0, 0, (4 - 3 * E.out(v)) * (lt > 1.6 ? 1 + Math.sin((lt - 1.6) * 8) * .04 : 1), (1 - E.out(v)) * 20, -8);
+    flash.style.opacity = v >= 1 ? (1 - prog(lt, 1.35, .3)) * .5 : 0;
+    const sh = prog(lt, 1.35, .3); stage.style.transform = sh > 0 && sh < 1 ? `translate(${Math.sin(sh * 50) * 18 * (1 - sh)}px,${Math.cos(sh * 43) * 12 * (1 - sh)}px)` : "";
+    chip.style.opacity = prog(lt, .2, .3); chip.style.transform = "translateX(-50%)";
+    set(cta, prog(lt, 1.8, .3), 0, 0, (lt > 2.1 ? 1 + Math.sin((lt - 2.1) * 6) * .05 : .7 + .3 * E.back(prog(lt, 1.8, .3))));
+  }};
+};
+
+/* risultato della sfida precedente: d.win, d.lose = {n, img}; d.perc (facoltativo, es. "62%") */
+B.result = (d, s) => {
+  const lab = el("div", "abs c", esc(d.label || "HA VINTO"), s); lab.style.cssText += "top:260px;font-weight:900;font-size:110px;color:#2ee59d;text-shadow:0 0 50px #2ee59d88";
+  const w = el("div", "tile", `<div class="im" style="${bgImg(d.win.img, d.win.n)}">${d.win.img ? "" : `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:300px;opacity:.25">${esc(iniz(d.win.n))}</div>`}</div><div class="sh"></div><div class="tx" style="font-size:64px">${esc(d.win.n)}${d.perc ? `<div class="ep" style="font-size:40px">${esc(d.perc)} dei voti</div>` : ""}</div>`, s);
+  w.style.cssText += "left:190px;width:700px;top:430px;height:820px;border-color:#2ee59d;box-shadow:0 0 60px #2ee59d66";
+  const l = el("div", "tile", `<div class="im" style="${bgImg(d.lose.img, d.lose.n)};filter:grayscale(1)"></div><div class="sh"></div><div class="tx" style="font-size:30px">${esc(d.lose.n)}</div><div class="xx" style="font-size:150px">✕</div>`, s);
+  l.style.cssText += "left:640px;width:330px;top:1130px;height:300px;opacity:.9";
+  return {dur: d.dur || 3, draw(lt) {
+    set(lab, prog(lt, 0, .2), 0, 0, 2.2 - 1.2 * E.out(prog(lt, 0, .3)));
+    const k = prog(lt, .2, .45); set(w, clamp(k * 2), 0, (1 - E.back(k)) * 300, .8 + .2 * E.out(k), 0, (1 - E.out(k)) * -6);
+    const kl = prog(lt, .6, .35); set(l, clamp(kl * 2), (1 - E.out(kl)) * 300, 0, 1, 0, 8);
+  }};
+};
+
+/* griglia di copertine: d.items = [{n, ep, img, pl, col}] (fino a 6) */
+B.grid = (d, s) => {
+  const color = d.color || "#3ee0ff";
+  const head = el("div", "abs", "", s); head.style.cssText += "left:70px;right:70px;top:230px";
+  el("div", "", esc(d.label || ""), head).style.cssText = "font-weight:800;font-size:38px;letter-spacing:.14em;opacity:.75";
+  const name = el("div", "", esc(d.title), head); name.style.cssText = `font-weight:900;font-size:${fit(d.title, 130, 76)}px;letter-spacing:-.02em;line-height:1.05;color:${color};text-shadow:0 0 60px ${color}66`;
+  const n = d.items.length, cols = 2, rows = Math.ceil(n / cols), gw = 450, gh = rows > 2 ? 330 : 480, gap = 30;
+  const tiles = d.items.map((x, i) => { const t = el("div", "tile", `<div class="im" style="${bgImg(x.img, x.n)}"></div><div class="sh"></div>` +
+      (x.pl ? `<div class="pl" style="background:${x.col || color}">${esc(x.pl)}</div>` : "") + `<div class="tx">${esc(x.n)}${x.ep ? `<br><span class="ep">${esc(x.ep)}</span>` : ""}</div>`, s);
+    t.style.cssText += `left:${70 + (i % cols) * (gw + gap)}px;top:${450 + Math.floor(i / cols) * (gh + gap)}px;width:${gw}px;height:${gh}px`;
+    if (gh < 400) t.querySelector(".tx").style.fontSize = "30px"; return t; });
+  return {dur: d.dur || 1.4 + n * .45 + 1.6, draw(lt) {
+    set(name, prog(lt, .05, .15), 0, 0, .6 + .4 * E.back(prog(lt, .05, .4))); name.style.transformOrigin = "left center";
+    tiles.forEach((t, i) => { const k = prog(lt, .4 + i * .32, .4); set(t, clamp(k * 2), 0, (1 - E.back(k)) * 200, .7 + .3 * E.out(k), (1 - E.out(k)) * 12);
+      const im = t.querySelector(".im"); im.style.transform = `scale(${1.12 - .08 * clamp((lt - .4 - i * .32) / 4)})`; });
   }};
 };
 
