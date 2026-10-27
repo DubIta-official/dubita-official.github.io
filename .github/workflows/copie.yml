@@ -1,0 +1,51 @@
+name: Copie per il giro
+
+# Ogni mattina scarica il foglio delle segnalazioni e le pagine di AnimeClick, che il giro automatico
+# di Claude da solo non riesce ad aprire, e le salva CIFRATE nel ramo «copie» (il repository è pubblico).
+# Secret necessari: FOGLIO_CSV_URL (link CSV del foglio) e CHIAVE_COPIE (password della cifratura).
+
+on:
+  schedule:
+    - cron: "47 4 * * *"   # prima del giro automatico delle 07:32 ora italiana
+  workflow_dispatch:
+    inputs:
+      pagine:
+        description: "Indirizzi in più da scaricare, separati da spazi"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: copie
+  cancel-in-progress: false
+
+jobs:
+  copie:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scarica
+        env:
+          FOGLIO_CSV_URL: ${{ secrets.FOGLIO_CSV_URL }}
+          PAGINE_EXTRA: ${{ github.event.inputs.pagine }}
+        run: python3 strumenti/scarica.py "$RUNNER_TEMP/copie"
+      - name: Cifra e salva nel ramo copie
+        env:
+          CHIAVE_COPIE: ${{ secrets.CHIAVE_COPIE }}
+        run: |
+          test -n "$CHIAVE_COPIE" || { echo "Manca il secret CHIAVE_COPIE"; exit 1; }
+          tar -czf "$RUNNER_TEMP/copie.tar.gz" -C "$RUNNER_TEMP" copie
+          openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -pass env:CHIAVE_COPIE \
+            -in "$RUNNER_TEMP/copie.tar.gz" -out "$RUNNER_TEMP/copie.tar.gz.enc"
+          git config user.name "dubita-bot"
+          git config user.email "dubita-bot@users.noreply.github.com"
+          git checkout --orphan copie
+          git rm -rfq .
+          cp "$RUNNER_TEMP/copie.tar.gz.enc" copie.tar.gz.enc
+          printf 'Copie cifrate per il giro automatico di DubITA. Non servono al sito.\n' > LEGGIMI.txt
+          git add copie.tar.gz.enc LEGGIMI.txt
+          git commit -qm "Copie del $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -f origin copie

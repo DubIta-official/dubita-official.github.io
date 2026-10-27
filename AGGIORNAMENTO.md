@@ -17,16 +17,32 @@ Fonti accettate, in ordine di affidabilità:
 
 Non sono fonti valide: commenti degli utenti, forum, video, ipotesi, la segnalazione stessa.
 
+## Le copie (quando Google e AnimeClick non si aprono)
+
+La sessione del giro di solito non riesce ad aprire Google Fogli e AnimeClick. Per questo l'Action
+«Copie per il giro» (`.github/workflows/copie.yml`, script `strumenti/scarica.py`) ogni mattina alle 04:47 UTC
+scarica il foglio delle segnalazioni, la pagina del tag doppiaggio-italiano di AnimeClick, i suoi articoli recenti,
+la panoramica e il Listone indicati in `STAGIONE`, e li salva **cifrati** nel ramo `copie` (file `copie.tar.gz.enc`).
+
+- Si decifrano con la password che sta nelle istruzioni dell'attività (mai scriverla nel repository):
+  `git fetch origin copie && git show origin/copie:copie.tar.gz.enc | openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass pass:PASSWORD | tar -xzf - -C <cartella temporanea fuori dal repository>`
+- Dentro ci sono `segnalazioni.csv`, `pagine/*.txt` (testo di ogni pagina, con URL, titolo e data) e `indice.md`
+  (cosa è stato scaricato e quando, ed eventuali errori). Controlla l'orario in `indice.md`: se è di oltre un giorno fa, dillo nel resoconto.
+- Una pagina copiata vale come fonte letta nel giro: nella voce si cita l'indirizzo originale (`URL:` in cima al file).
+- Se serve una pagina che non è tra le copie, avvia l'Action a mano (`workflow_dispatch`, ramo `main`) con gli indirizzi
+  nell'input `pagine`, aspetta qualche minuto che finisca e decifra di nuovo. Se non ci riesci, salta e dillo nel resoconto.
+- Non copiare mai nel repository il contenuto decifrato: le segnalazioni restano private.
+
 ## Il giro, passo per passo
 
 1. Leggi `stato.json`, `archivio.js` e questo file.
-2. **Segnalazioni.** Scarica il foglio delle segnalazioni in CSV (il link è nelle istruzioni dell'attività,
-   non in questo repository). Considera solo le righe con data successiva a `stato.json → ultimaSegnalazione`.
+2. **Segnalazioni.** Prova ad aprire il foglio in CSV (il link è nelle istruzioni dell'attività, non in questo
+   repository); se non si apre, usa `segnalazioni.csv` delle copie. Considera solo le righe con data successiva a `stato.json → ultimaSegnalazione`.
    Le date del foglio sono nel formato mese/giorno/anno (es. `10/25/2026 14:47:18`). Ignora prove e spam
    (testi senza senso, titoli inesistenti). Per ogni segnalazione seria cerca una fonte: se conferma, aggiorna
    l'archivio; altrimenti lascia tutto com'è. Le segnalazioni di anime mancanti nel calendario o nella ricerca
    riguardano AniList: annotale nel resoconto finale, non si risolvono qui.
-3. **Notizie.** Apri https://www.animeclick.it/notizie/tags/doppiaggio-italiano e leggi le notizie uscite dopo
+3. **Notizie.** Apri https://www.animeclick.it/notizie/tags/doppiaggio-italiano (o la sua copia) e leggi le notizie uscite dopo
    `stato.json → ultimeNotizie`. Apri gli articoli che annunciano doppiaggi, date o piattaforme e aggiorna le voci.
 4. **Cambio di stagione.** Se la data di oggi è fuori dalla stagione in `STAGIONE` (inverno = gennaio-marzo,
    primavera = aprile-giugno, estate = luglio-settembre, autunno = ottobre-dicembre), o mancano meno di 10 giorni
