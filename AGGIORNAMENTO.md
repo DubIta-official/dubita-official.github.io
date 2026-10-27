@@ -84,3 +84,5 @@ Quando un doppiaggio annunciato esce davvero, la voce passa da `soon` a `dub` (o
 
 `TRAME` contiene trame tradotte a mano in italiano, con le stesse chiavi di `DUBDB`. Si possono aggiungere,
 fedeli alla descrizione originale e senza note come "(Source: …)". Non sono obbligatorie a ogni giro.
+Dopo aver aggiunto una trama esegui `node strumenti/firma.js`: inserisce nel testo una firma invisibile di DubITA
+(serve a dimostrare la provenienza se qualcuno copia le trame). `controlla.js` segnala errore se una trama non è firmata.

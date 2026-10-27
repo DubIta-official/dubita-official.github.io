@@ -31,6 +31,8 @@ STAGIONE_SUB.forEach(([ks, p], i) => {
   if (typeof p !== "string" || !p) errors.push(`STAGIONE_SUB[${i}]: manca la piattaforma`);
 });
 TRAME.forEach((t, i) => { if (!Array.isArray(t.k) || typeof t.t !== "string" || t.t.length < 40) errors.push(`TRAME[${i}]: voce incompleta`); });
+{ const r = require("child_process").spawnSync(process.execPath, [path.join(__dirname, "firma.js"), "--verifica"], {encoding: "utf8"});
+  if (r.status !== 0) errors.push("TRAME: " + (r.stdout || r.stderr).trim()); }
 
 if (errors.length) { console.error("ERRORI in archivio.js:\n- " + errors.join("\n- ")); process.exit(1); }
 
