@@ -32,6 +32,9 @@ jobs:
           FOGLIO_CSV_URL: ${{ secrets.FOGLIO_CSV_URL }}
           PAGINE_EXTRA: ${{ github.event.inputs.pagine }}
         run: python3 strumenti/scarica.py "$RUNNER_TEMP/copie"
+      - name: AniList (palinsesto e copertine, dati pubblici)
+        continue-on-error: true
+        run: python3 strumenti/anilist.py "$RUNNER_TEMP/anilist"
       - name: Cifra e salva nel ramo copie
         env:
           CHIAVE_COPIE: ${{ secrets.CHIAVE_COPIE }}
@@ -48,7 +51,8 @@ jobs:
           git checkout --orphan copie
           git rm -rfq .
           cp "$RUNNER_TEMP/copie.tar.gz.enc" copie.tar.gz.enc
-          printf 'Copie cifrate per il giro automatico di DubITA. Non servono al sito.\n' > LEGGIMI.txt
-          git add copie.tar.gz.enc LEGGIMI.txt
+          printf 'Copie cifrate per il giro automatico di DubITA (copie.tar.gz.enc) e dati pubblici di AniList per i video (anilist/). Non servono al sito.\n' > LEGGIMI.txt
+          if [ -d "$RUNNER_TEMP/anilist" ]; then cp -r "$RUNNER_TEMP/anilist" anilist; fi   # dati pubblici di AniList, non cifrati
+          git add -A
           git commit -qm "Copie del $(date -u +%Y-%m-%dT%H:%MZ)"
           git push -f origin copie

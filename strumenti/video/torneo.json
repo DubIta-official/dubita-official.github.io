@@ -1,0 +1,24 @@
+{
+  "nome": "TORNEO ANIME",
+  "edizione": 1,
+  "nota": "Partecipanti nell'ordine del tabellone: 1 contro 2, 3 contro 4 e così via. 'cerca' è il titolo da cercare su AniList per la copertina. I vincitori si aggiungono in 'vincitori', sfida dopo sfida, con il nome 'corto'.",
+  "partecipanti": [
+    {"corto": "One Piece", "cerca": "One Piece"},
+    {"corto": "Bleach", "cerca": "Bleach"},
+    {"corto": "Naruto", "cerca": "Naruto Shippuden"},
+    {"corto": "Jujutsu Kaisen", "cerca": "Jujutsu Kaisen"},
+    {"corto": "Demon Slayer", "cerca": "Kimetsu no Yaiba"},
+    {"corto": "Chainsaw Man", "cerca": "Chainsaw Man"},
+    {"corto": "Death Note", "cerca": "Death Note"},
+    {"corto": "Spy×Family", "cerca": "Spy x Family"},
+    {"corto": "L'attacco dei giganti", "cerca": "Shingeki no Kyojin"},
+    {"corto": "Solo Leveling", "cerca": "Ore dake Level Up na Ken"},
+    {"corto": "Dragon Ball Z", "cerca": "Dragon Ball Z"},
+    {"corto": "Hunter x Hunter", "cerca": "Hunter x Hunter (2011)"},
+    {"corto": "Fullmetal Alchemist", "cerca": "Fullmetal Alchemist: Brotherhood"},
+    {"corto": "Frieren", "cerca": "Sousou no Frieren"},
+    {"corto": "My Hero Academia", "cerca": "Boku no Hero Academia"},
+    {"corto": "JoJo", "cerca": "JoJo no Kimyou na Bouken (TV)"}
+  ],
+  "vincitori": []
+}
