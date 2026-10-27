@@ -184,7 +184,7 @@ function torneo() {
 (async () => {
   fs.mkdirSync(OUT, {recursive: true});
   const video = TORNEO ? [torneo()]
-    : [quiz(rng(OGGI + "q")), lista(rng(OGGI + "l"), "arrivo"), uscite() || lista(rng(OGGI + "n"), "novita")];
+    : [quiz(rng(OGGI + "q")), lista(rng(OGGI + "l"), "arrivo"), uscite() || lista(rng(OGGI + "n"), ["solosub", "novita", "piattaforma"][giorno % 3])];   // senza AniList: a rotazione
   const b = await chromium.launch(), testi = [`Video DubITA del ${OGGI}\n`];
   for (const [i, v] of video.entries()) {
     const base = path.join(OUT, TORNEO ? `${OGGI}_${v.nome}` : `${OGGI}_${i + 1}_${v.nome}`);
