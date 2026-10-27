@@ -1,0 +1,151 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Modello dei video verticali di DubITA (1080×1920). Lo usa rendi.js: i dati arrivano in window.VIDEO = {scenes:[…]}.
+     Tutto è funzione del tempo t, così ogni fotogramma è identico a ogni render. © 2026 DubITA -->
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0b0820;font-family:"Inter Display","Inter","DejaVu Sans",sans-serif;color:#fff}
+#stage{position:absolute;inset:0;overflow:hidden}
+.bg{position:absolute;inset:-200px;background:radial-gradient(circle at 50% 40%,#1d1450 0%,#0b0820 60%)}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55}
+.grain{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 2px,transparent 2px 4px)}
+.scene{position:absolute;inset:0;opacity:0}
+.abs{position:absolute;white-space:nowrap}
+.c{left:0;right:0;text-align:center}
+.wrap{white-space:normal}
+.grad{background:linear-gradient(90deg,#ff4fa3,#b44dff 50%,#4d8bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.chip{display:inline-block;padding:14px 30px;border-radius:999px;font-weight:800;font-size:34px;letter-spacing:.06em;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.18)}
+.kata{color:#3ee0ff;font-family:"IPAPGothic",sans-serif;font-weight:700}
+.row{display:flex;align-items:center;gap:28px;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:34px;padding:34px 36px;margin-bottom:26px}
+.row .t{font-weight:800;font-size:52px;line-height:1.1;flex:1;white-space:normal}
+.row .d{font-weight:900;font-size:34px;padding:10px 20px;border-radius:16px;white-space:nowrap;color:#0b0820}
+.bar{position:absolute;left:0;top:0;height:10px;background:linear-gradient(90deg,#ff4fa3,#b44dff,#4d8bff)}
+.flag{display:inline-flex;height:.22em;width:2.4em;border-radius:6px;overflow:hidden;vertical-align:middle}
+.flag i{flex:1}
+.card{background:rgba(255,255,255,.08);border:3px solid rgba(255,255,255,.16);border-radius:44px;padding:56px 50px;text-align:center}
+.stamp{display:inline-block;font-weight:900;font-size:150px;letter-spacing:-.01em;padding:10px 54px;border-radius:36px;border:12px solid currentColor;line-height:1.05}
+.info{display:inline-block;font-weight:800;font-size:46px;padding:18px 36px;border-radius:24px;background:rgba(255,255,255,.1);margin:10px}
+.mark{position:absolute;left:70px;top:1540px;font-weight:900;font-size:40px;opacity:.55}
+</style></head>
+<body><div id="stage"></div>
+<script>
+const V = window.VIDEO || {scenes: [
+  {type: "hook", chip: "QUIZ", lines: ["DOPPIATO", "O NO?"], accent: 1},
+  {type: "quiz", n: "1/3", title: "Solo Leveling", sub: "1ª stagione", verdict: "SÌ", tone: "yes", info: ["Crunchyroll"]},
+  {type: "outro"}
+]};
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const prog = (t, s, d) => clamp((t - s) / d);
+const E = {out: x => 1 - Math.pow(1 - x, 3), back: x => { const c = 1.9; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); }, in: x => x * x * x};
+const stage = document.getElementById("stage");
+const el = (tag, cls, html, parent) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; (parent || stage).appendChild(e); return e; };
+const set = (e, o, x = 0, y = 0, sc = 1, blur = 0, rot = 0, pre = "") => { e.style.opacity = o; e.style.transform = `${pre} translate(${x}px,${y}px) scale(${sc}) rotate(${rot}deg)`; e.style.filter = blur > .3 ? `blur(${blur}px)` : "none"; };
+const TONE = {yes: "#2ee59d", partial: "#3ee0ff", soon: "#ffc53d", no: "#ff4d6a"};
+const esc = s => String(s).replace(/[&<>]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;"}[c]));
+// dimensione del carattere perché il testo stia in "w" pixel (stima: una lettera maiuscola nera è larga circa 0,64 em)
+const fit = (txt, max, min, w = 940, k) => { const up = txt === txt.toUpperCase(); k = k || (up ? .66 : .56); return Math.max(min, Math.min(max, Math.floor(w / (Math.max(1, txt.length) * k)))); };
+
+el("div", "bg");
+const blobs = [["#ff4fa3", 620], ["#4d8bff", 700], ["#b44dff", 560], ["#3ee0ff", 380]].map(([c, s]) => { const b = el("div", "blob"); b.style.cssText += `width:${s}px;height:${s}px;background:${c}`; return b; });
+el("div", "grain");
+const bar = el("div", "bar");
+
+/* ---------- tipi di scena: ognuno restituisce {dur, draw(lt)} ---------- */
+const B = {};
+B.hook = (d, s) => {
+  const chip = el("div", "chip abs", `<span class="kata">ダブ</span>&nbsp; ${esc(d.chip || "DOPPIAGGI ITA")}`, s); chip.style.cssText += "left:50%;top:400px";
+  const n = d.lines.length;
+  const hs = d.lines.map((txt, i) => { const big = i === (d.accent ?? n - 1); const h = el("div", "abs c" + (big ? " grad" : ""), esc(txt), s);
+    const fs = big ? fit(txt, 200, 90) : fit(txt, 135, 76);
+    h.style.cssText += `font-weight:900;letter-spacing:-.02em;top:${(n > 3 ? 560 : 640) + i * 180}px;font-size:${fs}px;line-height:1`; return h; });
+  const flag = el("div", "abs", `<span class="flag"><i style="background:#1fb35a"></i><i style="background:#fff"></i><i style="background:#ff3b4a"></i></span>`, s);
+  flag.style.cssText += `left:50%;top:${(n > 3 ? 560 : 640) + n * 180 + 60}px;font-size:120px`;
+  return {dur: d.dur || 1 + n * .4 + 1.1, draw(lt) {
+    const p = E.back(prog(lt, .05, .45)); chip.style.opacity = prog(lt, .05, .3); chip.style.transform = `translateX(-50%) translateY(${(1 - p) * -60}px)`;
+    hs.forEach((h, i) => { const st = .25 + i * .38, k = prog(lt, st, .32), big = h.classList.contains("grad");
+      const sc = big ? 2.6 - 1.6 * E.out(k) : 1.8 - .8 * E.out(k), kk = prog(lt, st + .3, .25);
+      const sh = kk > 0 && kk < 1 ? Math.sin(kk * 40) * 14 * (1 - kk) : 0, pulse = big && lt > st + .6 ? 1 + Math.sin((lt - st - .6) * 6) * .025 : 1;
+      set(h, k > 0 ? clamp(k * 3) : 0, sh, 0, sc * pulse, (1 - E.out(k)) * 18); });
+    const f = E.out(prog(lt, .3 + n * .38, .5)); flag.style.opacity = f; flag.style.transform = `translateX(-50%) scaleX(${f})`;
+  }};
+};
+B.list = (d, s) => {
+  const color = d.color || "#b44dff";
+  const head = el("div", "abs", "", s); head.style.cssText += "left:70px;right:70px;top:250px";
+  const lab = el("div", "", esc(d.label || ""), head); lab.style.cssText = "font-weight:800;font-size:40px;letter-spacing:.14em;opacity:.75";
+  const name = el("div", "", esc(d.title), head); name.style.cssText = `font-weight:900;font-size:${fit(d.title, 150, 80)}px;letter-spacing:-.02em;line-height:1.05;color:${color};text-shadow:0 0 60px ${color}66;transform-origin:left center`;
+  const under = el("div", "", "", head); under.style.cssText = `height:14px;border-radius:8px;background:${color};margin-top:18px;transform-origin:left`;
+  const list = el("div", "abs", "", s); list.style.cssText += "left:70px;right:70px;top:600px;bottom:400px;display:flex;flex-direction:column;justify-content:center";
+  const rows = d.items.map(([t, x]) => { const r = el("div", "row", `<div class="t">${esc(t)}</div>` + (x ? `<div class="d" style="background:${color}">${esc(x)}</div>` : ""), list); r.style.borderColor = color + "55"; return r; });
+  const count = el("div", "abs", `${d.items.length}`, s); count.style.cssText += `right:40px;bottom:330px;font-weight:900;font-size:420px;line-height:1;color:${color}22`;
+  return {dur: d.dur || 1.3 + d.items.length * .5 + 1.2, draw(lt) {
+    set(name, prog(lt, .05, .15), 0, 0, .6 + .4 * E.back(prog(lt, .05, .4)));
+    under.style.transform = `scaleX(${E.out(prog(lt, .25, .5))})`;
+    count.style.transform = `translateY(${(1 - E.out(prog(lt, .1, .6))) * 80}px)`;
+    rows.forEach((r, i) => { const k = prog(lt, .45 + i * .3, .4); set(r, clamp(k * 2), (1 - E.back(k)) * 700, 0, 1, (1 - E.out(k)) * 10);
+      const hl = prog(lt, .8 + i * .3, .25); r.style.background = `rgba(255,255,255,${.07 + (hl > 0 && hl < 1 ? (1 - hl) * .18 : 0)})`; });
+  }};
+};
+B.quiz = (d, s) => {   // un anime: titolo, suspense, timbro con la risposta
+  const col = TONE[d.tone] || TONE.yes;
+  const n = el("div", "abs c", esc(d.n ? `${d.n}` : ""), s); n.style.cssText += "top:250px;font-weight:900;font-size:44px;letter-spacing:.2em;opacity:.7";
+  const q = el("div", "abs c", esc(d.question || "È DOPPIATO IN ITALIANO?"), s); q.style.cssText += "top:320px;font-weight:900;font-size:62px";
+  const card = el("div", "abs card wrap", `<div style="font-weight:900;font-size:${fit(d.title.split(" ").reduce((a, b) => a.length > b.length ? a : b, ""), 118, 64, 860)}px;line-height:1.05">${esc(d.title)}</div>` + (d.sub ? `<div style="font-weight:700;font-size:46px;opacity:.75;margin-top:18px">${esc(d.sub)}</div>` : ""), s);
+  card.style.cssText += "left:70px;right:70px;top:500px";
+  const meter = el("div", "abs", "", s); meter.style.cssText += "left:170px;right:170px;top:1010px;height:16px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden";
+  const fill = el("div", "", "", meter); fill.style.cssText = "height:100%;width:100%;background:linear-gradient(90deg,#ff4fa3,#b44dff,#4d8bff);transform-origin:left";
+  const stamp = el("div", "abs c", `<span class="stamp" style="color:${col};text-shadow:0 0 50px ${col}88;box-shadow:0 0 60px ${col}55, inset 0 0 40px ${col}33">${esc(d.verdict)}</span>`, s); stamp.style.cssText += "top:1070px";
+  const info = el("div", "abs c wrap", (d.info || []).map(x => `<span class="info">${esc(x)}</span>`).join(""), s); info.style.cssText += "top:1340px;padding:0 60px";
+  const flash = el("div", "abs", "", s); flash.style.cssText += `inset:0;background:${col};opacity:0`;
+  const T = .9, R = 2.1;   // titolo pronto, risposta
+  return {dur: d.dur || 4.6, draw(lt) {
+    const y = 500 + card.offsetHeight;   // tutto sotto la scheda, che può essere alta 1-4 righe
+    meter.style.top = (y + 60) + "px"; stamp.style.top = (y + 110) + "px"; info.style.top = (y + 390) + "px";
+    set(n, prog(lt, 0, .2)); set(q, prog(lt, .05, .25), 0, (1 - E.out(prog(lt, .05, .35))) * -40);
+    const c = prog(lt, .15, .45); set(card, clamp(c * 2), 0, (1 - E.back(c)) * 260, .85 + .15 * E.out(c), (1 - E.out(c)) * 14);
+    meter.style.opacity = lt < R ? prog(lt, T, .15) : 1 - prog(lt, R, .2);
+    fill.style.transform = `scaleX(${1 - prog(lt, T, R - T)})`;
+    const k = prog(lt, R, .28); set(stamp, k > 0 ? 1 : 0, 0, 0, 3 - 2 * E.out(k), (1 - E.out(k)) * 20, -6 + (1 - k) * -10);
+    const sh = prog(lt, R + .28, .25); if (sh > 0 && sh < 1) card.style.transform += ` translateX(${Math.sin(sh * 40) * 16 * (1 - sh)}px)`;
+    flash.style.opacity = (k > .8 ? (1 - prog(lt, R + .25, .3)) * .35 : 0);
+    const ip = prog(lt, R + .45, .4); set(info, ip, 0, (1 - E.out(ip)) * 50);
+  }};
+};
+B.outro = (d, s) => {
+  const lines = d.lines || ["Il tuo anime", "è doppiato?"];
+  const q = lines.map((txt, i) => { const h = el("div", "abs c", esc(txt), s); h.style.cssText += `font-weight:900;font-size:${fit(txt, 130, 70)}px;line-height:1;top:${330 + i * 150}px`; return h; });
+  const logo = el("div", "abs c", `<div class="kata" style="font-size:70px;letter-spacing:.3em">ダブ</div><div style="font-weight:900;font-size:250px;line-height:.95">Dub<br><span class="grad">ITA</span></div>`, s); logo.style.cssText += "top:690px";
+  const url = el("div", "abs chip", esc(d.url || "dubita-official.github.io"), s); url.style.cssText += "left:50%;top:1320px;font-size:46px;padding:20px 40px";
+  const follow = el("div", "abs c", esc(d.cta || "Cercalo sul sito · Seguici per i nuovi doppiaggi"), s); follow.style.cssText += "top:1460px;font-weight:700;font-size:38px;opacity:.75";
+  return {dur: d.dur || 3.4, draw(lt) {
+    q.forEach((h, i) => { const k = prog(lt, .05 + i * .25, .35); set(h, clamp(k * 2), 0, (1 - E.back(k)) * 120, 1, (1 - E.out(k)) * 14); });
+    const lp = prog(lt, .7, .5); set(logo, clamp(lp * 2), 0, 0, (.4 + .6 * E.back(lp)) * (lt > 1.3 ? 1 + Math.sin((lt - 1.3) * 5) * .02 : 1), (1 - E.out(lp)) * 20);
+    const up = E.back(prog(lt, 1.2, .4)); url.style.opacity = clamp(up * 2); url.style.transform = `translateX(-50%) scale(${.6 + .4 * up})`;
+    set(follow, prog(lt, 1.6, .4), 0, (1 - E.out(prog(lt, 1.6, .4))) * 30);
+  }};
+};
+
+/* ---------- montaggio: scene in fila con transizione a frusta ---------- */
+let acc = 0;
+const S = V.scenes.map(d => { const s = el("div", "scene"); const sc = B[d.type](d, s); const o = {s, start: acc, ...sc}; acc += sc.dur; return o; });
+const TOTAL = acc;
+const mark = el("div", "mark", `Dub<span class="grad">ITA</span>`);
+
+function render(t) {
+  blobs.forEach((b, i) => { const a = t * (.35 + i * .12) + i * 1.7;
+    b.style.left = (540 + Math.cos(a) * (260 + i * 40) - b.offsetWidth / 2) + "px"; b.style.top = (900 + Math.sin(a * 1.3) * (420 + i * 30) - b.offsetHeight / 2) + "px"; });
+  bar.style.width = (t / TOTAL * 100) + "%";
+  S.forEach((o, i) => {
+    const lt = t - o.start, first = i === 0, last = i === S.length - 1;
+    const vis = lt > (first ? -1 : -.2) && lt < o.dur + (last ? 99 : .1);
+    o.s.style.opacity = vis ? 1 : 0; if (!vis) return;
+    const inK = first ? 1 : E.out(prog(lt, -.15, .35)), outK = last ? 0 : E.in(prog(lt, o.dur - .25, .3));
+    o.s.style.transform = `translateX(${(1 - inK) * 1100 - outK * 1100}px)`;
+    o.s.style.filter = (1 - inK) + outK > .01 ? `blur(${(1 - inK) * 30 + outK * 30}px)` : "none";
+    o.draw(lt);
+  });
+  mark.style.opacity = S[S.length - 1].start - .3 < t ? 0 : .55;
+}
+window.render = render; window.TOTAL = TOTAL;
+render(0);
+</script></body></html>
