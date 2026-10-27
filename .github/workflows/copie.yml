@@ -37,6 +37,7 @@ jobs:
           CHIAVE_COPIE: ${{ secrets.CHIAVE_COPIE }}
         run: |
           test -n "$CHIAVE_COPIE" || { echo "Manca il secret CHIAVE_COPIE"; exit 1; }
+          echo "Impronta della chiave (per controllare che sia quella giusta): $(printf %s "$CHIAVE_COPIE" | sha256sum | cut -c1-8), lunghezza ${#CHIAVE_COPIE}"
           tar -czf "$RUNNER_TEMP/copie.tar.gz" -C "$RUNNER_TEMP" copie
           openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -pass env:CHIAVE_COPIE \
             -in "$RUNNER_TEMP/copie.tar.gz" -out "$RUNNER_TEMP/copie.tar.gz.enc"
