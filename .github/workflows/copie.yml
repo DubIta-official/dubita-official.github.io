@@ -36,6 +36,8 @@ jobs:
         env:
           CHIAVE_COPIE: ${{ secrets.CHIAVE_COPIE }}
         run: |
+          CHIAVE_COPIE=$(printf %s "$CHIAVE_COPIE" | tr -d '[:space:]')   # toglie spazi e a capo incollati per sbaglio
+          export CHIAVE_COPIE
           test -n "$CHIAVE_COPIE" || { echo "Manca il secret CHIAVE_COPIE"; exit 1; }
           echo "Impronta della chiave (per controllare che sia quella giusta): $(printf %s "$CHIAVE_COPIE" | sha256sum | cut -c1-8), lunghezza ${#CHIAVE_COPIE}"
           tar -czf "$RUNNER_TEMP/copie.tar.gz" -C "$RUNNER_TEMP" copie
