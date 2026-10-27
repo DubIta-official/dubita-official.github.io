@@ -8,7 +8,7 @@
    ex = parole che escludono, inc = basta che il titolo contenga la chiave.
    st: "dub" doppiato · "partial" doppiaggio in corso · "soon" annunciato · "sub" solo sottotitolato · "none" nessun doppiaggio (confermato)
    v = data in cui la voce è stata verificata (facoltativa, es. "26 ottobre 2026") */
-const DUB_CHECKED = "26 ottobre 2026";
+const DUB_CHECKED = "27 ottobre 2026";
 const SRC = {
   rag: "https://www.antoniogenna.net/doppiaggio/anim/rentagirlfriend.htm",
   ragNews: "https://www.animeclick.it/news/107762-rent-a-girlfriend-su-crunchyroll-la-prima-stagione-doppiata",
@@ -35,11 +35,11 @@ const DUBDB = [
 
   // Black Clover
   {k: ["black clover"], s: [1], yx: 2021, st: "partial", p: "Crunchyroll", n: "Doppiaggio in corso (VSI Roma): i primi episodi sono già disponibili, gli altri arrivano a blocchi.", src: SRC.bc},
-  {k: ["black clover"], s: [2], st: "soon", p: "Crunchyroll", n: "Doppiaggio in lavorazione, data da annunciare.", src: SRC.autumn},
+  {k: ["black clover"], s: [2], st: "soon", p: "Crunchyroll", n: "Doppiaggio annunciato a partire dal 24 ottobre 2026 (non in simuldub).", src: SRC.autumn, v: "27 ottobre 2026"},
 
   // Autunno 2026
   {k: ["overgeared"], st: "dub", p: "Crunchyroll", n: "Simuldub dal 27 settembre 2026.", src: SRC.autumn},
-  {k: ["kusuriya no hitorigoto", "the apothecary diaries", "il monologo della speziale"], s: [3], st: "soon", p: "Crunchyroll", n: "Simuldub annunciato, data da comunicare.", src: SRC.autumn},
+  {k: ["kusuriya no hitorigoto", "the apothecary diaries", "il monologo della speziale"], s: [3], st: "soon", p: "Crunchyroll", n: "Doppiaggio annunciato a partire dal 23 ottobre 2026 (non in simuldub).", src: SRC.autumn, v: "27 ottobre 2026"},
   {k: ["magic knight rayearth", "mahou kishi rayearth"], y: 2026, st: "soon", p: "Crunchyroll", n: "Simuldub annunciato, data da comunicare.", src: SRC.autumn},
   {k: ["firefly wedding", "hotaru no yomeiri"], st: "soon", p: "Crunchyroll", n: "Simuldub annunciato, data da comunicare.", src: SRC.autumn},
   {k: ["jojo no kimyou na bouken steel ball run", "jojo s bizarre adventure steel ball run"], st: "dub", p: "Netflix", n: "Simuldub dal 25 settembre 2026.", src: SRC.autumn},
@@ -52,7 +52,7 @@ const DUBDB = [
   {k: ["tank chair"], st: "dub", p: "Prime Video", n: "Simuldub dal 4 ottobre 2026.", src: SRC.autumn},
   {k: ["three titans", "mitsudomoe"], inc: true, st: "dub", p: "Disney+", n: "Simuldub dal 2 ottobre 2026, con nuovo cast.", src: SRC.autumn},
   {k: ["tokyo revengers"], s: [1], yx: 2021, ex: ["three titans", "mitsudomoe", "seiya", "christmas", "tenjiku"], st: "dub", p: "Crunchyroll", n: "Prima stagione doppiata.", src: SRC.crCat},
-  {k: ["bleach sennen kessen hen", "bleach thousand year blood war"], st: "partial", p: "Disney+", n: "Doppiaggio in corso: la quarta parte arriva in italiano durante l'autunno 2026.", src: SRC.autumn},
+  {k: ["bleach sennen kessen hen", "bleach thousand year blood war"], st: "partial", p: "Disney+", n: "Doppiaggio in corso: il primo episodio doppiato della quarta parte è già disponibile, la serie si conclude in autunno 2026.", src: SRC.autumn, v: "27 ottobre 2026"},
   {k: ["boruto naruto next generations"], st: "partial", p: "Prime Video", n: "Doppiaggio in corso a blocchi di 30 episodi (91-120 dal 15 ottobre, 121-150 dal 15 novembre, 151-180 dal 15 dicembre); finale previsto ad aprile 2027.", src: SRC.autumn},
 
   // Estate 2026
