@@ -5,11 +5,12 @@ più torneo.json con l'id AniList di ogni partecipante del torneo."""
 import json, os, sys, time, urllib.request
 
 API = "https://graphql.anilist.co"
+UA = "Mozilla/5.0 (compatible; DubITA/1.0; +https://dubita-official.github.io)"   # senza un nome, AniList può rifiutare la richiesta
 def gql(query, var):
     for i in range(4):
         try:
             req = urllib.request.Request(API, json.dumps({"query": query, "variables": var}).encode(),
-                                         {"Content-Type": "application/json", "Accept": "application/json"})
+                                         {"Content-Type": "application/json", "Accept": "application/json", "User-Agent": UA})
             with urllib.request.urlopen(req, timeout=40) as r:
                 return json.load(r)["data"]
         except Exception as e:
@@ -23,7 +24,7 @@ Q_CERCA = "query($s:String){Media(search:$s,type:ANIME,sort:POPULARITY_DESC){%s}
 
 def scarica_img(url, dest):
     if os.path.exists(dest) or not url: return
-    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "DubITA"}), timeout=40) as r:
+    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=40) as r:
         open(dest, "wb").write(r.read())
 
 def main():
@@ -60,4 +61,11 @@ def main():
         print("torneo: " + ", ".join(f"{r['corto']}={r.get('titolo')}" for r in ris))
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:   # lascia traccia dell'errore nel ramo copie, così si capisce cosa non ha funzionato
+        out = sys.argv[1] if len(sys.argv) > 1 else "anilist"
+        os.makedirs(out, exist_ok=True)
+        open(os.path.join(out, "errore.txt"), "w").write(f"{time.strftime('%Y-%m-%d %H:%M')} {type(e).__name__}: {e}\n")
+        print("ERRORE AniList:", type(e).__name__, e)
+        sys.exit(1)
