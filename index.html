@@ -194,6 +194,45 @@ footer a{color:var(--muted)}
   .rcard{grid-template-columns:1fr;padding:16px}
   .rcard .rcover{width:150px;justify-self:center}
 }
+
+/* testata e menu: sul telefono il menu va in basso, come nelle app */
+.brand{display:flex;flex-direction:column;gap:8px;min-width:0}
+.lead{margin:0;color:#d8d6f5;font-size:16px;max-width:46ch}
+.lead b{color:var(--ink)}
+nav .ni{display:none}
+@media (max-width:700px){
+  body{padding-bottom:calc(92px + env(safe-area-inset-bottom, 0px))}
+  .wrap{gap:16px}
+  header{gap:10px}
+  h1 small{display:none}
+  h1{font-size:36px}
+  .lead{font-size:15px}
+  nav{position:fixed;left:0;right:0;bottom:0;z-index:15;max-width:none;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;
+    border:0;border-top:1px solid var(--line);border-radius:0;background:rgba(13,14,34,.94);overflow:visible;
+    padding:6px max(4px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(4px, env(safe-area-inset-left, 0px))}
+  nav button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;border-radius:12px;font-size:10.5px;letter-spacing:.01em;min-width:0}
+  nav button .nl{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+  nav button .xl{display:none}
+  nav .ni{display:flex;align-items:center;justify-content:center;width:46px;height:28px;border-radius:999px;transition:background .15s}
+  nav button[aria-pressed="true"]{background:none;box-shadow:none;color:#fff}
+  nav button[aria-pressed="true"] .ni{background:var(--grad);box-shadow:0 4px 14px rgba(255,79,139,.4)}
+  .intro{padding:0 14px;font-size:13.5px}
+  .intro summary{padding:9px 0;font-size:14px}
+  .hero{min-height:0;border-radius:18px}
+  .hero .hin{padding:14px;gap:12px;align-items:center}
+  .hero img{width:62px;border-radius:10px}
+  .hero .ht{gap:3px}
+  .hero .eyebrow{font-size:10.5px;letter-spacing:.08em}
+  .hero .name{font-size:19px}
+  .hero .hm{font-size:12.5px;line-height:1.35}
+  .hero .go{display:none}
+  .days{gap:5px}
+  .day{padding:7px 0;border-radius:12px}
+  #week .tools{flex-wrap:nowrap;gap:8px}
+  #week .tools .field{flex:1 1 0;padding:9px 12px}
+  #week .tools .chip{flex:none}
+  .status{font-size:13px}
+}
 </style>
 <!-- Statistiche delle visite: GoatCounter, senza cookie (pannello: dubita-anime.goatcounter.com) -->
 <script data-goatcounter="https://dubita-anime.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
@@ -202,18 +241,21 @@ footer a{color:var(--muted)}
 
 <div class="wrap">
   <header>
-    <h1><small>Anime in italiano · episodi, notizie, doppiaggi</small>Dub<span class="g">ITA</span></h1>
+    <div class="brand">
+      <h1><small>Anime in italiano · episodi, notizie, doppiaggi</small>Dub<span class="g">ITA</span></h1>
+      <p class="lead">Cosa esce oggi, a che ora in Italia e <b>se è doppiato in italiano</b>.</p>
+    </div>
     <nav aria-label="Sezioni">
-      <button data-view="week" aria-pressed="true">Settimana</button>
-      <button data-view="explore" aria-pressed="false">Esplora</button>
-      <button data-view="tips" aria-pressed="false">Consigli</button>
-      <button data-view="news" aria-pressed="false">Notizie</button>
-      <button data-view="lists" aria-pressed="false">Librerie</button>
-      <button data-view="dubs" aria-pressed="false">Doppiaggi ITA</button>
+      <button data-view="week" aria-pressed="true"><span class="ni"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><span class="nl">Settimana</span></button>
+      <button data-view="explore" aria-pressed="false"><span class="ni"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><span class="nl">Esplora</span></button>
+      <button data-view="tips" aria-pressed="false"><span class="ni"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg></span><span class="nl">Consigli</span></button>
+      <button data-view="news" aria-pressed="false"><span class="ni"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="nl">Notizie</span></button>
+      <button data-view="lists" aria-pressed="false"><span class="ni"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg></span><span class="nl">Librerie</span></button>
+      <button data-view="dubs" aria-pressed="false"><span class="ni"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><span class="nl">Doppiaggi<span class="xl"> ITA</span></span></button>
     </nav>
   </header>
 
-  <details class="intro" id="intro" open>
+  <details class="intro" id="intro">
     <summary>Come funziona DubITA</summary>
     <p>DubITA ti dice cosa esce, quando e soprattutto <b>se è doppiato in italiano</b>. I dati sugli anime arrivano da AniList; i doppiaggi da un archivio controllato con le fonti ufficiali e aggiornato ogni giorno.</p>
     <ul>
@@ -1317,10 +1359,15 @@ function show(v){
   if (v === "week") renderWeek();
 }
 function refresh(){ if (view === "week") renderWeek(); if (view === "lists") renderLists(false); if (view === "news") renderNews(); if (view === "dubs") renderDubs(); }
-document.querySelector("nav").addEventListener("click", e => { const b = e.target.closest("button"); if (b) show(b.dataset.view); });
+document.querySelector("nav").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  show(b.dataset.view);
+  if (window.matchMedia("(max-width: 700px)").matches) window.scrollTo({top: 0});   // sul telefono il menu è in basso: si riparte dall'inizio della sezione
+});
 
-// «Come funziona»: aperto alla prima visita, poi ricorda se l'hai chiuso
-if (store.get("dubita-intro-closed", false)) $("intro").open = false;
+// «Come funziona»: alla prima visita aperto sul computer e chiuso sul telefono (si apre toccandolo); poi ricorda la scelta
+const introPref = store.get("dubita-intro-closed", null);
+$("intro").open = introPref === null ? window.matchMedia("(min-width: 701px)").matches : !introPref;
 $("intro").addEventListener("toggle", () => store.set("dubita-intro-closed", !$("intro").open));
 
 renderWeek(); renderDubs(); renderNews();
