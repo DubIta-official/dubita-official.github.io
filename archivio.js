@@ -10,7 +10,7 @@
    ex = parole che escludono, inc = basta che il titolo contenga la chiave.
    st: "dub" doppiato · "partial" doppiaggio in corso · "soon" annunciato · "sub" solo sottotitolato · "none" nessun doppiaggio (confermato)
    v = data in cui la voce è stata verificata (facoltativa, es. "26 ottobre 2026") */
-const DUB_CHECKED = "28 ottobre 2026";
+const DUB_CHECKED = "29 ottobre 2026";
 const SRC = {
   rag: "https://www.antoniogenna.net/doppiaggio/anim/rentagirlfriend.htm",
   ragNews: "https://www.animeclick.it/news/107762-rent-a-girlfriend-su-crunchyroll-la-prima-stagione-doppiata",
@@ -138,7 +138,8 @@ const DUBDB = [
   {k: ["blue lock"], s: [1], yx: 2023, st: "dub", p: "Crunchyroll", n: "Prima stagione doppiata.", src: SRC.crCat},
   {k: ["jidou hanbaiki ni umarekawatta", "reborn as a vending machine"], s: [1], yx: 2023, st: "dub", p: "Crunchyroll", n: "Prima stagione doppiata.", src: SRC.crCat},
   {k: ["zom 100", "zombie 100"], st: "dub", p: "Crunchyroll", n: "Doppiato.", src: SRC.crCat},
-  {k: ["chao neng lifang", "super cube"], y: 2025, st: "soon", p: "Anime Generation (Prime Video)", n: "Doppiaggio annunciato a partire dal 28 ottobre 2026; già disponibile sottotitolato.", src: "https://www.animeclick.it/news/112149-super-cube-informazioni-sul-doppiaggio-di-yamato-video", v: "28 ottobre 2026"}
+  {k: ["chao neng lifang", "super cube"], y: 2025, st: "soon", p: "Anime Generation (Prime Video)", n: "Doppiaggio annunciato a partire dal 28 ottobre 2026; già disponibile sottotitolato.", src: "https://www.animeclick.it/news/112149-super-cube-informazioni-sul-doppiaggio-di-yamato-video", v: "28 ottobre 2026"},
+  {k: ["kun tun tianxia"], y: 2025, st: "soon", p: "Anime Generation (Prime Video)", n: "Doppiaggio annunciato a partire dal 29 ottobre 2026; già disponibile sottotitolato.", src: "https://www.animeclick.it/news/112159-kun-il-divoratore-del-creato-informazioni-sul-doppiaggio-di-yamato-video", v: "29 ottobre 2026"}
 ];
 
 // STAGIONE IN CORSO: da aggiornare all'inizio di ogni stagione (gennaio, aprile, luglio, ottobre)
