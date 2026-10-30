@@ -46,6 +46,24 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0b0820;font-fam
 .tile .tx{position:absolute;left:18px;right:18px;bottom:16px;font-weight:900;font-size:34px;line-height:1.05;white-space:normal}
 .tile .ep{display:inline-block;margin-top:8px;font-weight:800;font-size:26px;opacity:.85}
 .tile .pl{position:absolute;top:14px;left:14px;font-weight:900;font-size:24px;padding:8px 14px;border-radius:12px;color:#0b0820}
+.mtile{position:absolute;overflow:hidden;background:#2a2060 center/cover}
+.mtile i{position:absolute;inset:0;background:inherit;background-size:cover;background-position:center}
+.prow{position:absolute;left:50px;right:50px;display:flex;align-items:center;gap:0;border-radius:26px;background:rgba(255,255,255,.07);border:3px solid rgba(255,255,255,.12)}
+.prow .side{flex:1;display:flex;align-items:center;gap:18px;min-width:0;height:100%;padding:0 14px}
+.prow .side.r{flex-direction:row-reverse;text-align:right}
+.prow .pc{flex:none;height:calc(100% - 20px);aspect-ratio:2/3;border-radius:12px;background:#2a2060 center/cover;border:2px solid rgba(255,255,255,.2)}
+.prow .pn{font-weight:900;line-height:1.02;white-space:normal;min-width:0}
+.prow .mid{flex:none;width:86px;text-align:center;font-weight:900;font-style:italic;font-size:42px;opacity:.55}
+.prow.cur{border-color:#fff;background:rgba(255,79,163,.18);box-shadow:0 0 0 4px #ff4fa3,0 0 50px #ff4fa388}
+.prow.cur .mid{opacity:1;color:#ff4fa3}
+.prow .side.lose{opacity:.35;filter:grayscale(1)}
+.prow .side.win .pc{border-color:#2ee59d;box-shadow:0 0 22px #2ee59d}
+.prow .tag{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-weight:900;font-size:26px;letter-spacing:.1em;padding:6px 16px;border-radius:10px;background:#ff4fa3;color:#fff}
+.vnum{display:inline-flex;align-items:center;justify-content:center;width:1.15em;height:1.15em;border-radius:22%;font-style:normal;margin:0 .25em;vertical-align:.08em;font-size:.8em;color:#0b0820}
+.vplate{display:inline;padding:.04em .2em;border-radius:.16em;background:rgba(11,8,32,.62);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.gimg{position:absolute;left:90px;right:90px;top:430px;height:1050px;border-radius:44px;overflow:hidden;border:4px solid rgba(255,255,255,.2);background:#2a2060}
+.gimg .im{position:absolute;inset:0;background:#2a2060 center/cover}
+.ring{position:absolute;left:50%;top:1530px;width:150px;height:150px;margin-left:-75px}
 </style></head>
 <body><div id="stage"></div>
 <script>
@@ -202,8 +220,8 @@ B.vs = (d, s) => {
     c.style.cssText += `top:${top}px;height:960px`; c.querySelector(".sh").style.background = top ? `linear-gradient(0deg,rgba(11,8,32,.15),rgba(11,8,32,.85) 92%), linear-gradient(0deg,${col}55,transparent)` : `linear-gradient(180deg,rgba(11,8,32,.15),rgba(11,8,32,.85) 92%), linear-gradient(180deg,${col}55,transparent)`; return c; };
   const A = half(d.a, 0, "#ff4fa3"), Bc = half(d.b, 960, "#4d8bff");
   const fa = Math.max(70, Math.min(150, Math.floor(960 / (Math.max(...d.a.n.split(" ").map(w => w.length)) * .62)))), fb = Math.max(70, Math.min(150, Math.floor(960 / (Math.max(...d.b.n.split(" ").map(w => w.length)) * .62))));
-  const na = el("div", "vsname", esc(d.a.n), s); na.style.cssText += `top:560px;font-size:${fa}px`;
-  const nb = el("div", "vsname", esc(d.b.n), s); nb.style.cssText += `top:1080px;font-size:${fb}px;text-align:right`;
+  const na = el("div", "vsname", (d.a.k ? `<span class="vnum" style="background:#ff4fa3">${esc(d.a.k)}</span>` : "") + `<span class="vplate">${esc(d.a.n)}</span>`, s); na.style.cssText += `top:560px;font-size:${fa}px`;
+  const nb = el("div", "vsname", `<span class="vplate">${esc(d.b.n)}</span>` + (d.b.k ? `<span class="vnum" style="background:#4d8bff">${esc(d.b.k)}</span>` : ""), s); nb.style.cssText += `top:1080px;font-size:${fb}px;text-align:right`;
   const cut = el("div", "abs", "", s); cut.style.cssText += "left:-100px;right:-100px;top:950px;height:20px;background:linear-gradient(90deg,#ff4fa3,#b44dff,#4d8bff);transform:rotate(-6deg);box-shadow:0 0 40px #b44dff";
   const vs = el("div", "abs c vs grad", "VS", s); vs.style.cssText += "top:820px";
   const chip = el("div", "abs chip", esc(d.chip || ""), s); chip.style.cssText += "left:50%;top:240px;background:rgba(11,8,32,.6)";
@@ -252,6 +270,76 @@ B.grid = (d, s) => {
     set(name, prog(lt, .05, .15), 0, 0, .6 + .4 * E.back(prog(lt, .05, .4))); name.style.transformOrigin = "left center";
     tiles.forEach((t, i) => { const k = prog(lt, .4 + i * .32, .4); set(t, clamp(k * 2), 0, (1 - E.back(k)) * 200, .7 + .3 * E.out(k), (1 - E.out(k)) * 12);
       const im = t.querySelector(".im"); im.style.transform = `scale(${1.12 - .08 * clamp((lt - .4 - i * .32) / 4)})`; });
+  }};
+};
+
+/* muro di copertine: d.imgs = [{n, img}] (fino a 16), d.chip, d.lines, d.accent, d.cta */
+B.mosaic = (d, s) => {
+  const n = d.imgs.length, cols = n > 9 ? 4 : n > 4 ? 2 : 1, rows = Math.ceil(n / cols), tw = 1080 / cols, th = 1920 / rows;
+  const wall = el("div", "abs", "", s); wall.style.cssText += "inset:0";
+  const tiles = d.imgs.map((x, i) => { const t = el("div", "mtile", `<i style="${bgImg(x.img, x.n)}"></i>`, wall);
+    t.style.cssText += `left:${(i % cols) * tw}px;top:${Math.floor(i / cols) * th}px;width:${tw + 1}px;height:${th + 1}px`; return t; });
+  const dark = el("div", "abs", "", s); dark.style.cssText += "inset:0;background:radial-gradient(circle at 50% 46%,rgba(11,8,32,.9) 0%,rgba(11,8,32,.7) 42%,rgba(11,8,32,.25) 100%)";
+  const chip = el("div", "chip abs", `<span class="kata">ダブ</span>&nbsp; ${esc(d.chip || "")}`, s); chip.style.cssText += "left:50%;top:560px;background:rgba(11,8,32,.75)";
+  const hs = d.lines.map((txt, i) => { const big = i === (d.accent ?? 0); const h = el("div", "abs c" + (big ? " grad" : ""), esc(txt), s);
+    h.style.cssText += `font-weight:900;letter-spacing:-.02em;top:${700 + i * 170}px;font-size:${big ? fit(txt, 190, 90) : fit(txt, 120, 70)}px;line-height:1;text-shadow:0 8px 40px rgba(0,0,0,.6)`; return h; });
+  const cta = el("div", "abs c", esc(d.cta || ""), s); cta.style.cssText += `top:${720 + d.lines.length * 170 + 40}px;font-weight:900;font-size:56px`;
+  return {dur: d.dur || 3.6, draw(lt) {
+    tiles.forEach((t, i) => { const k = prog(lt, (i * 7 % n) * .035, .3); set(t, clamp(k * 2), 0, 0, 1.25 - .25 * E.out(k));
+      t.firstChild.style.transform = `scale(${1.05 + .04 * Math.sin(lt * .8 + i)})`; });
+    dark.style.opacity = prog(lt, .55, .35);
+    chip.style.opacity = prog(lt, .7, .25); chip.style.transform = `translateX(-50%) scale(${.7 + .3 * E.back(prog(lt, .7, .35))})`;
+    hs.forEach((h, i) => { const k = prog(lt, .85 + i * .3, .3); set(h, clamp(k * 3), 0, 0, (2.2 - 1.2 * E.out(k)) * (i === (d.accent ?? 0) && lt > 1.6 ? 1 + Math.sin((lt - 1.6) * 6) * .025 : 1), (1 - E.out(k)) * 16); });
+    const c = prog(lt, 1.2 + d.lines.length * .3, .35); set(cta, c, 0, (1 - E.out(c)) * 40, lt > 2.6 ? 1 + Math.sin((lt - 2.6) * 6) * .04 : 1);
+  }};
+};
+
+/* sfide di un turno: d.matches = [{a:{n,img,esito}, b:{...}, cur}], d.title, d.label */
+B.pairs = (d, s) => {
+  const title = el("div", "abs c", esc(d.title || "TORNEO ANIME"), s); title.style.cssText += "top:200px;font-weight:900;font-size:90px;letter-spacing:-.01em";
+  const lab = el("div", "abs c", esc(d.label || ""), s); lab.style.cssText += "top:305px;font-weight:800;font-size:38px;letter-spacing:.14em;color:#3ee0ff";
+  const m = d.matches.length, top = 390, avail = 1440 - top, gap = m > 4 ? 22 : 34, h = Math.min(250, Math.floor((avail - gap * (m - 1)) / m));
+  const side = (x, r) => { if (!x) return `<div class="side${r ? " r" : ""}"><div class="pc"></div><div class="pn" style="font-size:40px;opacity:.4">?</div></div>`;
+    const lw = Math.max(...x.n.split(" ").map(w => w.length)), fs = Math.max(26, Math.min(h > 160 ? 50 : 40, Math.floor(300 / (lw * .6)), Math.floor(300 * 2 / (x.n.length * .58))));
+    return `<div class="side${r ? " r" : ""}${x.esito ? " " + x.esito : ""}"><div class="pc" style="${bgImg(x.img, x.n)}"></div><div class="pn" style="font-size:${fs}px">${esc(x.n)}</div></div>`; };
+  const rows = d.matches.map((mt, i) => { const r = el("div", "prow" + (mt.cur ? " cur" : ""), side(mt.a, false) + `<div class="mid">VS</div>` + side(mt.b, true), s);
+    r.style.cssText += `top:${top + i * (h + gap)}px;height:${h}px`;
+    if (mt.cur) el("div", "tag", "OGGI SI VOTA", r);
+    return {r, cur: mt.cur}; });
+  return {dur: d.dur || 1.4 + m * .22 + 1.6, draw(lt) {
+    set(title, prog(lt, 0, .25), 0, (1 - E.out(prog(lt, 0, .4))) * -50); set(lab, prog(lt, .15, .3));
+    rows.forEach(({r, cur}, i) => { const k = prog(lt, .3 + i * .16, .35); let sc = .9 + .1 * E.out(k);
+      if (cur && lt > 1.3 + m * .16) sc *= 1 + Math.sin((lt - 1.3 - m * .16) * 7) * .025;
+      set(r, clamp(k * 2), (1 - E.back(k)) * (i % 2 ? 500 : -500), 0, sc); });
+  }};
+};
+
+/* indovina dalla copertina: d.img, d.n, d.num ("1/4"), d.pill {t, col} facoltativa */
+B.guess = (d, s) => {
+  const n = el("div", "abs c", esc(d.num || ""), s); n.style.cssText += "top:230px;font-weight:900;font-size:44px;letter-spacing:.2em;opacity:.75";
+  const q = el("div", "abs c", "CHE ANIME È?", s); q.style.cssText += "top:300px;font-weight:900;font-size:84px";
+  const box = el("div", "gimg", `<div class="im" style="${bgImg(d.img, d.n)}"></div>`, s), im = box.firstChild;
+  const svg = `<svg viewBox="0 0 150 150" width="150" height="150"><circle cx="75" cy="75" r="64" fill="rgba(11,8,32,.6)" stroke="rgba(255,255,255,.15)" stroke-width="12"/><circle class="arc" cx="75" cy="75" r="64" fill="none" stroke="#ff4fa3" stroke-width="12" stroke-linecap="round" stroke-dasharray="402" transform="rotate(-90 75 75)"/><text class="num" x="75" y="96" text-anchor="middle" font-size="64" font-weight="900" fill="#fff" font-family="Inter Display,Inter,sans-serif">3</text></svg>`;
+  const ring = el("div", "ring", svg, s), arc = ring.querySelector(".arc"), num = ring.querySelector(".num");
+  const name = el("div", "abs c wrap", `<span class="vplate">${esc(d.n)}</span>`, s);
+  const lw = Math.max(...d.n.split(" ").map(w => w.length)); name.style.cssText += `left:70px;right:70px;top:1180px;font-weight:900;font-size:${Math.max(70, Math.min(130, Math.floor(900 / (lw * .6))))}px;line-height:1.08`;
+  const pill = d.pill ? el("div", "abs c", `<span class="info" style="background:${d.pill.col};color:#0b0820">${esc(d.pill.t)}</span>`, s) : null;
+  if (pill) pill.style.cssText += "top:1530px";
+  const flash = el("div", "abs", "", s); flash.style.cssText += "inset:0;background:#fff;opacity:0";
+  const R = 3.0;   // svelato
+  return {dur: d.dur || 5.2, draw(lt) {
+    set(n, prog(lt, 0, .2)); set(q, prog(lt, .05, .25), 0, (1 - E.out(prog(lt, .05, .35))) * -40);
+    const c = prog(lt, .1, .4); set(box, clamp(c * 2), 0, (1 - E.back(c)) * 200, .9 + .1 * E.out(c));
+    const rev = E.out(prog(lt, R, .4));
+    im.style.transform = `scale(${3.2 - 2.2 * rev})`; im.style.transformOrigin = d.origin || "50% 38%";
+    im.style.filter = `blur(${(1 - rev) * (22 - 10 * prog(lt, .4, R - .4))}px) saturate(${1 + (1 - rev) * .4})`;
+    const left = Math.max(0, R - lt), tick = Math.ceil(left / ((R - .5) / 3));
+    ring.style.opacity = lt < R ? prog(lt, .4, .2) : 1 - prog(lt, R, .2);
+    arc.style.strokeDashoffset = 402 * (1 - clamp(left / (R - .4)));
+    num.textContent = Math.max(1, Math.min(3, tick));
+    flash.style.opacity = rev > 0 && rev < 1 ? (1 - prog(lt, R, .35)) * .45 : 0;
+    const k = prog(lt, R + .2, .35); set(name, k > 0 ? 1 : 0, 0, (1 - E.back(k)) * 120, .6 + .4 * E.back(k));
+    if (pill) { const kp = prog(lt, R + .55, .3); set(pill, kp, 0, (1 - E.out(kp)) * 40); }
   }};
 };
 

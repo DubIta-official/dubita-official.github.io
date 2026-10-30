@@ -1,7 +1,8 @@
 // Crea i video del giorno per TikTok a partire dall'archivio verificato (archivio.js), più le didascalie da copiare.
-// Uso: node strumenti/video/genera.js [cartella di uscita] [data AAAA-MM-GG] [--prova] [--torneo]
+// Uso: node strumenti/video/genera.js [cartella di uscita] [data AAAA-MM-GG] [--prova] [--torneo] [--extra]
 //   --prova: invece dei video salva solo alcuni fotogrammi PNG (veloce, per controllare la grafica).
 //   --torneo: crea solo il video della prossima sfida del torneo (strumenti/video/torneo.json).
+//   --extra: crea solo i due video extra: «Indovina l'anime dalla copertina» e «I più seguiti del momento».
 // Ogni giorno escono 3 video: il quiz «Il tuo anime è doppiato?», i doppiaggi in arrivo e le nuove uscite
 // (episodi del giorno da AniList, anche non doppiati). La scelta dipende dalla data: rilanciando lo stesso giorno escono gli stessi video.
 // Copertine e palinsesto arrivano dalla cartella anilist/ del ramo «copie» (li scarica l'Action ogni mattina).
@@ -10,7 +11,7 @@ const {rendi, foto} = require("./rendi.js");
 const {chromium} = require("playwright");
 
 const ROOT = path.join(__dirname, "..", "..");
-const args = process.argv.slice(2).filter(a => !a.startsWith("--")), PROVA = process.argv.includes("--prova"), TORNEO = process.argv.includes("--torneo");
+const args = process.argv.slice(2).filter(a => !a.startsWith("--")), PROVA = process.argv.includes("--prova"), TORNEO = process.argv.includes("--torneo"), EXTRA = process.argv.includes("--extra");
 const OUT = path.resolve(args[0] || "video-oggi");
 const OGGI = args[1] || new Date().toISOString().slice(0, 10);
 
@@ -162,38 +163,78 @@ function torneo() {
       else slots[r + 1][i] = null; } }
   const fatte = V.length, prossima = partite[fatte], prec = fatte ? partite[fatte - 1] : null;
   const scenes = [];
-  if (!prec) scenes.push({type: "hook", chip: `${T.nome} · EDIZIONE ${T.edizione}`, lines: ["16 ANIME", "1 SOLO", "VINCITORE"], accent: 2});
-  else { const w = prec.a.esito === "win" ? prec.a : prec.b, l = w === prec.a ? prec.b : prec.a;
-    scenes.push({type: "result", label: prossima ? "HA VINTO" : "CAMPIONE!", win: {n: w.n, img: w.img}, lose: {n: l.n, img: l.img}, perc: prec.v.perc}); }
   const cur = prossima ? [prossima.r, prossima.i] : null;
   const nSfida = prossima ? ROUND[prossima.r][1] - (partite.filter(x => x.r === prossima.r && !x.v).length) + 1 : 0;
   const label = prossima ? `${ROUND[prossima.r][0]} · SFIDA ${nSfida} DI ${ROUND[prossima.r][1]}` : "IL VINCITORE";
-  scenes.push({type: "bracket", title: T.nome, label, slots, cur});
+  if (!prec) scenes.push({type: "mosaic", chip: `${T.nome} · EDIZIONE ${T.edizione}`, imgs: P, lines: ["16 ANIME", "1 SOLO VINCITORE"], accent: 0, cta: "Decidete voi 👇"});
+  else { const w = prec.a.esito === "win" ? prec.a : prec.b, l = w === prec.a ? prec.b : prec.a;
+    scenes.push({type: "result", label: prossima ? "HA VINTO" : "CAMPIONE!", win: {n: w.n, img: w.img}, lose: {n: l.n, img: l.img}, perc: prec.v.perc}); }
   if (prossima) {
-    scenes.push({type: "vs", chip: label, a: {n: prossima.a.n, img: prossima.a.img}, b: {n: prossima.b.n, img: prossima.b.img}, cta: "VOTA NEI COMMENTI 👇"});
-    scenes.push({type: "outro", lines: ["Chi passa", "il turno?"], cta: "Vota nel sondaggio nei commenti · Domani il risultato"});
-  } else scenes.push({type: "outro", lines: ["Il campione", "è deciso!"], cta: "Quale torneo facciamo adesso? Scrivilo nei commenti"});
+    const nomiTurno = {0: "OTTAVI DI FINALE", 1: "QUARTI DI FINALE", 2: "SEMIFINALI", 3: "FINALE"};
+    const delTurno = partite.filter(x => x.r === prossima.r).map(x => ({a: x.a && {...x.a}, b: x.b && {...x.b}, cur: x === prossima}));
+    scenes.push({type: "pairs", title: T.nome, label: nomiTurno[prossima.r], matches: delTurno});
+    scenes.push({type: "vs", chip: label, a: {n: prossima.a.n, img: prossima.a.img, k: "1"}, b: {n: prossima.b.n, img: prossima.b.img, k: "2"}, cta: "COMMENTA 1 O 2 👇", dur: 5.4});
+    scenes.push({type: "outro", lines: ["Chi passa", "il turno?"], cta: `Commenta 1 per ${prossima.a.n} · 2 per ${prossima.b.n}`});
+  } else {
+    scenes.push({type: "bracket", title: T.nome, label, slots, cur});
+    scenes.push({type: "outro", lines: ["Il campione", "è deciso!"], cta: "Quale torneo facciamo adesso? Scrivilo nei commenti"});
+  }
   const did = prossima
-    ? `${T.nome} ⚔️ ${label.toLowerCase()}: ${prossima.a.n} contro ${prossima.b.n}! Chi passa il turno? Vota nel sondaggio nei commenti 👇\n${prec ? `Sfida precedente: ha vinto ${prec.v.n}${prec.v.perc ? " con il " + prec.v.perc : ""}.\n` : ""}${BASE} #torneoanime #animebattle ${tag(prossima.a.n)} ${tag(prossima.b.n)}`
+    ? `${T.nome} ⚔️ ${label.toLowerCase()}: ${prossima.a.n} contro ${prossima.b.n}!\nCommenta 1 per ${prossima.a.n} o 2 per ${prossima.b.n} 👇 Il più votato passa al turno successivo.\n${prec ? `Sfida precedente: ha vinto ${prec.v.n}${prec.v.perc ? " con il " + prec.v.perc : ""}.\n` : ""}${BASE} #torneoanime #animebattle ${tag(prossima.a.n)} ${tag(prossima.b.n)}`
     : `${T.nome}: il campione è ${prec.v.n}! 🏆 Quale torneo facciamo adesso? Scrivilo nei commenti\n${BASE} #torneoanime ${tag(prec.v.n)}`;
-  const sondaggio = prossima ? `SONDAGGIO DA METTERE NEI COMMENTI:\nDomanda: Chi passa il turno?\nRisposte: ${prossima.a.n} / ${prossima.b.n}` : "";
+  const sondaggio = prossima ? `COME SI CONTANO I VOTI: conta i commenti con 1 e con 2 (o usa anche un sondaggio TikTok con le risposte ${prossima.a.n} / ${prossima.b.n}).\nPer il prossimo video scrivimi chi ha vinto, ed eventualmente la percentuale.` : "";
   return {nome: `torneo-sfida-${fatte + 1}`, scenes, didascalia: did + (sondaggio ? "\n\n" + sondaggio : "")};
+}
+
+/* ---------- extra: indovina dalla copertina ---------- */
+const PILL_DUB = st => ({dub: ["DOPPIATO IN ITALIANO", "#2ee59d"], partial: ["DOPPIAGGIO ITA IN CORSO", "#3ee0ff"], soon: ["DOPPIAGGIO ITA IN ARRIVO", "#ffc53d"],
+  sub: ["SOLO SOTTOTITOLATO", "#ffffff"], none: ["NON DOPPIATO", "#ff4d6a"]})[st];
+function indovina(r) {
+  const T = JSON.parse(fs.readFileSync(path.join(__dirname, "torneo.json"), "utf8")), ids = leggi("torneo.json") || [];
+  const pool = T.partecipanti.map(p => { const x = ids.find(i => i.corto === p.corto); return x && copertina(x.id) ? {n: p.corto, img: copertina(x.id), romaji: x.titolo} : null; }).filter(Boolean);
+  if (pool.length < 4) return null;
+  const scelti = pesca(r, pool, 4);
+  const origini = ["50% 30%", "40% 45%", "60% 35%", "50% 55%"];
+  const scenes = [{type: "hook", chip: "QUIZ · 4 ANIME", lines: ["INDOVINA", "L'ANIME", "DALLA COPERTINA"], accent: 0},
+    ...scelti.map((x, i) => { const d = ctx.dubData({id: "indovina-" + x.n, format: "TV", status: "FINISHED", title: {english: x.n, romaji: x.romaji}}), pl = d && PILL_DUB(d.st);
+      return {type: "guess", num: `${i + 1}/4`, n: x.n, img: x.img, origin: origini[i], pill: pl ? {t: pl[0] + (d.p && ["dub", "partial", "soon"].includes(d.st) ? " · " + d.p.split(" · ")[0] : ""), col: pl[1]} : null}; }),
+    {type: "outro", lines: ["Quanti ne hai", "indovinati?"], cta: "Scrivilo nei commenti · Il doppiaggio di ogni anime è sul sito"}];
+  return {nome: "indovina-copertina", scenes,
+    didascalia: `Riesci a indovinare l'anime dalla copertina? 🔍 Quanti ne hai presi su 4? Scrivilo nei commenti!\nE se ti chiedi se è doppiato in italiano, lo trovi sul nostro sito, link in bio 🔗\n${BASE} #quizanime #indovinalanime ${scelti.map(x => tag(x.n)).join(" ")}`};
+}
+
+/* ---------- extra: i più seguiti del momento ---------- */
+function popolari() {
+  const pal = leggi("palinsesto.json"); if (!pal) return null;
+  const visti = new Map();
+  for (const e of pal.episodi) if (["TV", "TV_SHORT", "ONA"].includes(e.media.format) && copertina(e.media.id) && !visti.has(e.media.id)) visti.set(e.media.id, e);
+  const top = [...visti.values()].sort((a, b) => (b.media.popularity || 0) - (a.media.popularity || 0)).slice(0, 6);
+  if (top.length < 4) return null;
+  const items = top.map(e => { const m = e.media, d = ctx.dubData(m), st = d ? d.st : "noann", [pl, col] = PILL[st] || PILL.noann;
+    const n = (m.title.english || m.title.romaji).replace(/\s+/g, " ");
+    return {n: n.length > 38 ? n.slice(0, 36).trim() + "…" : n, ep: d && d.p && ["dub", "partial", "soon"].includes(st) ? d.p.split(" · ")[0] : "", img: copertina(m.id), pl, col, titolo: n, st}; });
+  const ita = items.filter(x => ["dub", "partial"].includes(x.st)).length;
+  return {nome: "piu-seguiti", scenes: [
+    {type: "mosaic", chip: "IN ONDA ADESSO", imgs: items.map(x => ({n: x.n, img: x.img})), lines: [`I ${items.length} PIÙ SEGUITI`, "li puoi vedere", "in italiano?"], accent: 0, cta: "Scopriamolo 👇", dur: 3.2},
+    {type: "grid", label: "I PIÙ SEGUITI DEL MOMENTO", title: "IN ITALIANO?", color: "#3ee0ff", items},
+    {type: "outro", lines: [ita ? `${ita} su ${items.length}` : "Nessuno", ita === 1 ? "è doppiato" : "sono doppiati"], cta: "Quale vorresti doppiato? Scrivilo nei commenti"}],
+    didascalia: `I ${items.length} anime più seguiti del momento: quali puoi vedere in italiano? 🇮🇹\n${items.map(x => `• ${x.titolo} – ${x.pl}${x.ep ? " (" + x.ep + ")" : ""}`).join("\n")}\nTutti i doppiaggi verificati sul nostro sito, link in bio 🔗\n${BASE} #animedelmomento ${items.slice(0, 4).map(x => tag(x.titolo)).join(" ")}`};
 }
 
 /* ---------- main ---------- */
 (async () => {
   fs.mkdirSync(OUT, {recursive: true});
-  const video = TORNEO ? [torneo()]
+  const video = TORNEO ? [torneo()] : EXTRA ? [indovina(rng(OGGI + "i")), popolari()].filter(Boolean)
     : [quiz(rng(OGGI + "q")), lista(rng(OGGI + "l"), "arrivo"), uscite() || lista(rng(OGGI + "n"), ["solosub", "novita", "piattaforma"][giorno % 3])];   // senza AniList: a rotazione
   const b = await chromium.launch(), testi = [`Video DubITA del ${OGGI}\n`];
   for (const [i, v] of video.entries()) {
-    const base = path.join(OUT, TORNEO ? `${OGGI}_${v.nome}` : `${OGGI}_${i + 1}_${v.nome}`);
+    const base = path.join(OUT, TORNEO || EXTRA ? `${OGGI}_${v.nome}` : `${OGGI}_${i + 1}_${v.nome}`);
     fs.writeFileSync(base + ".json", JSON.stringify({scenes: v.scenes}, null, 1));
     if (PROVA) { const f = await foto({scenes: v.scenes}, [2, 4.5, 6.6, 8.9, 11.5, 15], base, {browser: b}); console.log(f.join("\n")); }
     else { const s = await rendi({scenes: v.scenes}, base + ".mp4", {browser: b}); console.log(`${base}.mp4 · ${s.toFixed(1)} s`); }
     testi.push(`— VIDEO ${i + 1}: ${path.basename(base)}.mp4\n${v.didascalia}\n`);
   }
   await b.close();
-  fs.writeFileSync(path.join(OUT, `${OGGI}_${TORNEO ? "torneo_" : ""}didascalie.txt`), testi.join("\n"));
+  fs.writeFileSync(path.join(OUT, `${OGGI}_${TORNEO ? "torneo_" : EXTRA ? "extra_" : ""}didascalie.txt`), testi.join("\n"));
   if (senzaNome.size) console.log("Anime senza nome in nomi.json (esclusi dai video): " + [...senzaNome].join(", "));
 })().catch(e => { console.error(e); process.exit(1); });
