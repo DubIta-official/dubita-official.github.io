@@ -326,13 +326,14 @@ B.guess = (d, s) => {
   const pill = d.pill ? el("div", "abs c", `<span class="info" style="background:${d.pill.col};color:#0b0820">${esc(d.pill.t)}</span>`, s) : null;
   if (pill) pill.style.cssText += "top:1530px";
   const flash = el("div", "abs", "", s); flash.style.cssText += "inset:0;background:#fff;opacity:0";
-  const R = 3.0;   // svelato
-  return {dur: d.dur || 5.2, draw(lt) {
+  const R = d.reveal || 3.0;   // svelato
+  const Z = d.zoom || 3.2, BL = d.blur || 22;
+  return {dur: d.dur || R + 2.2, draw(lt) {
     set(n, prog(lt, 0, .2)); set(q, prog(lt, .05, .25), 0, (1 - E.out(prog(lt, .05, .35))) * -40);
     const c = prog(lt, .1, .4); set(box, clamp(c * 2), 0, (1 - E.back(c)) * 200, .9 + .1 * E.out(c));
     const rev = E.out(prog(lt, R, .4));
-    im.style.transform = `scale(${3.2 - 2.2 * rev})`; im.style.transformOrigin = d.origin || "50% 38%";
-    im.style.filter = `blur(${(1 - rev) * (22 - 10 * prog(lt, .4, R - .4))}px) saturate(${1 + (1 - rev) * .4})`;
+    im.style.transform = `scale(${Z - (Z - 1) * rev})`; im.style.transformOrigin = d.origin || "50% 38%";
+    im.style.filter = `blur(${(1 - rev) * (BL - BL * .45 * prog(lt, .4, R - .4))}px) saturate(${1 + (1 - rev) * .4})`;
     const left = Math.max(0, R - lt), tick = Math.ceil(left / ((R - .5) / 3));
     ring.style.opacity = lt < R ? prog(lt, .4, .2) : 1 - prog(lt, R, .2);
     arc.style.strokeDashoffset = 402 * (1 - clamp(left / (R - .4)));

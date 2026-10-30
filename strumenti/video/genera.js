@@ -3,6 +3,7 @@
 //   --prova: invece dei video salva solo alcuni fotogrammi PNG (veloce, per controllare la grafica).
 //   --torneo: crea solo il video della prossima sfida del torneo (strumenti/video/torneo.json).
 //   --extra: crea solo i due video extra: «Indovina l'anime dalla copertina» e «I più seguiti del momento».
+//   --indovina=L-N: crea «Indovina l'anime», livello L (1 facile, 2 medio, 3 difficile), video N del livello (6 anime ciascuno, da indovina.json).
 // Ogni giorno escono 3 video: il quiz «Il tuo anime è doppiato?», i doppiaggi in arrivo e le nuove uscite
 // (episodi del giorno da AniList, anche non doppiati). La scelta dipende dalla data: rilanciando lo stesso giorno escono gli stessi video.
 // Copertine e palinsesto arrivano dalla cartella anilist/ del ramo «copie» (li scarica l'Action ogni mattina).
@@ -12,6 +13,7 @@ const {chromium} = require("playwright");
 
 const ROOT = path.join(__dirname, "..", "..");
 const args = process.argv.slice(2).filter(a => !a.startsWith("--")), PROVA = process.argv.includes("--prova"), TORNEO = process.argv.includes("--torneo"), EXTRA = process.argv.includes("--extra");
+const IND = (process.argv.find(a => a.startsWith("--indovina=")) || "").split("=")[1];
 const OUT = path.resolve(args[0] || "video-oggi");
 const OGGI = args[1] || new Date().toISOString().slice(0, 10);
 
@@ -203,6 +205,27 @@ function indovina(r) {
     didascalia: `Riesci a indovinare l'anime dalla copertina? 🔍 Quanti ne hai presi su 4? Scrivilo nei commenti!\nE se ti chiedi se è doppiato in italiano, lo trovi sul nostro sito, link in bio 🔗\n${BASE} #quizanime #indovinalanime ${scelti.map(x => tag(x.n)).join(" ")}`};
 }
 
+/* ---------- indovina l'anime a livelli (6 anime per video) ---------- */
+function indovinaLivello(spec) {
+  const [L, N] = spec.split("-").map(Number), cfg = JSON.parse(fs.readFileSync(path.join(__dirname, "indovina.json"), "utf8"));
+  const lv = cfg.livelli[L - 1]; if (!lv) throw new Error(`--indovina: il livello ${L} non esiste (1-${cfg.livelli.length})`);
+  const scaricati = leggi("indovina.json") || [];
+  const blocco = lv.anime.slice((N - 1) * 6, N * 6);
+  if (blocco.length < 6) throw new Error(`--indovina: il livello ${L} ha solo ${Math.floor(lv.anime.length / 6)} video; aggiungi anime in indovina.json`);
+  const scelti = blocco.map(p => { const x = scaricati.find(i => i.corto === p.corto && i.id); return {n: p.corto, img: x ? copertina(x.id) : "", x}; });
+  const senza = scelti.filter(x => !x.img).map(x => x.n);
+  if (senza.length) throw new Error("Copertine non ancora scaricate per: " + senza.join(", ") + ". Avvia l'Action «Copie per il giro» e riprova.");
+  const origini = ["50% 30%", "40% 45%", "60% 35%", "50% 55%", "45% 40%", "55% 25%"];
+  const succ = cfg.livelli[L] ? `Prossimo livello: ${cfg.livelli[L].nome}` : "Hai superato il livello più difficile!";
+  const scenes = [{type: "hook", chip: `LIVELLO ${L} · ${lv.nome}`, lines: ["INDOVINA", "L'ANIME", "DALLA COPERTINA"], accent: 0, dur: 2.6},
+    ...scelti.map((y, i) => { const d = ctx.dubData({id: `ind-${L}-${y.n}`, format: "TV", status: "FINISHED", title: {english: y.x.inglese || y.n, romaji: y.x.titolo}}), pl = d && PILL_DUB(d.st);
+      return {type: "guess", num: `LIVELLO ${L} · ${i + 1}/6`, n: y.n, img: y.img, origin: origini[i], zoom: lv.zoom, blur: lv.blur, reveal: 2.6, dur: 4.4,
+        pill: pl ? {t: pl[0] + (d.p && ["dub", "partial", "soon"].includes(d.st) ? " · " + d.p.split(" · ")[0] : ""), col: pl[1]} : null}; }),
+    {type: "outro", lines: ["Quanti su 6?", `Livello ${L} ${L === 3 ? "superato?" : "superato?"}`], cta: `Scrivi il tuo punteggio nei commenti · ${succ}`}];
+  return {nome: `indovina-livello${L}-${N}`, scenes,
+    didascalia: `Indovina l'anime dalla copertina 🔍 LIVELLO ${L} · ${lv.nome.toLowerCase()} (${N}) — quanti ne indovini su 6? Scrivi il tuo punteggio nei commenti!\n${succ.replace("Prossimo livello", "Il prossimo livello")} 👀 Seguici per non perderlo.\nE se ti chiedi se è doppiato in italiano, lo trovi sul nostro sito, link in bio 🔗\n${BASE} #quizanime #indovinalanime #livello${L} ${scelti.slice(0, 4).map(x => tag(x.n)).join(" ")}\n\nSOLUZIONI (non metterle nella didascalia): ${scelti.map((x, i) => `${i + 1}. ${x.n}`).join(" · ")}`};
+}
+
 /* ---------- extra: i più seguiti del momento ---------- */
 function popolari() {
   const pal = leggi("palinsesto.json"); if (!pal) return null;
@@ -224,17 +247,17 @@ function popolari() {
 /* ---------- main ---------- */
 (async () => {
   fs.mkdirSync(OUT, {recursive: true});
-  const video = TORNEO ? [torneo()] : EXTRA ? [indovina(rng(OGGI + "i")), popolari()].filter(Boolean)
+  const video = IND ? [indovinaLivello(IND)] : TORNEO ? [torneo()] : EXTRA ? [indovina(rng(OGGI + "i")), popolari()].filter(Boolean)
     : [quiz(rng(OGGI + "q")), lista(rng(OGGI + "l"), "arrivo"), uscite() || lista(rng(OGGI + "n"), ["solosub", "novita", "piattaforma"][giorno % 3])];   // senza AniList: a rotazione
   const b = await chromium.launch(), testi = [`Video DubITA del ${OGGI}\n`];
   for (const [i, v] of video.entries()) {
-    const base = path.join(OUT, TORNEO || EXTRA ? `${OGGI}_${v.nome}` : `${OGGI}_${i + 1}_${v.nome}`);
+    const base = path.join(OUT, TORNEO || EXTRA || IND ? `${OGGI}_${v.nome}` : `${OGGI}_${i + 1}_${v.nome}`);
     fs.writeFileSync(base + ".json", JSON.stringify({scenes: v.scenes}, null, 1));
     if (PROVA) { const f = await foto({scenes: v.scenes}, [2, 4.5, 6.6, 8.9, 11.5, 15], base, {browser: b}); console.log(f.join("\n")); }
     else { const s = await rendi({scenes: v.scenes}, base + ".mp4", {browser: b}); console.log(`${base}.mp4 · ${s.toFixed(1)} s`); }
     testi.push(`— VIDEO ${i + 1}: ${path.basename(base)}.mp4\n${v.didascalia}\n`);
   }
   await b.close();
-  fs.writeFileSync(path.join(OUT, `${OGGI}_${TORNEO ? "torneo_" : EXTRA ? "extra_" : ""}didascalie.txt`), testi.join("\n"));
+  fs.writeFileSync(path.join(OUT, `${OGGI}_${TORNEO ? "torneo_" : EXTRA ? "extra_" : IND ? `indovina${IND}_` : ""}didascalie.txt`), testi.join("\n"));
   if (senzaNome.size) console.log("Anime senza nome in nomi.json (esclusi dai video): " + [...senzaNome].join(", "));
 })().catch(e => { console.error(e); process.exit(1); });

@@ -59,6 +59,20 @@ def main():
                 ris.append({"corto": p["corto"], "id": None}); print("torneo: non trovato", p["cerca"], ex)
         json.dump(ris, open(os.path.join(out, "torneo.json"), "w"), ensure_ascii=False, indent=1)
         print("torneo: " + ", ".join(f"{r['corto']}={r.get('titolo')}" for r in ris))
+    # indovina l'anime: copertine di tutti i livelli (si scaricano solo quelle che mancano)
+    inf = os.path.join(os.path.dirname(os.path.abspath(__file__)), "video", "indovina.json")
+    if os.path.exists(inf):
+        ris = []
+        for lv in json.load(open(inf, encoding="utf-8"))["livelli"]:
+            for p in lv["anime"]:
+                try:
+                    m = gql(Q_CERCA, {"s": p["cerca"]})["Media"]; time.sleep(1)
+                    scarica_img(m["coverImage"]["extraLarge"] or m["coverImage"]["large"], os.path.join(out, "copertine", f"{m['id']}.jpg"))
+                    ris.append({"corto": p["corto"], "id": m["id"], "titolo": m["title"]["romaji"], "inglese": m["title"]["english"]})
+                except Exception as ex:
+                    ris.append({"corto": p["corto"], "id": None}); print("indovina: non trovato", p["cerca"], ex)
+        json.dump(ris, open(os.path.join(out, "indovina.json"), "w"), ensure_ascii=False, indent=1)
+        print(f"indovina: {sum(1 for r in ris if r['id'])} copertine su {len(ris)}")
 
 if __name__ == "__main__":
     try:
