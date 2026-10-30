@@ -202,7 +202,7 @@ function indovina(r) {
       return {type: "guess", num: `${i + 1}/4`, n: x.n, img: x.img, origin: origini[i], pill: pl ? {t: pl[0] + (d.p && ["dub", "partial", "soon"].includes(d.st) ? " · " + d.p.split(" · ")[0] : ""), col: pl[1]} : null}; }),
     {type: "outro", lines: ["Quanti ne hai", "indovinati?"], cta: "Scrivilo nei commenti · Il doppiaggio di ogni anime è sul sito"}];
   return {nome: "indovina-copertina", scenes,
-    didascalia: `Riesci a indovinare l'anime dalla copertina? 🔍 Quanti ne hai presi su 4? Scrivilo nei commenti!\nE se ti chiedi se è doppiato in italiano, lo trovi sul nostro sito, link in bio 🔗\n${BASE} #quizanime #indovinalanime ${scelti.map(x => tag(x.n)).join(" ")}`};
+    didascalia: `Riesci a indovinare l'anime dalla copertina? 🔍 Quanti ne hai presi su 4? Scrivilo nei commenti!\nE se ti chiedi se è doppiato in italiano, lo trovi sul nostro sito, link in bio 🔗\n${BASE} #quizanime #indovinalanime #animequiz`};
 }
 
 /* ---------- indovina l'anime a livelli (6 anime per video) ---------- */
@@ -223,7 +223,7 @@ function indovinaLivello(spec) {
         pill: pl ? {t: pl[0] + (d.p && ["dub", "partial", "soon"].includes(d.st) ? " · " + d.p.split(" · ")[0] : ""), col: pl[1]} : null}; }),
     {type: "outro", lines: ["Quanti su 6?", `Livello ${L} ${L === 3 ? "superato?" : "superato?"}`], cta: `Scrivi il tuo punteggio nei commenti · ${succ}`}];
   return {nome: `indovina-livello${L}-${N}`, scenes,
-    didascalia: `Indovina l'anime dalla copertina 🔍 LIVELLO ${L} · ${lv.nome.toLowerCase()} (${N}) — quanti ne indovini su 6? Scrivi il tuo punteggio nei commenti!\n${succ.replace("Prossimo livello", "Il prossimo livello")} 👀 Seguici per non perderlo.\nE se ti chiedi se è doppiato in italiano, lo trovi sul nostro sito, link in bio 🔗\n${BASE} #quizanime #indovinalanime #livello${L} ${scelti.slice(0, 4).map(x => tag(x.n)).join(" ")}\n\nSOLUZIONI (non metterle nella didascalia): ${scelti.map((x, i) => `${i + 1}. ${x.n}`).join(" · ")}`};
+    didascalia: `Indovina l'anime dalla copertina 🔍 LIVELLO ${L} · ${lv.nome.toLowerCase()} (${N}) — quanti ne indovini su 6? Scrivi il tuo punteggio nei commenti!\n${succ.replace("Prossimo livello", "Il prossimo livello")} 👀 Seguici per non perderlo.\nE se ti chiedi se è doppiato in italiano, lo trovi sul nostro sito, link in bio 🔗\n${BASE} #quizanime #indovinalanime #livello${L} #animequiz\n\nSOLUZIONI (non metterle nella didascalia): ${scelti.map((x, i) => `${i + 1}. ${x.n}`).join(" · ")}`};
 }
 
 /* ---------- extra: i più seguiti del momento ---------- */
