@@ -74,7 +74,10 @@ la panoramica e il Listone indicati in `STAGIONE`, e li salva **cifrati** nel ra
 - `st`: `dub` (doppiato), `partial` (doppiaggio in corso), `soon` (annunciato), `sub` (solo sottotitolato),
   `none` (nessun doppiaggio, **confermato** da una fonte). Gli anime della stagione che non compaiono nella panoramica
   ricevono da soli l'etichetta "Nessun annuncio": non serve scriverli nell'archivio.
-- `p`: piattaforma. `n`: una frase in italiano, con la data se c'è. `src`: il link della fonte aperta.
+- `p`: piattaforma. Se la stessa stagione è su più piattaforme, scrivile tutte separate da ` · `
+  (es. `"Crunchyroll · Disney+"`). Sul sito, nella scheda di un anime, compare il riquadro «Dove vederlo, stagione per stagione»
+  con tutte le voci della stessa serie: per questo è meglio una voce per stagione (con `s`) quando le piattaforme cambiano
+  da una stagione all'altra. `n`: una frase in italiano, con la data se c'è. `src`: il link della fonte aperta.
 - `v`: la data di oggi in italiano (es. `"26 ottobre 2026"`). Va messa su ogni voce che aggiungi o cambi: sul sito
   compare come "voce verificata il …".
 

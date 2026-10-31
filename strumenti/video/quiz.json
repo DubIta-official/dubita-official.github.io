@@ -1,0 +1,17 @@
+{
+  "_nota": "Livelli del quiz «Il tuo anime è doppiato?» (5 anime: 2 facili, 2 medi, 1 difficilissimo). Le chiavi sono quelle di nomi.json. Gli anime non elencati sono medi. Sono difficilissimi anche, da soli: i doppiaggi annunciati (IN ARRIVO) e le stagioni non doppiate di serie che hanno altre stagioni doppiate.",
+  "facili": [
+    "one piece", "meitantei conan", "doraemon 2005", "crayon shin chan", "pokemon 2023",
+    "jujutsu kaisen", "boku no hero academia", "spy x family", "chainsaw man", "shingeki no kyojin",
+    "ore dake level up na ken", "kimetsu no yaiba mugen jou hen", "dr stone", "black clover",
+    "tensei shitara slime datta ken", "hokuto no ken", "jojo no kimyou na bouken stardust crusaders",
+    "bleach sennen kessen hen", "boruto naruto next generations", "kaijuu 8 gou", "blue lock",
+    "ranma 1 2", "koe no katachi", "cat s eye", "tokyo revengers", "jujutsu kaisen 0"
+  ],
+  "difficili": [
+    "thunder3", "tank chair", "nippon sangoku", "darwin jihen", "chainsmoker cat", "the ribbon hero",
+    "marronnier", "rooster fighter", "snowball earth", "sparks of tomorrow", "dance in the vampire bund",
+    "akane banashi", "jidou hanbaiki ni umarekawatta", "kaminaki sekai no kamisama katsudou",
+    "yuusha ga shinda", "shiguang dailiren", "ninja to gokudou", "dandelion", "black torch"
+  ]
+}
