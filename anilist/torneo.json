@@ -1,0 +1,98 @@
+[
+ {
+  "corto": "One Piece",
+  "id": 21,
+  "titolo": "ONE PIECE",
+  "colore": "#e49335"
+ },
+ {
+  "corto": "Bleach",
+  "id": 269,
+  "titolo": "BLEACH",
+  "colore": "#f1a150"
+ },
+ {
+  "corto": "Naruto",
+  "id": 1735,
+  "titolo": "NARUTO: Shippuuden",
+  "colore": "#e4865d"
+ },
+ {
+  "corto": "Jujutsu Kaisen",
+  "id": 113415,
+  "titolo": "Jujutsu Kaisen",
+  "colore": "#e45d5d"
+ },
+ {
+  "corto": "Demon Slayer",
+  "id": 101922,
+  "titolo": "Kimetsu no Yaiba",
+  "colore": "#f1c9ae"
+ },
+ {
+  "corto": "Chainsaw Man",
+  "id": 127230,
+  "titolo": "Chainsaw Man",
+  "colore": "#6b1a1a"
+ },
+ {
+  "corto": "Death Note",
+  "id": 1535,
+  "titolo": "DEATH NOTE",
+  "colore": null
+ },
+ {
+  "corto": "Spy×Family",
+  "id": 140960,
+  "titolo": "SPY×FAMILY",
+  "colore": "#c9f1f1"
+ },
+ {
+  "corto": "L'attacco dei giganti",
+  "id": 16498,
+  "titolo": "Shingeki no Kyojin",
+  "colore": "#f1a143"
+ },
+ {
+  "corto": "Solo Leveling",
+  "id": 151807,
+  "titolo": "Ore dake Level Up na Ken",
+  "colore": "#35bbf1"
+ },
+ {
+  "corto": "Dragon Ball Z",
+  "id": 813,
+  "titolo": "Dragon Ball Z",
+  "colore": "#e49343"
+ },
+ {
+  "corto": "Hunter x Hunter",
+  "id": 11061,
+  "titolo": "HUNTER×HUNTER (2011)",
+  "colore": "#f1d65d"
+ },
+ {
+  "corto": "Fullmetal Alchemist",
+  "id": 5114,
+  "titolo": "Hagane no Renkinjutsushi: FULLMETAL ALCHEMIST",
+  "colore": "#e4c993"
+ },
+ {
+  "corto": "Frieren",
+  "id": 154587,
+  "titolo": "Sousou no Frieren",
+  "colore": "#bbf1a1"
+ },
+ {
+  "corto": "My Hero Academia",
+  "id": 21459,
+  "titolo": "Boku no Hero Academia",
+  "colore": "#f1d643"
+ },
+ {
+  "corto": "JoJo",
+  "id": 14719,
+  "titolo": "JoJo no Kimyou na Bouken (TV)",
+  "colore": "#e49343"
+ }
+]

@@ -1,0 +1,324 @@
+[
+ {
+  "corto": "Naruto",
+  "id": 20,
+  "titolo": "NARUTO",
+  "inglese": "Naruto"
+ },
+ {
+  "corto": "Dragon Ball Z",
+  "id": 813,
+  "titolo": "Dragon Ball Z",
+  "inglese": "Dragon Ball Z"
+ },
+ {
+  "corto": "Pokémon",
+  "id": 527,
+  "titolo": "Pocket Monsters",
+  "inglese": "Pokémon"
+ },
+ {
+  "corto": "L'attacco dei giganti",
+  "id": 16498,
+  "titolo": "Shingeki no Kyojin",
+  "inglese": "Attack on Titan"
+ },
+ {
+  "corto": "Death Note",
+  "id": 1535,
+  "titolo": "DEATH NOTE",
+  "inglese": "Death Note"
+ },
+ {
+  "corto": "Sailor Moon",
+  "id": 530,
+  "titolo": "Bishoujo Senshi Sailor Moon",
+  "inglese": "Sailor Moon"
+ },
+ {
+  "corto": "Demon Slayer",
+  "id": 101922,
+  "titolo": "Kimetsu no Yaiba",
+  "inglese": "Demon Slayer: Kimetsu no Yaiba"
+ },
+ {
+  "corto": "One Piece",
+  "id": 21,
+  "titolo": "ONE PIECE",
+  "inglese": "ONE PIECE"
+ },
+ {
+  "corto": "Detective Conan",
+  "id": 235,
+  "titolo": "Meitantei Conan",
+  "inglese": "Detective Conan"
+ },
+ {
+  "corto": "My Hero Academia",
+  "id": 21459,
+  "titolo": "Boku no Hero Academia",
+  "inglese": "My Hero Academia"
+ },
+ {
+  "corto": "Doraemon",
+  "id": 8687,
+  "titolo": "Doraemon (2005)",
+  "inglese": null
+ },
+ {
+  "corto": "Jujutsu Kaisen",
+  "id": 113415,
+  "titolo": "Jujutsu Kaisen",
+  "inglese": "JUJUTSU KAISEN"
+ },
+ {
+  "corto": "Spy×Family",
+  "id": 140960,
+  "titolo": "SPY×FAMILY",
+  "inglese": "SPY x FAMILY"
+ },
+ {
+  "corto": "Tokyo Ghoul",
+  "id": 20605,
+  "titolo": "Tokyo Ghoul",
+  "inglese": "Tokyo Ghoul"
+ },
+ {
+  "corto": "Chainsaw Man",
+  "id": 127230,
+  "titolo": "Chainsaw Man",
+  "inglese": "Chainsaw Man"
+ },
+ {
+  "corto": "One Punch Man",
+  "id": 21087,
+  "titolo": "One Punch Man",
+  "inglese": "One-Punch Man"
+ },
+ {
+  "corto": "Solo Leveling",
+  "id": 151807,
+  "titolo": "Ore dake Level Up na Ken",
+  "inglese": "Solo Leveling"
+ },
+ {
+  "corto": "Bleach",
+  "id": 269,
+  "titolo": "BLEACH",
+  "inglese": "Bleach"
+ },
+ {
+  "corto": "Haikyu!!",
+  "id": 20464,
+  "titolo": "Haikyuu!!",
+  "inglese": "HAIKYU!!"
+ },
+ {
+  "corto": "Fullmetal Alchemist",
+  "id": 5114,
+  "titolo": "Hagane no Renkinjutsushi: FULLMETAL ALCHEMIST",
+  "inglese": "Fullmetal Alchemist: Brotherhood"
+ },
+ {
+  "corto": "Mob Psycho 100",
+  "id": 21507,
+  "titolo": "Mob Psycho 100",
+  "inglese": "Mob Psycho 100"
+ },
+ {
+  "corto": "Code Geass",
+  "id": 1575,
+  "titolo": "Code Geass: Hangyaku no Lelouch",
+  "inglese": "Code Geass: Lelouch of the Rebellion"
+ },
+ {
+  "corto": "Blue Lock",
+  "id": 137822,
+  "titolo": "Blue Lock",
+  "inglese": "BLUE LOCK"
+ },
+ {
+  "corto": "Black Clover",
+  "id": 97940,
+  "titolo": "Black Clover",
+  "inglese": "Black Clover"
+ },
+ {
+  "corto": "Frieren",
+  "id": 154587,
+  "titolo": "Sousou no Frieren",
+  "inglese": "Frieren: Beyond Journey’s End"
+ },
+ {
+  "corto": "Tokyo Revengers",
+  "id": 120120,
+  "titolo": "Tokyo Revengers",
+  "inglese": "Tokyo Revengers"
+ },
+ {
+  "corto": "Dr. Stone",
+  "id": 105333,
+  "titolo": "Dr. STONE",
+  "inglese": "Dr. STONE"
+ },
+ {
+  "corto": "Vinland Saga",
+  "id": 101348,
+  "titolo": "VINLAND SAGA",
+  "inglese": "Vinland Saga"
+ },
+ {
+  "corto": "Re:Zero",
+  "id": 21355,
+  "titolo": "Re:Zero kara Hajimeru Isekai Seikatsu",
+  "inglese": "Re:ZERO -Starting Life in Another World-"
+ },
+ {
+  "corto": "Fire Force",
+  "id": 105310,
+  "titolo": "Enen no Shouboutai",
+  "inglese": "Fire Force"
+ },
+ {
+  "corto": "Steins;Gate",
+  "id": 9253,
+  "titolo": "Steins;Gate",
+  "inglese": "Steins;Gate"
+ },
+ {
+  "corto": "Sword Art Online",
+  "id": 11757,
+  "titolo": "Sword Art Online",
+  "inglese": "Sword Art Online"
+ },
+ {
+  "corto": "Kaguya-sama",
+  "id": 101921,
+  "titolo": "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
+  "inglese": "Kaguya-sama: Love is War"
+ },
+ {
+  "corto": "Konosuba",
+  "id": 21202,
+  "titolo": "Kono Subarashii Sekai ni Shukufuku wo!",
+  "inglese": "KONOSUBA -God's blessing on this wonderful world!"
+ },
+ {
+  "corto": "Cowboy Bebop",
+  "id": null
+ },
+ {
+  "corto": "Slime",
+  "id": 101280,
+  "titolo": "Tensei Shitara Slime Datta Ken",
+  "inglese": "That Time I Got Reincarnated as a Slime"
+ },
+ {
+  "corto": "Made in Abyss",
+  "id": 97986,
+  "titolo": "Made in Abyss",
+  "inglese": "Made in Abyss"
+ },
+ {
+  "corto": "Monster",
+  "id": 19,
+  "titolo": "MONSTER",
+  "inglese": "Monster"
+ },
+ {
+  "corto": "Erased",
+  "id": 21234,
+  "titolo": "Boku dake ga Inai Machi",
+  "inglese": "ERASED"
+ },
+ {
+  "corto": "Dandadan",
+  "id": 171018,
+  "titolo": "Dandadan",
+  "inglese": "DAN DA DAN"
+ },
+ {
+  "corto": "Violet Evergarden",
+  "id": 21827,
+  "titolo": "Violet Evergarden",
+  "inglese": "Violet Evergarden"
+ },
+ {
+  "corto": "Dorohedoro",
+  "id": 105228,
+  "titolo": "Dorohedoro",
+  "inglese": "Dorohedoro"
+ },
+ {
+  "corto": "Il monologo della speziale",
+  "id": 161645,
+  "titolo": "Kusuriya no Hitorigoto",
+  "inglese": "The Apothecary Diaries"
+ },
+ {
+  "corto": "Oshi no Ko",
+  "id": 150672,
+  "titolo": "[Oshi no Ko]",
+  "inglese": "OSHI NO KO"
+ },
+ {
+  "corto": "Bocchi the Rock!",
+  "id": 130003,
+  "titolo": "Bocchi the Rock!",
+  "inglese": "BOCCHI THE ROCK!"
+ },
+ {
+  "corto": "Cyberpunk: Edgerunners",
+  "id": 120377,
+  "titolo": "Cyberpunk: Edgerunners",
+  "inglese": "Cyberpunk: Edgerunners"
+ },
+ {
+  "corto": "Ranking of Kings",
+  "id": 113717,
+  "titolo": "Ousama Ranking",
+  "inglese": "Ranking of Kings"
+ },
+ {
+  "corto": "Psycho-Pass",
+  "id": 13601,
+  "titolo": "PSYCHO-PASS",
+  "inglese": "PSYCHO-PASS"
+ },
+ {
+  "corto": "Mushishi",
+  "id": 457,
+  "titolo": "Mushishi",
+  "inglese": "MUSHI-SHI"
+ },
+ {
+  "corto": "Odd Taxi",
+  "id": 128547,
+  "titolo": "Odd Taxi",
+  "inglese": "ODDTAXI"
+ },
+ {
+  "corto": "Hell's Paradise",
+  "id": 128893,
+  "titolo": "Jigokuraku",
+  "inglese": "Hell’s Paradise"
+ },
+ {
+  "corto": "Summer Time Rendering",
+  "id": 129201,
+  "titolo": "Summer Time Render",
+  "inglese": "Summer Time Rendering"
+ },
+ {
+  "corto": "Akudama Drive",
+  "id": 116566,
+  "titolo": "Akudama Drive",
+  "inglese": "Akudama Drive"
+ },
+ {
+  "corto": "Principessa Mononoke",
+  "id": 164,
+  "titolo": "Mononoke-hime",
+  "inglese": "Princess Mononoke"
+ }
+]
