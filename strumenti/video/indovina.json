@@ -1,5 +1,5 @@
 {
-  "nota": "Anime per «Indovina l'anime dalla copertina», divisi per livello. Ogni video usa 6 anime del livello, in ordine: video 1 = i primi 6, video 2 = i successivi 6, e così via. 'cerca' è il titolo da cercare su AniList (l'Action scarica la copertina); 'corto' è il nome mostrato nel video.",
+  "nota": "Anime per «Indovina l'anime dalla copertina», divisi per livello. Ogni video ha 5 anime: 2 facili, 2 medi e 1 difficile, presi in ordine (video 1 = i primi 2 facili, i primi 2 medi e il primo difficile; video 2 = i successivi, e così via). 'cerca' è il titolo da cercare su AniList (l'Action scarica la copertina); 'corto' è il nome mostrato nel video.",
   "livelli": [
     {"nome": "FACILE", "zoom": 2.2, "blur": 14, "anime": [
       {"corto": "Naruto", "cerca": "Naruto"},

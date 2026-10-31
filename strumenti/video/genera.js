@@ -3,8 +3,8 @@
 //   --prova: invece dei video salva solo alcuni fotogrammi PNG (veloce, per controllare la grafica).
 //   --torneo: crea solo il video della prossima sfida del torneo (strumenti/video/torneo.json).
 //   --extra: crea solo i due video extra: «Indovina l'anime dalla copertina» e «I più seguiti del momento».
-//   --indovina=L-N: crea «Indovina l'anime», livello L (1 facile, 2 medio, 3 difficile), video N del livello (6 anime ciascuno, da indovina.json).
-// Ogni giorno escono 3 video: il quiz «Il tuo anime è doppiato?» (5 anime: 2 facili, 2 medi, 1 difficilissimo, livelli in quiz.json), i doppiaggi in arrivo e le nuove uscite
+//   --indovina=N: crea il video N di «Indovina l'anime» (da indovina.json): 2 anime facili, 2 medi e 1 difficile, in quest'ordine.
+// Ogni giorno escono 3 video: il quiz «Il tuo anime è doppiato?», i doppiaggi in arrivo e le nuove uscite
 // (episodi del giorno da AniList, anche non doppiati). La scelta dipende dalla data: rilanciando lo stesso giorno escono gli stessi video.
 // Copertine e palinsesto arrivano dalla cartella anilist/ del ramo «copie» (li scarica l'Action ogni mattina).
 const fs = require("fs"), path = require("path"), vm = require("vm");
@@ -53,7 +53,6 @@ const SOLO_SUB = ctx.SUB.map(([k, p]) => ({id: k[0], titolo: nome(k[0]), sub: ""
 function rng(seed) { let h = 1779033703 ^ seed.length; for (const c of seed) h = Math.imul(h ^ c.charCodeAt(0), 3432918353), h = h << 13 | h >>> 19;
   return () => { h = Math.imul(h ^ h >>> 16, 2246822507); h = Math.imul(h ^ h >>> 13, 3266489909); h ^= h >>> 16; return (h >>> 0) / 4294967296; }; }
 const pesca = (r, arr, n) => { const a = [...arr], o = []; while (o.length < n && a.length) o.push(a.splice(Math.floor(r() * a.length), 1)[0]); return o; };
-const pescaTutti = pesca;
 const giorno = Math.floor(Date.parse(OGGI + "T12:00:00Z") / 864e5);
 
 /* ---------- verdetti ---------- */
@@ -72,28 +71,14 @@ const BASE = "#anime #animeita #doppiaggioitaliano #doppiaggio #animetiktok #per
 const outro = {type: "outro"};
 
 /* ---------- formati ---------- */
-/* quiz a livelli: 2 facili, 2 medi, 1 difficilissimo (livelli in quiz.json) */
-const LIV = JSON.parse(fs.readFileSync(path.join(__dirname, "quiz.json"), "utf8"));
-const siDub = x => ["dub", "partial"].includes(x.st);
-function livello(x) {
-  const trappola = !siDub(x) && DUB.some(y => y.id === x.id && siDub(y));   // altre stagioni doppiate, questa no
-  if (x.st === "soon" || trappola || LIV.difficili.includes(x.id)) return "difficile";
-  if (LIV.facili.includes(x.id) && siDub(x)) return "facile";
-  return "medio";
-}
 function quiz(r) {
-  const usati = new Set(), tutti = [...DUB, ...SOLO_SUB];
-  const di = l => { const ok = tutti.filter(x => livello(x) === l && !usati.has(x.id)); return ok; };
-  const pesca = (r, arr, n) => { const o = []; for (const x of pescaTutti(r, arr, arr.length)) if (o.length < n && !usati.has(x.id)) { o.push(x); usati.add(x.id); } return o; };   // mai lo stesso anime due volte
-  const facili = pesca(r, di("facile"), 2);
-  const medi = [...pesca(r, di("medio").filter(siDub), 1), ...pesca(r, di("medio").filter(x => !siDub(x)), 1)];   // un sì e un no
-  const scelti = [...facili, ...pescaTutti(r, medi, 2), ...pesca(r, di("difficile"), 1)];
-  const LAB = ["FACILE", "FACILE", "MEDIO", "MEDIO", "DIFFICILISSIMO"];
+  const si = DUB.filter(x => ["dub", "partial"].includes(x.st)), no = [...SOLO_SUB, ...DUB.filter(x => ["sub", "none"].includes(x.st))];
+  const scelti = pesca(r, [...pesca(r, si, 2), ...pesca(r, no, 1)], 3);   // mescolati: almeno un sì e un no
   return {nome: "quiz", scenes: [
-    {type: "hook", chip: "LA SFIDA · 5 ANIME", lines: ["IL TUO ANIME", "È DOPPIATO?"], accent: 1},
-    ...scelti.map((x, i) => ({type: "quiz", n: `${i + 1}/5 · ${LAB[i]}`, title: x.titolo, sub: x.sub, ...verdetto(x), dur: 4.3})),
+    {type: "hook", chip: "LA SFIDA · 3 ANIME", lines: ["IL TUO ANIME", "È DOPPIATO?"], accent: 1},
+    ...scelti.map((x, i) => ({type: "quiz", n: `${i + 1}/3`, title: x.titolo, sub: x.sub, ...verdetto(x)})),
     {type: "outro", lines: ["Quante ne hai", "indovinate?"], cta: "Scrivilo nei commenti · Cerca il tuo anime sul sito"}],
-    didascalia: `Doppiato in italiano o no? 👀 2 facili, 2 medi e 1 difficilissimo: quante ne hai indovinate su 5? Scrivilo nei commenti!\n${scelti.map((x, i) => `• ${x.titolo}${x.sub ? " (" + x.sub + ")" : ""}${i === 4 ? " 🔥" : ""}`).join("\n")}\nCerca qualsiasi anime sul nostro sito, link in bio 🔗\n${BASE} #quiz ${scelti.map(x => tag(x.titolo)).join(" ")}`};
+    didascalia: `Doppiato in italiano o no? 👀 Quante ne hai indovinate su 3? Scrivilo nei commenti!\n${scelti.map(x => `• ${x.titolo}${x.sub ? " (" + x.sub + ")" : ""}`).join("\n")}\nCerca qualsiasi anime sul nostro sito, link in bio 🔗\n${BASE} #quiz ${scelti.map(x => tag(x.titolo)).join(" ")}`};
 }
 function scheda(r) {
   const pool = DUB.filter(x => ["dub", "partial", "soon"].includes(x.st)), x = pesca(r, pool, 1)[0];
@@ -220,25 +205,25 @@ function indovina(r) {
     didascalia: `Riesci a indovinare l'anime dalla copertina? 🔍 Quanti ne hai presi su 4? Scrivilo nei commenti!\nE se ti chiedi se è doppiato in italiano, lo trovi sul nostro sito, link in bio 🔗\n${BASE} #quizanime #indovinalanime #animequiz`};
 }
 
-/* ---------- indovina l'anime a livelli (6 anime per video) ---------- */
+/* ---------- indovina l'anime: 2 facili, 2 medi, 1 difficile nello stesso video ---------- */
+const SCHEMA = [[0, 2], [1, 2], [2, 1]];   // [livello, quanti] in ordine: facile, medio, difficile
 function indovinaLivello(spec) {
-  const [L, N] = spec.split("-").map(Number), cfg = JSON.parse(fs.readFileSync(path.join(__dirname, "indovina.json"), "utf8"));
-  const lv = cfg.livelli[L - 1]; if (!lv) throw new Error(`--indovina: il livello ${L} non esiste (1-${cfg.livelli.length})`);
+  const N = +spec, cfg = JSON.parse(fs.readFileSync(path.join(__dirname, "indovina.json"), "utf8"));
+  if (!(N >= 1)) throw new Error("--indovina=N: N è il numero del video (1, 2, 3…)");
   const scaricati = leggi("indovina.json") || [];
-  const blocco = lv.anime.slice((N - 1) * 6, N * 6);
-  if (blocco.length < 6) throw new Error(`--indovina: il livello ${L} ha solo ${Math.floor(lv.anime.length / 6)} video; aggiungi anime in indovina.json`);
-  const scelti = blocco.map(p => { const x = scaricati.find(i => i.corto === p.corto && i.id); return {n: p.corto, img: x ? copertina(x.id) : "", x}; });
+  const scelti = SCHEMA.flatMap(([L, q]) => { const lv = cfg.livelli[L], blocco = lv.anime.slice((N - 1) * q, N * q);
+    if (blocco.length < q) throw new Error(`--indovina: il livello ${lv.nome} ha anime solo per ${Math.floor(lv.anime.length / q)} video; aggiungi anime in indovina.json`);
+    return blocco.map(p => { const x = scaricati.find(i => i.corto === p.corto && i.id); return {n: p.corto, img: x ? copertina(x.id) : "", x, lv}; }); });
   const senza = scelti.filter(x => !x.img).map(x => x.n);
   if (senza.length) throw new Error("Copertine non ancora scaricate per: " + senza.join(", ") + ". Avvia l'Action «Copie per il giro» e riprova.");
-  const origini = ["50% 30%", "40% 45%", "60% 35%", "50% 55%", "45% 40%", "55% 25%"];
-  const succ = cfg.livelli[L] ? `Prossimo livello: ${cfg.livelli[L].nome}` : "Hai superato il livello più difficile!";
-  const scenes = [{type: "hook", chip: `LIVELLO ${L} · ${lv.nome}`, lines: ["INDOVINA", "L'ANIME", "DALLA COPERTINA"], accent: 0, dur: 2.6},
-    ...scelti.map((y, i) => { const d = ctx.dubData({id: `ind-${L}-${y.n}`, format: "TV", status: "FINISHED", title: {english: y.x.inglese || y.n, romaji: y.x.titolo}}), pl = d && PILL_DUB(d.st);
-      return {type: "guess", num: `LIVELLO ${L} · ${i + 1}/6`, n: y.n, img: y.img, origin: origini[i], zoom: lv.zoom, blur: lv.blur, reveal: 2.6, dur: 4.4,
+  const origini = ["50% 30%", "40% 45%", "60% 35%", "50% 55%", "45% 40%"], tot = scelti.length;
+  const scenes = [{type: "hook", chip: "2 FACILI · 2 MEDI · 1 DIFFICILE", lines: ["INDOVINA", "L'ANIME", "DALLA COPERTINA"], accent: 0, dur: 2.6},
+    ...scelti.map((y, i) => { const d = ctx.dubData({id: `ind-${N}-${y.n}`, format: "TV", status: "FINISHED", title: {english: y.x.inglese || y.n, romaji: y.x.titolo}}), pl = d && PILL_DUB(d.st);
+      return {type: "guess", num: `${i + 1}/${tot} · ${y.lv.nome}`, n: y.n, img: y.img, origin: origini[i], zoom: y.lv.zoom, blur: y.lv.blur, reveal: 2.6, dur: 4.4,
         pill: pl ? {t: pl[0] + (d.p && ["dub", "partial", "soon"].includes(d.st) ? " · " + d.p.split(" · ")[0] : ""), col: pl[1]} : null}; }),
-    {type: "outro", lines: ["Quanti su 6?", `Livello ${L} ${L === 3 ? "superato?" : "superato?"}`], cta: `Scrivi il tuo punteggio nei commenti · ${succ}`}];
-  return {nome: `indovina-livello${L}-${N}`, scenes,
-    didascalia: `Indovina l'anime dalla copertina 🔍 LIVELLO ${L} · ${lv.nome.toLowerCase()} (${N}) — quanti ne indovini su 6? Scrivi il tuo punteggio nei commenti!\n${succ.replace("Prossimo livello", "Il prossimo livello")} 👀 Seguici per non perderlo.\nE se ti chiedi se è doppiato in italiano, lo trovi sul nostro sito, link in bio 🔗\n${BASE} #quizanime #indovinalanime #livello${L} #animequiz\n\nSOLUZIONI (non metterle nella didascalia): ${scelti.map((x, i) => `${i + 1}. ${x.n}`).join(" · ")}`};
+    {type: "outro", lines: [`Quanti su ${tot}?`, "Anche il difficile?"], cta: "Scrivi il tuo punteggio nei commenti · Seguici per il prossimo"}];
+  return {nome: `indovina-${N}`, scenes,
+    didascalia: `Indovina l'anime dalla copertina 🔍 2 facili, 2 medi e 1 difficile: quanti ne indovini su ${tot}? Scrivi il tuo punteggio nei commenti!\nL'ultimo è per pochi 👀 Seguici per non perdere il prossimo.\nE se ti chiedi se è doppiato in italiano, lo trovi sul nostro sito, link in bio 🔗\n${BASE} #quizanime #indovinalanime #animequiz\n\nSOLUZIONI (non metterle nella didascalia): ${scelti.map((x, i) => `${i + 1}. ${x.n}`).join(" · ")}`};
 }
 
 /* ---------- extra: i più seguiti del momento ---------- */
