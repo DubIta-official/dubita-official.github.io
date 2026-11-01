@@ -4,6 +4,7 @@
 //   --torneo: crea solo il video della prossima sfida del torneo (strumenti/video/torneo.json).
 //   --extra: crea solo i due video extra: «Indovina l'anime dalla copertina» e «I più seguiti del momento».
 //   --indovina=N: crea il video N di «Indovina l'anime» (da indovina.json): 2 anime facili, 2 medi e 1 difficile, in quest'ordine.
+//   --personaggio=N: crea il video N di «Indovina il personaggio» (da personaggi.json), con lo stesso schema 2 facili, 2 medi, 1 difficile.
 // Ogni giorno escono 3 video: il quiz «Il tuo anime è doppiato?», i doppiaggi in arrivo e le nuove uscite
 // (episodi del giorno da AniList, anche non doppiati). La scelta dipende dalla data: rilanciando lo stesso giorno escono gli stessi video.
 // Copertine e palinsesto arrivano dalla cartella anilist/ del ramo «copie» (li scarica l'Action ogni mattina).
@@ -14,6 +15,7 @@ const {chromium} = require("playwright");
 const ROOT = path.join(__dirname, "..", "..");
 const args = process.argv.slice(2).filter(a => !a.startsWith("--")), PROVA = process.argv.includes("--prova"), TORNEO = process.argv.includes("--torneo"), EXTRA = process.argv.includes("--extra");
 const IND = (process.argv.find(a => a.startsWith("--indovina=")) || "").split("=")[1];
+const PERS = (process.argv.find(a => a.startsWith("--personaggio=")) || "").split("=")[1];
 const OUT = path.resolve(args[0] || "video-oggi");
 const OGGI = args[1] || new Date().toISOString().slice(0, 10);
 
@@ -226,6 +228,26 @@ function indovinaLivello(spec) {
     didascalia: `Indovina l'anime dalla copertina 🔍 2 facili, 2 medi e 1 difficile: quanti ne indovini su ${tot}? Scrivi il tuo punteggio nei commenti!\nL'ultimo è per pochi 👀 Seguici per non perdere il prossimo.\nE se ti chiedi se è doppiato in italiano, lo trovi sul nostro sito, link in bio 🔗\n${BASE} #quizanime #indovinalanime #animequiz\n\nSOLUZIONI (non metterle nella didascalia): ${scelti.map((x, i) => `${i + 1}. ${x.n}`).join(" · ")}`};
 }
 
+/* ---------- indovina il personaggio: 2 facili, 2 medi, 1 difficile ---------- */
+function indovinaPersonaggio(spec) {
+  const N = +spec, cfg = JSON.parse(fs.readFileSync(path.join(__dirname, "personaggi.json"), "utf8"));
+  if (!(N >= 1)) throw new Error("--personaggio=N: N è il numero del video (1, 2, 3…)");
+  const scaricati = leggi("personaggi.json") || [];
+  const foto = id => { const f = AL && id && path.join(AL, "personaggi", id + ".jpg"); return f && fs.existsSync(f) ? f : ""; };
+  const scelti = SCHEMA.flatMap(([L, q]) => { const lv = cfg.livelli[L], blocco = lv.personaggi.slice((N - 1) * q, N * q);
+    if (blocco.length < q) throw new Error(`--personaggio: il livello ${lv.nome} ha personaggi solo per ${Math.floor(lv.personaggi.length / q)} video; aggiungine in personaggi.json`);
+    return blocco.map(p => { const x = scaricati.find(i => i.nome === p.nome && i.id); return {n: p.nome, anime: p.anime, img: x ? foto(x.id) : "", lv}; }); });
+  const senza = scelti.filter(x => !x.img).map(x => x.n);
+  if (senza.length) throw new Error("Immagini non ancora scaricate per: " + senza.join(", ") + ". Avvia l'Action «Copie per il giro» e riprova.");
+  const origini = ["50% 22%", "50% 28%", "45% 25%", "55% 25%", "50% 30%"], tot = scelti.length;
+  const scenes = [{type: "hook", chip: "2 FACILI · 2 MEDI · 1 DIFFICILE", lines: ["INDOVINA", "IL PERSONAGGIO"], accent: 0, dur: 2.4},
+    ...scelti.map((y, i) => ({type: "guess", q: "CHI È?", num: `${i + 1}/${tot} · ${y.lv.nome}`, n: y.n, img: y.img, origin: origini[i], zoom: y.lv.zoom, blur: y.lv.blur, reveal: 2.6, dur: 4.4,
+      pill: {t: "da " + y.anime, col: "#ffffff"}})),
+    {type: "outro", lines: [`Quanti su ${tot}?`, "Anche il difficile?"], cta: "Scrivi il tuo punteggio nei commenti · Seguici per il prossimo"}];
+  return {nome: `personaggio-${N}`, scenes,
+    didascalia: `Indovina il personaggio anime 🔍 2 facili, 2 medi e 1 difficile: quanti ne riconosci su ${tot}? Scrivi il tuo punteggio nei commenti!\nL'ultimo è per veri fan 👀 Seguici per non perdere il prossimo.\nIl doppiaggio italiano dei tuoi anime lo trovi sul nostro sito, link in bio 🔗\n${BASE} #quizanime #indovinailpersonaggio #animequiz\n\nSOLUZIONI (non metterle nella didascalia): ${scelti.map((x, i) => `${i + 1}. ${x.n} (${x.anime})`).join(" · ")}`};
+}
+
 /* ---------- extra: i più seguiti del momento ---------- */
 function popolari() {
   const pal = leggi("palinsesto.json"); if (!pal) return null;
@@ -247,17 +269,17 @@ function popolari() {
 /* ---------- main ---------- */
 (async () => {
   fs.mkdirSync(OUT, {recursive: true});
-  const video = IND ? [indovinaLivello(IND)] : TORNEO ? [torneo()] : EXTRA ? [indovina(rng(OGGI + "i")), popolari()].filter(Boolean)
+  const video = PERS ? [indovinaPersonaggio(PERS)] : IND ? [indovinaLivello(IND)] : TORNEO ? [torneo()] : EXTRA ? [indovina(rng(OGGI + "i")), popolari()].filter(Boolean)
     : [quiz(rng(OGGI + "q")), lista(rng(OGGI + "l"), "arrivo"), uscite() || lista(rng(OGGI + "n"), ["solosub", "novita", "piattaforma"][giorno % 3])];   // senza AniList: a rotazione
   const b = await chromium.launch(), testi = [`Video DubITA del ${OGGI}\n`];
   for (const [i, v] of video.entries()) {
-    const base = path.join(OUT, TORNEO || EXTRA || IND ? `${OGGI}_${v.nome}` : `${OGGI}_${i + 1}_${v.nome}`);
+    const base = path.join(OUT, TORNEO || EXTRA || IND || PERS ? `${OGGI}_${v.nome}` : `${OGGI}_${i + 1}_${v.nome}`);
     fs.writeFileSync(base + ".json", JSON.stringify({scenes: v.scenes}, null, 1));
     if (PROVA) { const f = await foto({scenes: v.scenes}, [2, 4.5, 6.6, 8.9, 11.5, 15], base, {browser: b}); console.log(f.join("\n")); }
     else { const s = await rendi({scenes: v.scenes}, base + ".mp4", {browser: b}); console.log(`${base}.mp4 · ${s.toFixed(1)} s`); }
     testi.push(`— VIDEO ${i + 1}: ${path.basename(base)}.mp4\n${v.didascalia}\n`);
   }
   await b.close();
-  fs.writeFileSync(path.join(OUT, `${OGGI}_${TORNEO ? "torneo_" : EXTRA ? "extra_" : IND ? `indovina${IND}_` : ""}didascalie.txt`), testi.join("\n"));
+  fs.writeFileSync(path.join(OUT, `${OGGI}_${TORNEO ? "torneo_" : EXTRA ? "extra_" : IND ? `indovina${IND}_` : PERS ? `personaggio${PERS}_` : ""}didascalie.txt`), testi.join("\n"));
   if (senzaNome.size) console.log("Anime senza nome in nomi.json (esclusi dai video): " + [...senzaNome].join(", "));
 })().catch(e => { console.error(e); process.exit(1); });
