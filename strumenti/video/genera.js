@@ -3,7 +3,7 @@
 //   --prova: invece dei video salva solo alcuni fotogrammi PNG (veloce, per controllare la grafica).
 //   --torneo: crea solo il video della prossima sfida del torneo (strumenti/video/torneo.json).
 //   --extra: crea solo i due video extra: «Indovina l'anime dalla copertina» e «I più seguiti del momento».
-//   --indovina=N: crea il video N di «Indovina l'anime» (da indovina.json): 2 anime facili, 2 medi e 1 difficile, in quest'ordine.
+//   --indovina=N: crea «Indovina l'anime» n° N (da indovina.json): 2 anime facili, 2 medi e 1 difficile, sempre MAI usati prima (usati.json).
 //   --personaggio=N: crea il video N di «Indovina il personaggio» (da personaggi.json), con lo stesso schema 2 facili, 2 medi, 1 difficile.
 // Ogni giorno escono 3 video: il quiz «Il tuo anime è doppiato?», i doppiaggi in arrivo e le nuove uscite
 // (episodi del giorno da AniList, anche non doppiati). La scelta dipende dalla data: rilanciando lo stesso giorno escono gli stessi video.
@@ -207,14 +207,24 @@ function indovina(r) {
     didascalia: `Riesci a indovinare l'anime dalla copertina? 🔍 Quanti ne hai presi su 4? Scrivilo nei commenti!\nE se ti chiedi se è doppiato in italiano, lo trovi sul nostro sito, link in bio 🔗\n${BASE} #quizanime #indovinalanime #animequiz`};
 }
 
+/* ---------- registro degli anime e personaggi già usati nei quiz (usati.json) ---------- */
+const USATI_F = path.join(__dirname, "usati.json"), USATI = JSON.parse(fs.readFileSync(USATI_F, "utf8"));
+const daSegnare = [];   // [tipo, nome] da aggiungere a usati.json quando il video è creato davvero
+const animeNelVideo = new Set();   // mai due personaggi dello stesso anime nello stesso video
+function nuovi(tipo, lista, q, chiave, nomeLv) {
+  const fatti = new Set(USATI[tipo] || []), ok = [];
+  for (const p of lista) { if (ok.length >= q || fatti.has(p[chiave]) || (p.anime && animeNelVideo.has(p.anime))) continue; ok.push(p); if (p.anime) animeNelVideo.add(p.anime); }
+  if (ok.length < q) throw new Error(`Nel livello ${nomeLv} non ci sono più ${tipo === "indovina" ? "anime" : "personaggi"} mai usati: aggiungine altri in ${tipo === "indovina" ? "indovina.json" : "personaggi.json"}.`);
+  ok.forEach(p => daSegnare.push([tipo, p[chiave]])); return ok;
+}
+
 /* ---------- indovina l'anime: 2 facili, 2 medi, 1 difficile nello stesso video ---------- */
 const SCHEMA = [[0, 2], [1, 2], [2, 1]];   // [livello, quanti] in ordine: facile, medio, difficile
 function indovinaLivello(spec) {
   const N = +spec, cfg = JSON.parse(fs.readFileSync(path.join(__dirname, "indovina.json"), "utf8"));
   if (!(N >= 1)) throw new Error("--indovina=N: N è il numero del video (1, 2, 3…)");
   const scaricati = leggi("indovina.json") || [];
-  const scelti = SCHEMA.flatMap(([L, q]) => { const lv = cfg.livelli[L], blocco = lv.anime.slice((N - 1) * q, N * q);
-    if (blocco.length < q) throw new Error(`--indovina: il livello ${lv.nome} ha anime solo per ${Math.floor(lv.anime.length / q)} video; aggiungi anime in indovina.json`);
+  const scelti = SCHEMA.flatMap(([L, q]) => { const lv = cfg.livelli[L], blocco = nuovi("indovina", lv.anime, q, "corto", lv.nome);
     return blocco.map(p => { const x = scaricati.find(i => i.corto === p.corto && i.id); return {n: p.corto, img: x ? copertina(x.id) : "", x, lv}; }); });
   const senza = scelti.filter(x => !x.img).map(x => x.n);
   if (senza.length) throw new Error("Copertine non ancora scaricate per: " + senza.join(", ") + ". Avvia l'Action «Copie per il giro» e riprova.");
@@ -234,8 +244,7 @@ function indovinaPersonaggio(spec) {
   if (!(N >= 1)) throw new Error("--personaggio=N: N è il numero del video (1, 2, 3…)");
   const scaricati = leggi("personaggi.json") || [];
   const foto = id => { const f = AL && id && path.join(AL, "personaggi", id + ".jpg"); return f && fs.existsSync(f) ? f : ""; };
-  const scelti = SCHEMA.flatMap(([L, q]) => { const lv = cfg.livelli[L], blocco = lv.personaggi.slice((N - 1) * q, N * q);
-    if (blocco.length < q) throw new Error(`--personaggio: il livello ${lv.nome} ha personaggi solo per ${Math.floor(lv.personaggi.length / q)} video; aggiungine in personaggi.json`);
+  const scelti = SCHEMA.flatMap(([L, q]) => { const lv = cfg.livelli[L], blocco = nuovi("personaggio", lv.personaggi, q, "nome", lv.nome);
     return blocco.map(p => { const x = scaricati.find(i => i.nome === p.nome && i.id); return {n: p.nome, anime: p.anime, img: x ? foto(x.id) : "", lv}; }); });
   const senza = scelti.filter(x => !x.img).map(x => x.n);
   if (senza.length) throw new Error("Immagini non ancora scaricate per: " + senza.join(", ") + ". Avvia l'Action «Copie per il giro» e riprova.");
@@ -269,7 +278,7 @@ function popolari() {
 /* ---------- main ---------- */
 (async () => {
   fs.mkdirSync(OUT, {recursive: true});
-  const video = PERS ? [indovinaPersonaggio(PERS)] : IND ? [indovinaLivello(IND)] : TORNEO ? [torneo()] : EXTRA ? [indovina(rng(OGGI + "i")), popolari()].filter(Boolean)
+  const video = PERS ? [indovinaPersonaggio(PERS)] : IND ? [indovinaLivello(IND)] : TORNEO ? [torneo()] : EXTRA ? [indovinaLivello(String((USATI.indovina || []).length)), popolari()].filter(Boolean)
     : [quiz(rng(OGGI + "q")), lista(rng(OGGI + "l"), "arrivo"), uscite() || lista(rng(OGGI + "n"), ["solosub", "novita", "piattaforma"][giorno % 3])];   // senza AniList: a rotazione
   const b = await chromium.launch(), testi = [`Video DubITA del ${OGGI}\n`];
   for (const [i, v] of video.entries()) {
@@ -280,6 +289,8 @@ function popolari() {
     testi.push(`— VIDEO ${i + 1}: ${path.basename(base)}.mp4\n${v.didascalia}\n`);
   }
   await b.close();
+  if (!PROVA && daSegnare.length) { for (const [t, n] of daSegnare) (USATI[t] = USATI[t] || []).includes(n) || USATI[t].push(n);
+    fs.writeFileSync(USATI_F, JSON.stringify(USATI, null, 2) + "\n"); console.log("Segnati come usati: " + daSegnare.map(x => x[1]).join(", ") + " (ricordati commit e push di usati.json)"); }
   fs.writeFileSync(path.join(OUT, `${OGGI}_${TORNEO ? "torneo_" : EXTRA ? "extra_" : IND ? `indovina${IND}_` : PERS ? `personaggio${PERS}_` : ""}didascalie.txt`), testi.join("\n"));
   if (senzaNome.size) console.log("Anime senza nome in nomi.json (esclusi dai video): " + [...senzaNome].join(", "));
 })().catch(e => { console.error(e); process.exit(1); });
