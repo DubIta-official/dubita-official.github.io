@@ -77,15 +77,15 @@ function quiz(r) {
   const si = DUB.filter(x => ["dub", "partial"].includes(x.st)), no = [...SOLO_SUB, ...DUB.filter(x => ["sub", "none"].includes(x.st))];
   const scelti = pesca(r, [...pesca(r, si, 2), ...pesca(r, no, 1)], 3);   // mescolati: almeno un sì e un no
   return {nome: "quiz", scenes: [
-    {type: "hook", chip: "LA SFIDA · 3 ANIME", lines: ["IL TUO ANIME", "È DOPPIATO?"], accent: 1},
+    {type: "hook", chip: "QUIZ · 3 ANIME", lines: ["UNO NON È", "DOPPIATO"], accent: 1, items: scelti.map(x => x.titolo + (x.sub ? " – " + x.sub : ""))},
     ...scelti.map((x, i) => ({type: "quiz", n: `${i + 1}/3`, title: x.titolo, sub: x.sub, ...verdetto(x)})),
-    {type: "outro", lines: ["Quante ne hai", "indovinate?"], cta: "Scrivilo nei commenti · Cerca il tuo anime sul sito"}],
-    didascalia: `Doppiato in italiano o no? 👀 Quante ne hai indovinate su 3? Scrivilo nei commenti!\n${scelti.map(x => `• ${x.titolo}${x.sub ? " (" + x.sub + ")" : ""}`).join("\n")}\nCerca qualsiasi anime sul nostro sito, link in bio 🔗\n${BASE} #quiz ${scelti.map(x => tag(x.titolo)).join(" ")}`};
+    {type: "outro", lines: ["L'avevi", "indovinato?"], cta: "Scrivilo nei commenti · Cerca il tuo anime sul sito"}],
+    didascalia: `Uno di questi anime NON è doppiato in italiano 👀 Quale? Scrivilo nei commenti prima della risposta!\n${scelti.map(x => `• ${x.titolo}${x.sub ? " (" + x.sub + ")" : ""}`).join("\n")}\nCerca qualsiasi anime sul nostro sito, link in bio 🔗\n${BASE} #quiz ${scelti.map(x => tag(x.titolo)).join(" ")}`};
 }
 function scheda(r) {
   const pool = DUB.filter(x => ["dub", "partial", "soon"].includes(x.st)), x = pesca(r, pool, 1)[0];
   return {nome: "scheda", scenes: [
-    {type: "hook", chip: "LO SAPEVI?", lines: ["È DOPPIATO", "IN ITALIANO?"], accent: 1},
+    {type: "hook", chip: "LO SAPEVI?", lines: ["È DOPPIATO", "IN ITALIANO?"], accent: 1, items: [x.titolo + (x.sub ? " – " + x.sub : "")]},
     {type: "quiz", title: x.titolo, sub: x.sub, ...verdetto(x), dur: 5},
     {type: "outro", lines: ["E il tuo anime", "preferito?"], cta: "Cercalo sul sito · Seguici per i nuovi doppiaggi"}],
     didascalia: `${x.titolo}${x.sub ? " (" + x.sub + ")" : ""} è doppiato in italiano? Ecco la risposta 🎙️\nVuoi sapere di un altro anime? Scrivilo nei commenti o cercalo sul sito, link in bio 🔗\n${BASE} ${tag(x.titolo)}${PIATT[x.p] ? " " + PIATT[x.p][2] : ""}`};
@@ -96,7 +96,6 @@ function lista(r, quale) {
     const p = ok[giorno % ok.length], [nomeP, colore, ht] = PIATT[p];
     const items = pesca(r, DUB.filter(x => x.p === p && x.st === "dub"), 5);
     return {nome: "lista-" + tag(p).slice(1), scenes: [
-      {type: "hook", chip: "DA VEDERE IN ITALIANO", lines: [`${items.length} ANIME DOPPIATI`, "SU", nomeP], accent: 2},
       {type: "list", label: "DOPPIATI IN ITALIANO SU", title: nomeP, color: colore, items: items.map(x => [x.titolo + (x.sub ? " – " + x.sub : ""), x.data ? x.data.corta : ""])},
       outro],
       didascalia: `${items.length} anime doppiati in italiano da vedere su ${p} 🇮🇹 Quale manca? Scrivilo nei commenti!\nTutti i doppiaggi sul nostro sito, link in bio 🔗\n${BASE} ${ht} ${items.map(x => tag(x.titolo)).join(" ")}`};
@@ -104,7 +103,6 @@ function lista(r, quale) {
   if (quale === "solosub") {
     const items = pesca(r, SOLO_SUB, 5);
     return {nome: "lista-solo-sub", scenes: [
-      {type: "hook", chip: ctx.STAGIONE.nome.toUpperCase().replace("L'", ""), lines: ["QUESTI ANIME", "NON HANNO", "IL DOPPIAGGIO"], accent: 2},
       {type: "list", label: "PER ORA SOLO", title: "SOTTOTITOLATI", color: "#ff4d6a", items: items.map(x => [x.titolo, x.p.split(" · ")[0]])},
       {type: "outro", lines: ["Quale vorresti", "doppiato?"], cta: "Scrivilo nei commenti · Il sito si aggiorna ogni giorno"}],
       didascalia: `Questi anime di ${ctx.STAGIONE.nome} per ora sono solo sottotitolati 😢 Quale vorresti doppiato in italiano?\nSe arriva un annuncio, lo trovi subito sul nostro sito, link in bio 🔗\n${BASE} #sottotitoli ${items.map(x => tag(x.titolo)).join(" ")}`};
@@ -113,7 +111,6 @@ function lista(r, quale) {
     const items = pesca(r, DUB.filter(x => x.st === "soon"), 5);
     if (items.length < 2) return lista(r, "piattaforma");
     return {nome: "lista-in-arrivo", scenes: [
-      {type: "hook", chip: "ANNUNCIATI", lines: ["DOPPIAGGI", "IN ARRIVO"], accent: 1},
       {type: "list", label: "PRESTO IN ITALIANO", title: "IN ARRIVO", color: "#ffc53d", items: items.map(x => [x.titolo + (x.sub ? " – " + x.sub : ""), x.p.split(" · ")[0]])},
       outro],
       didascalia: `Doppiaggi italiani annunciati e in arrivo 🎙️ Quale aspetti di più?\nDate e piattaforme aggiornate sul nostro sito, link in bio 🔗\n${BASE} #novita ${items.map(x => tag(x.titolo)).join(" ")}`};
@@ -123,7 +120,6 @@ function lista(r, quale) {
     .sort((a, b) => (b.data.a - a.data.a) || (b.data.m - a.data.m) || (b.data.g - a.data.g)).slice(0, 5);
   if (items.length < 3) return lista(r, "piattaforma");
   return {nome: "lista-novita", scenes: [
-    {type: "hook", chip: "APPENA USCITI", lines: ["ORA PARLANO", "ITALIANO"], accent: 1},
     {type: "list", label: "GLI ULTIMI", title: "DOPPIAGGI", color: "#2ee59d", items: items.map(x => [x.titolo + (x.sub ? " – " + x.sub : ""), x.data.corta])},
     outro],
     didascalia: `Gli ultimi anime usciti doppiati in italiano 🇮🇹 Li hai già visti?\nTutte le date e le piattaforme sul nostro sito, link in bio 🔗\n${BASE} #novita ${items.map(x => tag(x.titolo)).join(" ")}`};
@@ -143,7 +139,6 @@ function uscite() {
     return {n: n.length > 38 ? n.slice(0, 36).trim() + "…" : n, ep: `Episodio ${e.episode}${m.episodes === e.episode ? " · FINALE" : ""}`, img: copertina(m.id), pl, col, titolo: n, st}; });
   const gg = GIORNI[new Date(OGGI + "T12:00:00").getDay()], num = +OGGI.slice(8);
   return {nome: "nuove-uscite", scenes: [
-    {type: "hook", chip: "NUOVI EPISODI", lines: ["ESCONO", "OGGI"], accent: 1},
     {type: "grid", label: "NUOVI EPISODI · " + gg + " " + num, title: "IN USCITA OGGI", color: "#3ee0ff", items},
     {type: "outro", lines: ["Quale guardi", "stasera?"], cta: "Doppiato o no? Controlla ogni anime sul sito"}],
     didascalia: `Nuovi episodi anime in uscita oggi, ${gg.toLowerCase()} ${num} 📺 Quale guardi stasera?\n${items.map(x => `• ${x.titolo} – ${x.ep}${x.st === "dub" || x.st === "partial" ? " (anche doppiato 🇮🇹)" : ""}`).join("\n")}\nDoppiato o solo sottotitolato? Lo trovi sul nostro sito, link in bio 🔗\n${BASE} #nuoviepisodi #animedelgiorno ${items.slice(0, 4).map(x => tag(x.titolo)).join(" ")}`};
@@ -284,7 +279,7 @@ function popolari() {
   for (const [i, v] of video.entries()) {
     const base = path.join(OUT, TORNEO || EXTRA || IND || PERS ? `${OGGI}_${v.nome}` : `${OGGI}_${i + 1}_${v.nome}`);
     fs.writeFileSync(base + ".json", JSON.stringify({scenes: v.scenes}, null, 1));
-    if (PROVA) { const f = await foto({scenes: v.scenes}, [2, 4.5, 6.6, 8.9, 11.5, 15], base, {browser: b}); console.log(f.join("\n")); }
+    if (PROVA) { const f = await foto({scenes: v.scenes}, [0, 2, 4.5, 6.6, 8.9, 11.5], base, {browser: b}); console.log(f.join("\n")); }
     else { const s = await rendi({scenes: v.scenes}, base + ".mp4", {browser: b}); console.log(`${base}.mp4 · ${s.toFixed(1)} s`); }
     testi.push(`— VIDEO ${i + 1}: ${path.basename(base)}.mp4\n${v.didascalia}\n`);
   }
