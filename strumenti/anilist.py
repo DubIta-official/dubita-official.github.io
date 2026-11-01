@@ -73,6 +73,23 @@ def main():
                     ris.append({"corto": p["corto"], "id": None}); print("indovina: non trovato", p["cerca"], ex)
         json.dump(ris, open(os.path.join(out, "indovina.json"), "w"), ensure_ascii=False, indent=1)
         print(f"indovina: {sum(1 for r in ris if r['id'])} copertine su {len(ris)}")
+    # indovina il personaggio: immagini dei personaggi di tutti i livelli
+    pf = os.path.join(os.path.dirname(os.path.abspath(__file__)), "video", "personaggi.json")
+    if os.path.exists(pf):
+        os.makedirs(os.path.join(out, "personaggi"), exist_ok=True)
+        Q_PERS = "query($s:String){Page(perPage:5){characters(search:$s,sort:FAVOURITES_DESC){id name{full} image{large} media(sort:POPULARITY_DESC,perPage:1){nodes{title{romaji english}}}}}}"
+        ris = []
+        for lv in json.load(open(pf, encoding="utf-8"))["livelli"]:
+            for p in lv["personaggi"]:
+                try:
+                    c = gql(Q_PERS, {"s": p["cerca"]})["Page"]["characters"][0]; time.sleep(1)
+                    scarica_img(c["image"]["large"], os.path.join(out, "personaggi", f"{c['id']}.jpg"))
+                    t = (c["media"]["nodes"] or [{}])[0].get("title") or {}
+                    ris.append({"nome": p["nome"], "id": c["id"], "trovato": c["name"]["full"], "anime_anilist": t.get("english") or t.get("romaji")})
+                except Exception as ex:
+                    ris.append({"nome": p["nome"], "id": None}); print("personaggio: non trovato", p["cerca"], ex)
+        json.dump(ris, open(os.path.join(out, "personaggi.json"), "w"), ensure_ascii=False, indent=1)
+        print(f"personaggi: {sum(1 for r in ris if r['id'])} immagini su {len(ris)}")
 
 if __name__ == "__main__":
     try:
