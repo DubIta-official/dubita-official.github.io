@@ -10,7 +10,7 @@
    ex = parole che escludono, inc = basta che il titolo contenga la chiave.
    st: "dub" doppiato · "partial" doppiaggio in corso · "soon" annunciato · "sub" solo sottotitolato · "none" nessun doppiaggio (confermato)
    v = data in cui la voce è stata verificata (facoltativa, es. "26 ottobre 2026") */
-const DUB_CHECKED = "29 ottobre 2026";
+const DUB_CHECKED = "1 novembre 2026";
 const SRC = {
   rag: "https://www.antoniogenna.net/doppiaggio/anim/rentagirlfriend.htm",
   ragNews: "https://www.animeclick.it/news/107762-rent-a-girlfriend-su-crunchyroll-la-prima-stagione-doppiata",
@@ -24,20 +24,25 @@ const SRC = {
   kaiju: "https://www.animeclick.it/news/102862-kaiju-no-8-il-doppiaggio-uscira-lo-stesso-giorno-della-versione-giapponese",
   jjk2: "https://www.animeclick.it/news/110273-jujutsu-kaisen-la-seconda-stagione-anime-arriva-su-italia-2-e-su-mediaset-infinity",
   mha: "https://www.animeclick.it/news/97580-my-hero-academia-arriva-doppiato-su-crunchyroll",
+  lucca: "https://www.animeclick.it/news/112177-lucca-comics-games-2026-i-nuovi-doppiaggi-di-crunchyroll",
   mha6: "https://www.animeclick.it/news/104202-my-hero-academia-la-sesta-stagione-arriva-in-tv-su-italia-2-in-autunno"
 };
 const RAG = ["rent a girlfriend", "kanojo okarishimasu"];
 const DUBDB = [
-  // Rent-a-Girlfriend: stagioni 1-4 doppiate, la 5 no
+  // Rent-a-Girlfriend: stagioni 1-4 doppiate, la 5 annunciata
   {k: RAG, s: [1], yx: 2020, st: "dub", p: "Crunchyroll", n: "Doppiata da MOLOK Studios, disponibile dal 29 luglio 2025.", src: SRC.rag},
   {k: RAG, s: [2], st: "dub", p: "Crunchyroll", n: "Doppiata, disponibile dal 1 aprile 2026.", src: SRC.rag},
   {k: RAG, s: [3], st: "dub", p: "Crunchyroll", n: "Doppiata, disponibile dal 28 maggio 2026.", src: SRC.rag},
   {k: RAG, s: [4], st: "dub", p: "Crunchyroll", n: "Doppiata, disponibile da luglio 2026.", src: SRC.rag},
-  {k: RAG, s: [5], st: "sub", p: "Crunchyroll", n: "Disponibile solo sottotitolata: nessun doppiaggio annunciato.", src: SRC.rag},
+  {k: RAG, s: [5], st: "soon", p: "Crunchyroll", n: "Doppiaggio annunciato da Crunchyroll al Lucca Comics & Games 2026, data da comunicare.", src: SRC.lucca, v: "1 novembre 2026"},
 
   // Black Clover
   {k: ["black clover"], s: [1], yx: 2021, st: "partial", p: "Crunchyroll", n: "Doppiaggio in corso (VSI Roma): i primi episodi sono già disponibili, gli altri arrivano a blocchi.", src: SRC.bc},
   {k: ["black clover"], s: [2], st: "soon", p: "Crunchyroll", n: "Doppiaggio annunciato a partire dal 24 ottobre 2026 (non in simuldub).", src: SRC.autumn, v: "27 ottobre 2026"},
+
+  // Annunciati al Lucca Comics & Games 2026
+  {k: ["tsue to tsurugi no wistoria", "wistoria wand and sword"], s: [1], st: "soon", p: "Crunchyroll", n: "Doppiaggio della prima stagione annunciato da Crunchyroll al Lucca Comics & Games 2026, data da comunicare.", src: SRC.lucca, v: "1 novembre 2026"},
+  {k: ["to be hero x"], s: [1], st: "soon", p: "Crunchyroll", n: "Doppiaggio della prima stagione annunciato da Crunchyroll al Lucca Comics & Games 2026, data da comunicare.", src: SRC.lucca, v: "1 novembre 2026"},
 
   // Autunno 2026
   {k: ["overgeared"], st: "dub", p: "Crunchyroll", n: "Simuldub dal 27 settembre 2026.", src: SRC.autumn},
