@@ -273,7 +273,7 @@ nav .ni{display:none}
       <li><b>Librerie</b>: le tue liste di anime, salvate in questo browser.</li>
       <li><b>Doppiaggi ITA</b>: cosa è doppiato questa settimana, cosa è in arrivo, e dove segnalare un errore.</li>
     </ul>
-    <p class="legend">Le etichette sulle copertine: <span class="fact"><b>ITA</b></span> doppiato · <span class="fact"><b>ITA in corso</b></span> doppiaggio in uscita · <span class="fact"><b>ITA in arrivo</b></span> annunciato · <span class="fact"><b>SUB ITA</b></span> solo sottotitolato · <span class="fact"><b>No ITA</b></span> nessun doppiaggio · <span class="fact"><b>Nessun annuncio</b></span> per ora nessun doppiaggio annunciato · <span class="fact"><b>ITA ?</b></span> non ancora verificato. Ogni dato ha la sua fonte: tocca una copertina per vederla.</p>
+    <p class="legend">Le etichette sulle copertine: <span class="fact"><b>ITA</b></span> doppiato · <span class="fact"><b>ITA in corso</b></span> doppiaggio in uscita · <span class="fact"><b>ITA in arrivo</b></span> annunciato · <span class="fact"><b>SUB ITA</b></span> solo sottotitolato · <span class="fact"><b>No ITA</b></span> nessun doppiaggio · <span class="fact"><b>ITA rimosso</b></span> il doppiaggio c'era ma non è più disponibile ·<span class="fact"><b>Nessun annuncio</b></span> per ora nessun doppiaggio annunciato · <span class="fact"><b>ITA ?</b></span> non ancora verificato. Ogni dato ha la sua fonte: tocca una copertina per vederla.</p>
   </details>
 
   <!-- SETTIMANA -->
@@ -284,6 +284,7 @@ nav .ni{display:none}
       <input type="search" class="field" id="wq" placeholder="Filtra per titolo…" aria-label="Filtra per titolo">
       <button class="chip" id="onlyMine" aria-pressed="false">Solo le mie liste</button>
     </div>
+    <div class="chips langf" data-lang-for="week" role="group" aria-label="Filtra per lingua"></div>
     <div class="status" id="wstatus">Carico il palinsesto da AniList…</div>
     <div class="grid" id="wgrid"></div>
     <button class="linkbtn" data-miss="calendar" style="align-self:flex-start">Manca un anime in questo giorno? Segnalalo</button>
@@ -301,8 +302,10 @@ nav .ni{display:none}
       <button class="chip" data-mode="upcoming" aria-pressed="false">In arrivo</button>
       <button class="chip" data-mode="top" aria-pressed="false">I più amati</button>
     </div>
+    <div class="chips langf" data-lang-for="explore" role="group" aria-label="Filtra per lingua"></div>
     <div class="status" id="estatus"></div>
     <div class="grid" id="egrid"></div>
+    <button class="chip" id="emore" hidden style="align-self:flex-start">Mostra altri</button>
     <button class="linkbtn" data-miss="search" style="align-self:flex-start">Non trovi un anime? Segnalalo</button>
   </section>
 
@@ -374,7 +377,8 @@ nav .ni{display:none}
     <h2>In italiano questa settimana <span class="n" id="dn1"></span></h2>
     <p class="status" style="max-width:65ch">Gli anime in onda questa settimana che hanno il doppiaggio italiano, già uscito o in corso. Il dato arriva dall'archivio verificato.</p>
     <div class="grid" id="dgrid"></div>
-    <h2>Doppiaggio in arrivo <span class="n" id="dn2"></span></h2>
+    <h2>Doppiaggi in arrivo <span class="n" id="dn2"></span></h2>
+    <p class="status" style="max-width:65ch">Tutti i doppiaggi italiani annunciati nel nostro archivio, dal più vicino. Apri un anime e premi “Aggiungi al calendario” per non perdere la data.</p>
     <div class="grid" id="dgrid2"></div>
     <h2>Le tue segnalazioni <span class="n" id="dn3"></span></h2>
     <p class="status" style="max-width:65ch">Hai visto un dato sbagliato? Apri l'anime e premi “Segnala un errore”. Manca un anime? Usa “Segnala un anime mancante”. Le segnalazioni vengono controllate con le fonti prima di cambiare qualcosa, così nessuno può inserire dati falsi.</p>
@@ -389,7 +393,7 @@ nav .ni{display:none}
     </div>
   </section>
 
-  <footer><span style="opacity:.6">Versione 26.10-4 ·</span> Dati e immagini: <a href="https://anilist.co" target="_blank" rel="noopener">AniList</a>. Doppiaggi: archivio verificato a mano. Le librerie sono salvate solo in questo browser. Visite contate in forma anonima, senza cookie (GoatCounter).<br>© 2026 DubITA · Codice, archivio dei doppiaggi e trame tradotte sono opera originale di DubITA: tutti i diritti riservati, è vietato copiarli o ripubblicarli senza permesso.</footer>
+  <footer><span style="opacity:.6">Versione 26.11-1 ·</span> Dati e immagini: <a href="https://anilist.co" target="_blank" rel="noopener">AniList</a>. Doppiaggi: archivio verificato a mano. Le librerie sono salvate solo in questo browser. Visite contate in forma anonima, senza cookie (GoatCounter).<br>© 2026 DubITA · Codice, archivio dei doppiaggi e trame tradotte sono opera originale di DubITA: tutti i diritti riservati, è vietato copiarli o ripubblicarli senza permesso.</footer>
 </div>
 
 <div class="overlay" id="overlay" hidden></div>
@@ -486,9 +490,25 @@ let selected = (now.getDay() + 6) % 7;
 let episodes = [];
 let onlyMine = store.get("pa-only", false);
 
+/* filtro lingua (Settimana ed Esplora): usa solo i dati verificati dell'archivio */
+const LANG = {all: ["Tutte le lingue"], dub: ["Solo doppiati ITA", ["dub", "partial"]], ita: ["Doppiati o SUB ITA", ["dub", "partial", "sub"]]};
+let langF = store.get("pa-lang", "all"); if (!LANG[langF]) langF = "all";
+const langOk = m => langF === "all" || LANG[langF][1].includes(dubData(m)?.st);
+function renderLangChips(){
+  document.querySelectorAll(".langf").forEach(box => {
+    box.innerHTML = Object.entries(LANG).map(([k, v]) => `<button class="chip" data-lang="${k}" aria-pressed="${k === langF}">${v[0]}</button>`).join("")
+      + (langF !== "all" ? `<span class="status" style="align-self:center;font-size:13px">Solo anime verificati nel nostro archivio</span>` : "");
+  });
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-lang]"); if (!b) return;
+  langF = b.dataset.lang; store.set("pa-lang", langF); renderLangChips();
+  renderWeek(); if (exploreItems.length) renderExplore();
+});
 function weekFilter(e){
   const q = $("wq").value.trim().toLowerCase();
   if (onlyMine && !inAnyList(e.media.id)) return false;
+  if (!langOk(e.media)) return false;
   return !q || (e.media.title.romaji + " " + (e.media.title.english || "")).toLowerCase().includes(q);
 }
 function renderWeek(){
@@ -508,7 +528,7 @@ function renderWeek(){
       tr: inAnyList(e.media.id) ? "★" : "",
       meta: `Episodio ${e.episode}${e.media.episodes ? " di " + e.media.episodes : ""}`,
       past: e.airingAt < nowS })).join("")
-    : `<div class="empty" style="grid-column:1/-1">${onlyMine ? "Nessun anime delle tue liste esce in questo giorno." : "Nessun episodio trovato per questo giorno."}</div>`;
+    : `<div class="empty" style="grid-column:1/-1">${onlyMine ? "Nessun anime delle tue liste esce in questo giorno." : langF !== "all" ? "Nessun anime con questa lingua esce in questo giorno: prova un altro giorno o togli il filtro." : "Nessun episodio trovato per questo giorno."}</div>`;
 }
 function renderHero(rows){
   const h = $("hero");
@@ -557,27 +577,43 @@ function currentSeason(){
   return {season: ["WINTER","WINTER","SPRING","SPRING","SPRING","SUMMER","SUMMER","SUMMER","FALL","FALL","FALL","WINTER"][m],
           year: m === 11 ? now.getFullYear() + 1 : now.getFullYear()};
 }
-async function loadExplore(mode, search){
-  const vars = {}; let args;
+let exploreItems = [], exploreQuery = null, explorePage = 1, exploreMore = false;
+function renderExplore(){
+  const items = exploreItems.filter(langOk), hidden = exploreItems.length - items.length;
+  const s = exploreQuery?.search;
+  const parts = [s ? `${exploreItems.length} risultati per “${s}”` : "", langF !== "all" && hidden ? `${hidden} nascosti dal filtro lingua` : ""].filter(Boolean);
+  $("estatus").textContent = parts.join(" · "); $("estatus").className = "status";
+  $("egrid").innerHTML = items.length ? items.map(m => card(m, {
+      tl: m.averageScore ? m.averageScore + "%" : "",
+      tr: inAnyList(m.id) ? "★" : "",
+      meta: [FORMAT[m.format], m.seasonYear, STATUS[m.status]].filter(Boolean).join(" · ") })).join("")
+    : exploreItems.length ? `<div class="empty" style="grid-column:1/-1">Nessuno di questi anime è verificato con questa lingua.${exploreMore ? " Premi “Mostra altri” per cercare più avanti." : ""}</div>`
+    : `<div class="empty" style="grid-column:1/-1">Nessun anime trovato. Prova con il titolo originale o inglese, oppure <button class="linkbtn" data-miss="search">segnalaci che manca</button>.</div>`;
+  $("emore").hidden = !exploreMore;
+}
+$("emore").addEventListener("click", () => { if (exploreQuery) loadExplore(exploreQuery.mode, exploreQuery.search, explorePage + 1); });
+async function loadExplore(mode, search, page = 1){
+  const vars = {page}; let args;
   if (search) { args = "search:$s,sort:[SEARCH_MATCH,POPULARITY_DESC]"; vars.s = search; }
   else if (mode === "trending") args = "sort:TRENDING_DESC";
   else if (mode === "season") { const cs = currentSeason(); args = "season:$se,seasonYear:$y,sort:POPULARITY_DESC"; vars.se = cs.season; vars.y = cs.year; }
   else if (mode === "upcoming") args = "status:NOT_YET_RELEASED,sort:POPULARITY_DESC";
   else args = "sort:SCORE_DESC";
-  const defs = [search && "$s:String", vars.se && "$se:MediaSeason", vars.y && "$y:Int"].filter(Boolean).join(",");
-  const q = `query${defs ? "(" + defs + ")" : ""}{Page(perPage:30){media(type:ANIME,isAdult:false,${args}){${MEDIA}}}}`;
+  const defs = ["$page:Int", search && "$s:String", vars.se && "$se:MediaSeason", vars.y && "$y:Int"].filter(Boolean).join(",");
+  const q = `query(${defs}){Page(page:$page,perPage:30){pageInfo{hasNextPage} media(type:ANIME,isAdult:false,${args}){${MEDIA}}}}`;
   $("estatus").textContent = "Carico…"; $("estatus").className = "status";
+  $("emore").disabled = true;
   try {
     const d = await anilist(q, vars);
-    const items = d.Page.media;
-    $("estatus").textContent = search ? `${items.length} risultati per “${search}”` : "";
-    $("egrid").innerHTML = items.length ? items.map(m => card(m, {
-        tl: m.averageScore ? m.averageScore + "%" : "",
-        tr: inAnyList(m.id) ? "★" : "",
-        meta: [FORMAT[m.format], m.seasonYear, STATUS[m.status]].filter(Boolean).join(" · ") })).join("")
-      : `<div class="empty" style="grid-column:1/-1">Nessun anime trovato. Prova con il titolo originale o inglese, oppure <button class="linkbtn" data-miss="search">segnalaci che manca</button>.</div>`;
+    if (page === 1) exploreItems = [];
+    const ids = new Set(exploreItems.map(m => m.id));
+    exploreItems = exploreItems.concat(d.Page.media.filter(m => !ids.has(m.id)));
+    exploreQuery = {mode, search}; explorePage = page;
+    exploreMore = d.Page.pageInfo.hasNextPage && page < 10;
+    renderExplore();
     exploreLoaded = true;
   } catch (e) { $("estatus").textContent = errMsg(e); $("estatus").className = "status err"; }
+  $("emore").disabled = false;
 }
 $("echips").addEventListener("click", e => {
   const b = e.target.closest(".chip"); if (!b) return;
@@ -734,17 +770,55 @@ document.addEventListener("click", e => {
   const b = e.target.closest("[data-miss]"); if (!b) return;
   openMissing(b.dataset.miss, b.dataset.miss === "search" ? $("sq").value.trim() : "");
 });
+/* data scritta nella nota di una voce (es. "a partire dal 24 ottobre 2026") → Date, oppure null */
+const MESI = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+function noteDate(n){
+  const x = (n || "").match(new RegExp(`(\\d{1,2})\\s+(${MESI.join("|")})\\s+(\\d{4})`, "i"));
+  return x ? new Date(+x[3], MESI.indexOf(x[2].toLowerCase()), +x[1]) : null;
+}
+const fmtLong = new Intl.DateTimeFormat("it-IT", {day:"numeric", month:"long"});
+/* tutti i doppiaggi annunciati dell'archivio, con la copertina da AniList */
+let soonList = DUBDB.filter(e => e.st === "soon").map(e => ({e, date: noteDate(e.n), m: null}));
+let soonLoaded = false;
+async function loadSoon(){
+  if (soonLoaded || !soonList.length) return;
+  const q = "query{" + soonList.map((x, i) => `s${i}:Page(perPage:6){media(type:ANIME,isAdult:false,search:${JSON.stringify(x.e.k[0])}){${MEDIA}}}`).join(" ") + "}";
+  try {
+    const d = await anilist(q, {});
+    soonList.forEach((x, i) => {
+      const found = (d["s" + i]?.media || []).filter(m => matchEntry(DUBDB, m) === x.e);
+      // a parità di voce si preferisce la stagione più recente (quella che verrà doppiata)
+      x.m = found.sort((a, b) => (b.seasonYear || 0) - (a.seasonYear || 0))[0] || null;
+      if (x.m) mediaCache.set(x.m.id, x.m);
+    });
+    soonLoaded = true;
+  } catch (e) { /* senza AniList restano le schede di solo testo */ }
+  if (view === "dubs") renderDubs();
+}
+function soonCards(){
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const list = soonList.slice().sort((a, b) => (a.date ? a.date.getTime() : Infinity) - (b.date ? b.date.getTime() : Infinity));
+  return list.map(({e, date, m}) => {
+    const days = date ? Math.round((date - today) / 86400000) : null;
+    const when = !date ? "Data da comunicare" : days > 0 ? `Dal ${fmtLong.format(date)} · tra ${days} g` : days === 0 ? "Da oggi" : `Dal ${fmtLong.format(date)}`;
+    const plat = e.p ? splitPlat(e.p)[0] : "";
+    if (m) return card(m, {tl: plat, tr: days !== null && days >= 0 && days <= 7 ? "Presto" : "", meta: when});
+    const name = seasonLabel({...e, s: null, pt: null}, false) + (e.s ? ` · ${e.s.join(", ")}ª stagione` : "");
+    return `<div class="card" style="--c:#9b7bff;cursor:default"><div class="img" style="display:flex;align-items:center;justify-content:center;padding:14px;text-align:center;font-weight:600">${esc(name)}
+      <div class="top">${plat ? `<span class="tag">${esc(plat)}</span>` : "<span></span>"}</div><span class="dubtag soon">ITA in arrivo</span></div>
+      <div class="body"><span class="t">${esc(name)}</span><span class="m">${esc(when)}</span></div></div>`;
+  }).join("");
+}
 function renderDubs(){
   const seen = new Map();
   episodes.forEach(e => { if (!seen.has(e.media.id)) seen.set(e.media.id, e.media); });
   const all = [...seen.values()].map(m => [m, dubData(m)]).filter(([, e]) => e);
   const ita = all.filter(([, e]) => e.st === "dub" || e.st === "partial");
-  const soon = all.filter(([, e]) => e.st === "soon");
   const mk = (list, empty) => list.length ? list.map(([m, e]) => card(m, {tl: e.p ? e.p.split(" · ")[0] : "", meta: DUB_LABEL[e.st][2]})).join("")
     : `<div class="empty" style="grid-column:1/-1">${empty}</div>`;
-  $("dn1").textContent = ita.length || ""; $("dn2").textContent = soon.length || ""; $("dn3").textContent = reports.length || "";
+  $("dn1").textContent = ita.length || ""; $("dn2").textContent = soonList.length || ""; $("dn3").textContent = reports.length || "";
   $("dgrid").innerHTML = episodes.length ? mk(ita, "Nessun anime doppiato in onda questa settimana.") : `<div class="empty" style="grid-column:1/-1">Carico il palinsesto…</div>`;
-  $("dgrid2").innerHTML = episodes.length ? mk(soon, "Nessun doppiaggio annunciato tra gli anime di questa settimana.") : "";
+  $("dgrid2").innerHTML = soonList.length ? soonCards() : `<div class="empty" style="grid-column:1/-1">Nessun doppiaggio annunciato al momento.</div>`;
   $("rlist").innerHTML = reports.length ? reports.map((r, i) => `<div class="next" style="margin:0;background:var(--surface);border:1px solid var(--line)">
       <b>${esc(r.title)}</b> · ${esc(reportLabel(r))}${r.plat ? " · " + esc(r.plat) : ""}
       <div class="status">${new Date(r.t).toLocaleDateString("it-IT")} · ${r.sent ? "inviata" : REPORT_FORM ? "invio in corso…" : "salvata solo su questo browser"} · in attesa di verifica</div>
@@ -979,6 +1053,9 @@ async function openDetail(id){
         <div class="alt">${esc([m.title.romaji !== title(m) ? m.title.romaji : "", m.title.native].filter(Boolean).join(" · "))}</div>
         <div class="facts">${facts.map(f => `<span class="fact">${f[0]} <b>${esc(f[1])}</b></span>`).join("")}</div>
         ${n ? `<div class="next">Episodio <b>${n.episode}</b>: ${fmtFull.format(new Date(n.airingAt*1000))} (tra ${inDays(n.airingAt)})</div>` : ""}
+        ${n || calDubDate(m) ? `<div class="chips" style="margin-top:8px">
+          ${n ? `<button class="chip" id="calEp">📅 Aggiungi le uscite al calendario</button>` : ""}
+          ${calDubDate(m) ? `<button class="chip" id="calDub">📅 Data del doppiaggio nel calendario</button>` : ""}</div>` : ""}
       </div>
       <div class="addto" id="plot"></div>
       ${m.genres?.length ? `<div class="chips" style="grid-column:1/-1">${m.genres.map(g => `<span class="fact">${esc(g)}</span>`).join("")}</div>` : ""}
@@ -1016,6 +1093,40 @@ async function openDetail(id){
     : `<span class="status">Nessuna notizia recente su questo anime. Se esce, la trovi qui e nella sezione Notizie.</span>`);
   renderPlot(m, desc);
   renderDubBox(m);
+  $("calEp")?.addEventListener("click", ev => { downloadIcs(m, "ep"); ev.target.textContent = "✓ File del calendario scaricato"; });
+  $("calDub")?.addEventListener("click", ev => { downloadIcs(m, "dub"); ev.target.textContent = "✓ File del calendario scaricato"; });
+}
+/* ---------- calendario (.ics): funziona con Google Calendar, Apple Calendario e Outlook, senza account ---------- */
+function calDubDate(m){
+  const e = dubData(m);
+  if (!e || e.rule || e.st !== "soon") return null;
+  const d = noteDate(e.n); return d && d >= new Date(new Date().setHours(0, 0, 0, 0)) ? d : null;
+}
+function downloadIcs(m, kind){
+  const pad = x => String(x).padStart(2, "0");
+  const utc = d => `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}00Z`;
+  const day = d => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
+  const txt = s => String(s).replace(/[\\;,]/g, c => "\\" + c).replace(/\n/g, "\\n");
+  const t = title(m), url = "https://dubita-official.github.io";
+  let ev;
+  if (kind === "ep") {
+    const n = m.nextAiringEpisode, start = new Date(n.airingAt * 1000), end = new Date(start.getTime() + 24 * 60000);
+    const left = m.episodes ? Math.max(1, m.episodes - n.episode + 1) : 12;   // episodi totali sconosciuti: le prossime 12 settimane
+    ev = [`UID:dubita-${m.id}-ep@dubita`, `DTSTART:${utc(start)}`, `DTEND:${utc(end)}`, `RRULE:FREQ=WEEKLY;COUNT=${Math.min(left, 52)}`,
+      `SUMMARY:${txt(t + " · nuovo episodio")}`, `DESCRIPTION:${txt("L'orario si adatta da solo al tuo fuso (in Italia è l'ora italiana). Da DubITA: " + url)}`,
+      "BEGIN:VALARM", "ACTION:DISPLAY", `DESCRIPTION:${txt(t)}`, "TRIGGER:-PT10M", "END:VALARM"];
+  } else {
+    const d = calDubDate(m), e = dubData(m), next = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
+    ev = [`UID:dubita-${m.id}-dub@dubita`, `DTSTART;VALUE=DATE:${day(d)}`, `DTEND;VALUE=DATE:${day(next)}`,
+      `SUMMARY:${txt(t + " · doppiaggio italiano" + (e.p ? " su " + e.p : ""))}`, `DESCRIPTION:${txt(e.n + " Fonte: " + e.src + " · Da DubITA: " + url)}`,
+      "BEGIN:VALARM", "ACTION:DISPLAY", `DESCRIPTION:${txt(t)}`, "TRIGGER:PT9H", "END:VALARM"];
+  }
+  const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//DubITA//IT", "CALSCALE:GREGORIAN", "BEGIN:VEVENT", `DTSTAMP:${utc(new Date())}`, ...ev, "END:VEVENT", "END:VCALENDAR"].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics], {type: "text/calendar;charset=utf-8"}));
+  a.download = (norm(t).replace(/ /g, "-").slice(0, 40) || "anime") + (kind === "ep" ? "-episodi" : "-doppiaggio") + ".ics";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 10000);
 }
 /* dove vederlo, stagione per stagione: tutte le voci dell'archivio della stessa serie */
 const splitPlat = p => (p || "").split(/\s+(?:·|\/)\s+/).map(x => x.trim()).filter(Boolean);
@@ -1053,7 +1164,7 @@ function renderDubBox(m){
   let archHtml;
   if (e) {
     const L = DUB_LABEL[e.st];
-    archHtml = `<div class="next" style="margin:0;${["none", "noann", "sub"].includes(e.st) ? "background:var(--bg);border:1px solid var(--line)" : ""}">
+    archHtml = `<div class="next" style="margin:0;${["none", "noann", "sub", "removed"].includes(e.st) ? "background:var(--bg);border:1px solid var(--line)" : ""}">
       <b>${L[2]}</b>${e.p ? " · " + esc(e.p) : ""}<div style="margin-top:4px">${esc(e.n || "")}</div>
       <div style="margin-top:6px;font-size:13px;color:var(--muted)">${e.rule ? `Dedotto dalla panoramica della stagione, non confermato da un annuncio · archivio aggiornato il ${DUB_CHECKED}` : e.v ? `Confermato da una fonte · voce verificata il ${esc(e.v)}` : `Confermato da una fonte · archivio aggiornato il ${DUB_CHECKED}`} · <a href="${esc(e.src)}" target="_blank" rel="noopener" style="color:var(--accent2)">fonte</a></div></div>`;
   } else {
@@ -1408,9 +1519,9 @@ const introPref = store.get("dubita-intro-closed", null);
 $("intro").open = introPref === null ? window.matchMedia("(min-width: 701px)").matches : !introPref;
 $("intro").addEventListener("toggle", () => store.set("dubita-intro-closed", !$("intro").open));
 
-renderWeek(); renderDubs(); renderNews();
+renderLangChips(); renderWeek(); renderDubs(); renderNews();
 // all'apertura: palinsesto, librerie e notizie; poi tutto si riaggiorna da solo
-loadWeek().then(() => renderLists()).then(loadNews);
+loadWeek().then(() => renderLists()).then(loadNews).then(loadSoon);
 let lastAuto = Date.now();
 function autoRefresh(){ lastAuto = Date.now(); loadWeek(); loadNews(); }
 setInterval(autoRefresh, 15 * 60 * 1000);

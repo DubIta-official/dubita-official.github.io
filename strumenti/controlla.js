@@ -10,7 +10,7 @@ catch (e) { console.error("ERRORE: archivio.js non si carica:\n" + e.stack); pro
 const errors = [];
 const get = expr => vm.runInContext(expr, ctx);
 const DUBDB = get("DUBDB"), STAGIONE = get("STAGIONE"), STAGIONE_SUB = get("STAGIONE_SUB"), TRAME = get("TRAME"), DUB_CHECKED = get("DUB_CHECKED");
-const ST = ["dub", "partial", "soon", "sub", "none"];
+const ST = ["dub", "partial", "soon", "sub", "none", "removed"];
 const isNorm = k => typeof k === "string" && k === get(`norm(${JSON.stringify(k)})`) && k.length > 1;
 
 if (!/^\d{1,2} (gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre) \d{4}$/.test(DUB_CHECKED)) errors.push(`DUB_CHECKED scritto male: "${DUB_CHECKED}" (formato: "25 ottobre 2026")`);

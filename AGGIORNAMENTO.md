@@ -72,7 +72,8 @@ la panoramica e il Listone indicati in `STAGIONE`, e li salva **cifrati** nel ra
 - `y` / `yx`: anno minimo / massimo della stagione su AniList, per non confondere serie con lo stesso titolo.
 - `ex`: parole che escludono (es. titoli di film o spin-off). `inc: true`: basta che il titolo contenga la chiave.
 - `st`: `dub` (doppiato), `partial` (doppiaggio in corso), `soon` (annunciato), `sub` (solo sottotitolato),
-  `none` (nessun doppiaggio, **confermato** da una fonte). Gli anime della stagione che non compaiono nella panoramica
+  `none` (nessun doppiaggio, **confermato** da una fonte), `removed` (il doppiaggio c'era ma una fonte conferma che è stato
+  tolto dalla piattaforma: non si cancella la voce, si cambia `st` e si scrive in `n` da quando non c'è più). Gli anime della stagione che non compaiono nella panoramica
   ricevono da soli l'etichetta "Nessun annuncio": non serve scriverli nell'archivio.
 - `p`: piattaforma. Se la stessa stagione è su più piattaforme, scrivile tutte separate da ` · `
   (es. `"Crunchyroll · Disney+"`). Sul sito, nella scheda di un anime, compare il riquadro «Dove vederlo, stagione per stagione»
@@ -82,6 +83,9 @@ la panoramica e il Listone indicati in `STAGIONE`, e li salva **cifrati** nel ra
   compare come "voce verificata il …".
 
 Quando un doppiaggio annunciato esce davvero, la voce passa da `soon` a `dub` (o `partial`) e si aggiornano `n` e `src`.
+
+Le date nella nota `n` vanno scritte per esteso (es. "a partire dal 24 ottobre 2026"): il sito le legge per ordinare
+la sezione «Doppiaggi in arrivo», mostrare il conto alla rovescia e creare il promemoria nel calendario.
 
 ## Trame tradotte
 

@@ -8,7 +8,7 @@
 /* ---------- ARCHIVIO DOPPIAGGI ITALIANI (verificato a mano) ----------
    Ogni voce: k = titoli (inizio del titolo, già normalizzato), s = stagioni, pt = parti, y/yx = anno minimo/massimo,
    ex = parole che escludono, inc = basta che il titolo contenga la chiave.
-   st: "dub" doppiato · "partial" doppiaggio in corso · "soon" annunciato · "sub" solo sottotitolato · "none" nessun doppiaggio (confermato)
+   st: "dub" doppiato · "partial" doppiaggio in corso · "soon" annunciato · "sub" solo sottotitolato · "none" nessun doppiaggio (confermato) · "removed" il doppiaggio c'era ma è stato tolto dalla piattaforma
    v = data in cui la voce è stata verificata (facoltativa, es. "26 ottobre 2026") */
 const DUB_CHECKED = "1 novembre 2026";
 const SRC = {
@@ -263,6 +263,7 @@ function dubData(m){
 const DUB_LABEL = {dub: ["ITA", "ita", "Doppiato in italiano"], partial: ["ITA in corso", "ita", "Doppiaggio italiano in corso"],
   soon: ["ITA in arrivo", "soon", "Doppiaggio italiano annunciato"], sub: ["SUB ITA", "sub", "Solo sottotitolato in italiano"],
   none: ["No ITA", "sub", "Nessun doppiaggio italiano"],
+  removed: ["ITA rimosso", "sub", "Doppiaggio italiano non più disponibile"],
   noann: ["Nessun annuncio", "sub", "Nessun doppiaggio annunciato"]};
 
 /* ---------- TRAME TRADOTTE A MANO ---------- */
