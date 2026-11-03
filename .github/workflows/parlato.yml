@@ -1,0 +1,40 @@
+name: Video parlato
+
+# Crea il video «DubITA ti consiglia un anime» con la voce AI italiana (strumenti/video/parlato.js).
+# Si avvia a mano; il video si scarica dagli artefatti dell'esecuzione.
+
+on:
+  workflow_dispatch:
+    inputs:
+      voce:
+        description: "Voce (es. it-IT-DiegoNeural, it-IT-ElsaNeural, it-IT-IsabellaNeural, it-IT-GiuseppeMultilingualNeural)"
+        required: false
+        default: "it-IT-DiegoNeural"
+
+permissions:
+  contents: read
+
+jobs:
+  parlato:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Strumenti
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-color-emoji > /dev/null
+          pip install -q edge-tts
+          npm i --no-save --silent playwright@1.48.2
+          npx playwright install --with-deps chromium > /dev/null
+      - name: Video
+        run: node strumenti/video/parlato.js "$RUNNER_TEMP/parlato" "${{ github.event.inputs.voce || 'it-IT-DiegoNeural' }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: parlato
+          path: |
+            ${{ runner.temp }}/parlato/parlato.mp4
+            ${{ runner.temp }}/parlato/parlato.txt
+          retention-days: 7
