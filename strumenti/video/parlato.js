@@ -77,11 +77,14 @@ const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
   let pBtn = null, cliccato = false, aperto = false;
   await fase(s2, .5, async (lt, D) => {
     const k = lt / D;
-    if (k < .5) { const kd = clamp((k - .05) / .4); if (kd >= .45 && !aperto) { aperto = true; await page.click('nav button[data-view="tips"]'); await page.waitForTimeout(300); await page.evaluate(() => scrollTo(0, 0)); pBtn = await box("#rnd"); }
+    if (k < .5) { const kd = clamp((k - .05) / .4); if (kd >= .45 && !aperto) { aperto = true; await page.click('nav button[data-view="tips"]');
+        // aprendo Consigli il sito ne propone già uno: aspetto che arrivi e lo tolgo, così il consiglio appare solo dopo il tocco
+        await page.waitForSelector("#rcard .rcard", {timeout: 8000}).catch(() => {}); await page.waitForTimeout(800);
+        await page.evaluate(() => { document.getElementById("rcard").innerHTML = ""; }); await page.evaluate(() => scrollTo(0, 0)); pBtn = await box("#rnd"); }
       return ov({sub: subAt(s2, lt), dito: dito(pNav, kd)}); }
     const kd = clamp((k - .5) / .45);
     if (kd >= .45 && !cliccato) { cliccato = true; await page.click("#rnd");
-      await page.waitForSelector("#rcard .rcard", {timeout: 30000});
+      await page.waitForSelector("#rcard .rcard [data-open]", {timeout: 30000});
       await page.waitForFunction(() => { const d = document.querySelector("#rplot .desc"), i = document.querySelector("#rcard img");
         return i && i.complete && d && !/Traduco/.test(document.getElementById("rplot").textContent); }, null, {timeout: 40000}).catch(() => {});
       await page.waitForTimeout(500); }
