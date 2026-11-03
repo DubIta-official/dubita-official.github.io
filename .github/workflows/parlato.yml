@@ -1,7 +1,7 @@
 name: Video parlato
 
 # Crea il video «DubITA ti consiglia un anime» con la voce AI italiana (strumenti/video/parlato.js).
-# Si avvia a mano; il video si scarica dagli artefatti dell'esecuzione.
+# Si avvia a mano; il video finisce nel ramo «video-parlato» (sovrascritto a ogni esecuzione).
 
 on:
   workflow_dispatch:
@@ -12,7 +12,7 @@ on:
         default: "it-IT-DiegoNeural"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   parlato:
@@ -31,10 +31,9 @@ jobs:
           npx playwright install --with-deps chromium > /dev/null
       - name: Video
         run: node strumenti/video/parlato.js "$RUNNER_TEMP/parlato" "${{ github.event.inputs.voce || 'it-IT-DiegoNeural' }}"
-      - uses: actions/upload-artifact@v4
-        with:
-          name: parlato
-          path: |
-            ${{ runner.temp }}/parlato/parlato.mp4
-            ${{ runner.temp }}/parlato/parlato.txt
-          retention-days: 7
+      - name: Salva nel ramo video-parlato
+        run: |
+          cd "$RUNNER_TEMP/parlato" && rm -rf audio voce.wav && git init -q -b video-parlato
+          git config user.name "github-actions[bot]" && git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -q -m "Video parlato $(date -u +%F)"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" video-parlato
