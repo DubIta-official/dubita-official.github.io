@@ -15,7 +15,7 @@ const durata = f => parseFloat(sh("ffprobe", ["-v", "error", "-show_entries", "f
 let nAudio = 0;
 function voce(testo) {   // ritorna {f, d}
   const f = path.join(AU, `s${++nAudio}.mp3`);
-  sh("edge-tts", ["--voice", VOCE, "--rate=+8%", "--text", testo, "--write-media", f]);
+  sh("edge-tts", ["--voice", VOCE, "--rate=+12%", "--text", testo, "--write-media", f]);
   return {f, d: durata(f), testo};
 }
 const ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
@@ -66,12 +66,12 @@ const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
   const dito = (p, k) => ({x: p.x, y: p.y, o: k < 0 ? 0 : k < .15 ? k / .15 : k > .85 ? (1 - k) / .15 : 1, s: k > .35 && k < .55 ? .82 : 1, r: k > .45 ? Math.min(40, (k - .45) * 120) : 0});
 
   // 1. apertura: home che scorre
-  const s1 = voce("Non sai che anime guardare stasera? Te lo dice DubITA.");
+  const s1 = voce("Non sai che anime guardare? Chiedilo a DubITA.");
   const maxY = await page.evaluate(() => document.documentElement.scrollHeight - innerHeight);
-  await fase(s1, .35, (lt, D) => ov({hook: "NON SAI CHE <b>ANIME</b><br>GUARDARE?", sub: subAt(s1, lt - .1), y: Math.min(maxY, 900) * ease(clamp(lt / D))}));
+  await fase(s1, .2, (lt, D) => ov({hook: "NON SAI CHE <b>ANIME</b><br>GUARDARE?", sub: subAt(s1, lt - .1), y: Math.min(maxY, 900) * ease(clamp(lt / D))}));
 
   // 2. Consigli → «Consigliami un anime», solo doppiati in italiano
-  const s2 = voce("Vai su Consigli, e tocca: Consigliami un anime.");
+  const s2 = voce("Tocca Consigli, e poi: Consigliami un anime.");
   await page.evaluate(() => { rndOnlyDub = true; document.getElementById("rndDub").setAttribute("aria-pressed", "true"); });
   const pNav = await box('nav button[data-view="tips"]');
   let pBtn = null, cliccato = false, aperto = false;
@@ -94,21 +94,22 @@ const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
     return {titolo: title(m), generi: (m.genres || []).slice(0, 3).map(g => GENRE_IT[g] || g), ep: m.format !== "MOVIE" ? m.episodes : null, film: m.format === "MOVIE",
       anno: m.seasonYear, voto: m.averageScore, st: e && e.st, p: e && e.p, trama: (document.querySelector("#rplot .desc") || {}).textContent || ""};
   });
-  const frasi = []; for (const f of m.trama.replace(/\s+/g, " ").match(/[^.!?]+[.!?]+/g) || []) { if (frasi.length && (frasi.join(" ") + f).length > 240) break; frasi.push(f.trim()); }   // le prime frasi, in ordine
+  const frasi = []; for (const f of m.trama.replace(/\s+/g, " ").match(/[^.!?]+[.!?]+/g) || []) { if (frasi.length && (frasi.join(" ") + f).length > 150) break; frasi.push(f.trim()); }   // le prime frasi, in ordine
   const generi = m.generi.length > 1 ? m.generi.slice(0, -1).join(", ") + " e " + m.generi[m.generi.length - 1] : m.generi[0] || "";
   const piatt = (m.p || "").split(/\s*[·/]\s*/).filter(Boolean).join(" e ");
+  // a voce niente Crunchyroll (la voce non lo pronuncia bene): la piattaforma si vede comunque sulla scheda del sito
+  const dette = (m.p || "").split(/\s*[·/]\s*/).filter(p => p && !/crunchyroll/i.test(p)).join(" e ");
   const testo3 = [`Oggi ti consiglio: ${m.titolo}.`,
-    `${m.film ? "È un film" : "È un anime"}${m.anno ? " del " + m.anno : ""}${m.ep ? `, ${m.ep} episodi` : ""}. Generi: ${generi.toLowerCase()}.`,
-    m.voto ? `Su AniList ha un voto di ${m.voto} su 100.` : "",
+    `${generi}${m.voto ? `, con un voto di ${m.voto} su 100` : ""}.`,
     frasi.join(" "),
-    m.st === "partial" ? `Il doppiaggio italiano è in corso${piatt ? ", su " + piatt : ""}.` : `E la cosa migliore: è doppiato in italiano${piatt ? ". Lo trovi su " + piatt : ""}.`].filter(Boolean).join(" ");
+    m.st === "partial" ? `E il doppiaggio italiano è in arrivo${dette ? " su " + dette : ""}!` : `E la cosa migliore: è doppiato in italiano${dette ? ", su " + dette : ""}!`].filter(Boolean).join(" ");
   const s3 = voce(testo3);
   const cardY = await page.evaluate(() => { const c = document.querySelector("#rcard .rcard").getBoundingClientRect(); return {top: c.top + scrollY, h: c.height}; });
   const y0 = Math.max(0, cardY.top - 70), y1 = Math.max(y0, Math.min(cardY.top + cardY.h - 640 + 200, y0 + 520));
-  await fase(s3, .4, (lt, D) => ov({sub: subAt(s3, lt), y: y0 + (y1 - y0) * ease(clamp((lt - 1.2) / (D - 2)))}));
+  await fase(s3, .25, (lt, D) => ov({sub: subAt(s3, lt), y: y0 + (y1 - y0) * ease(clamp((lt - 1.2) / (D - 2)))}));
 
   // 4. chiusura
-  const s4 = voce("Lo trovi su DubITA, link in bio. Seguici per un consiglio ogni giorno!");
+  const s4 = voce("Link in bio. Seguici per un consiglio ogni giorno!");
   await fase(s4, .8, (lt, D) => ov({hook: "DubITA<br><b>link in bio</b>", sub: subAt(s4, lt), y: y1 + (y0 - y1) * ease(clamp(lt / 1.2))}));
   await browser.close();
 
