@@ -10,7 +10,7 @@
    ex = parole che escludono, inc = basta che il titolo contenga la chiave.
    st: "dub" doppiato · "partial" doppiaggio in corso · "soon" annunciato · "sub" solo sottotitolato · "none" nessun doppiaggio (confermato) · "removed" il doppiaggio c'era ma è stato tolto dalla piattaforma
    v = data in cui la voce è stata verificata (facoltativa, es. "26 ottobre 2026") */
-const DUB_CHECKED = "1 novembre 2026";
+const DUB_CHECKED = "3 novembre 2026";
 const SRC = {
   rag: "https://www.antoniogenna.net/doppiaggio/anim/rentagirlfriend.htm",
   ragNews: "https://www.animeclick.it/news/107762-rent-a-girlfriend-su-crunchyroll-la-prima-stagione-doppiata",
@@ -24,6 +24,7 @@ const SRC = {
   kaiju: "https://www.animeclick.it/news/102862-kaiju-no-8-il-doppiaggio-uscira-lo-stesso-giorno-della-versione-giapponese",
   jjk2: "https://www.animeclick.it/news/110273-jujutsu-kaisen-la-seconda-stagione-anime-arriva-su-italia-2-e-su-mediaset-infinity",
   mha: "https://www.animeclick.it/news/97580-my-hero-academia-arriva-doppiato-su-crunchyroll",
+  yamatoAutunno: "https://www.animeclick.it/news/112105-yamato-video-riepilogo-della-stagione-autunnale-su-anime-generation",
   lucca: "https://www.animeclick.it/news/112177-lucca-comics-games-2026-i-nuovi-doppiaggi-di-crunchyroll",
   mha6: "https://www.animeclick.it/news/104202-my-hero-academia-la-sesta-stagione-arriva-in-tv-su-italia-2-in-autunno"
 };
@@ -47,8 +48,8 @@ const DUBDB = [
   // Autunno 2026
   {k: ["overgeared"], st: "dub", p: "Crunchyroll", n: "Simuldub dal 27 settembre 2026.", src: SRC.autumn},
   {k: ["kusuriya no hitorigoto", "the apothecary diaries", "il monologo della speziale"], s: [3], st: "soon", p: "Crunchyroll", n: "Doppiaggio annunciato a partire dal 23 ottobre 2026 (non in simuldub).", src: SRC.autumn, v: "27 ottobre 2026"},
-  {k: ["magic knight rayearth", "mahou kishi rayearth"], y: 2026, st: "soon", p: "Crunchyroll", n: "Simuldub annunciato, data da comunicare.", src: SRC.autumn},
-  {k: ["firefly wedding", "hotaru no yomeiri"], st: "soon", p: "Crunchyroll", n: "Simuldub annunciato, data da comunicare.", src: SRC.autumn},
+  {k: ["magic knight rayearth", "mahou kishi rayearth"], y: 2026, st: "soon", p: "Crunchyroll", n: "Doppiaggio annunciato a partire dal 28 ottobre 2026 (non in simuldub).", src: SRC.autumn, v: "3 novembre 2026"},
+  {k: ["firefly wedding", "hotaru no yomeiri"], st: "soon", p: "Crunchyroll", n: "Doppiaggio annunciato, data da comunicare.", src: SRC.autumn, v: "3 novembre 2026"},
   {k: ["jojo no kimyou na bouken steel ball run", "jojo s bizarre adventure steel ball run"], st: "dub", p: "Netflix", n: "Simuldub dal 25 settembre 2026.", src: SRC.autumn},
   {k: ["the ramparts of ice", "koori no jouheki"], s: [1], st: "dub", p: "Netflix", n: "Doppiata.", src: SRC.tag},
   {k: ["the ramparts of ice", "koori no jouheki"], s: [2], st: "dub", p: "Netflix", n: "Simuldub dal 1 ottobre 2026.", src: SRC.autumn},
@@ -144,7 +145,17 @@ const DUBDB = [
   {k: ["jidou hanbaiki ni umarekawatta", "reborn as a vending machine"], s: [1], yx: 2023, st: "dub", p: "Crunchyroll", n: "Prima stagione doppiata.", src: SRC.crCat},
   {k: ["zom 100", "zombie 100"], st: "dub", p: "Crunchyroll", n: "Doppiato.", src: SRC.crCat},
   {k: ["chao neng lifang", "super cube"], y: 2025, st: "soon", p: "Anime Generation (Prime Video)", n: "Doppiaggio annunciato a partire dal 28 ottobre 2026; già disponibile sottotitolato.", src: "https://www.animeclick.it/news/112149-super-cube-informazioni-sul-doppiaggio-di-yamato-video", v: "28 ottobre 2026"},
-  {k: ["kun tun tianxia"], y: 2025, st: "soon", p: "Anime Generation (Prime Video)", n: "Doppiaggio annunciato a partire dal 29 ottobre 2026; già disponibile sottotitolato.", src: "https://www.animeclick.it/news/112159-kun-il-divoratore-del-creato-informazioni-sul-doppiaggio-di-yamato-video", v: "29 ottobre 2026"}
+  {k: ["kun tun tianxia"], y: 2025, st: "soon", p: "Anime Generation (Prime Video)", n: "Doppiaggio annunciato a partire dal 29 ottobre 2026; già disponibile sottotitolato.", src: "https://www.animeclick.it/news/112159-kun-il-divoratore-del-creato-informazioni-sul-doppiaggio-di-yamato-video", v: "29 ottobre 2026"},
+
+  // Yamato Video: doppiaggi inediti dell'autunno 2026 su ANiME Generation (riepilogo del 23 ottobre)
+  {k: ["tougen anki"], y: 2026, st: "soon", p: "Anime Generation (Prime Video)", n: "Doppiaggio della seconda stagione (Arco delle cascate Kegon a Nikko) annunciato da Yamato Video per l'autunno 2026, data da comunicare; intanto è in simulcast sottotitolato.", src: SRC.yamatoAutunno, v: "3 novembre 2026"},
+  {k: ["isekai nonbiri nouka", "farming life in another world"], s: [2], st: "soon", p: "Anime Generation (Prime Video)", n: "Doppiaggio annunciato da Yamato Video per l'autunno 2026, data da comunicare.", src: SRC.yamatoAutunno, v: "3 novembre 2026"},
+  {k: ["witch watch"], s: [1], st: "soon", p: "Anime Generation (Prime Video)", n: "Doppiaggio annunciato da Yamato Video per l'autunno 2026, data da comunicare.", src: SRC.yamatoAutunno, v: "3 novembre 2026"},
+  {k: ["yoroi shinden samurai troopers", "yoroi shin den samurai troopers"], y: 2026, st: "soon", p: "Anime Generation (Prime Video)", n: "Doppiaggio annunciato da Yamato Video per l'autunno 2026, data da comunicare.", src: SRC.yamatoAutunno, v: "3 novembre 2026"},
+  {k: ["biao ren", "blades of the guardians"], s: [1, 2], st: "soon", p: "Anime Generation (Prime Video)", n: "Doppiaggio delle stagioni 1 e 2 annunciato da Yamato Video per l'autunno 2026, data da comunicare.", src: SRC.yamatoAutunno, v: "3 novembre 2026"},
+  {k: ["kuroko no basket movie 1", "kuroko no basket movie 2", "kuroko no basket movie 3", "kuroko s basketball winter cup highlights"], st: "soon", p: "Anime Generation (Prime Video)", n: "I tre film riassuntivi Winter Cup Highlights: doppiaggio annunciato da Yamato Video per l'autunno 2026, data da comunicare.", src: SRC.yamatoAutunno, v: "3 novembre 2026"},
+  {k: ["one piece 3d2y"], st: "soon", p: "Anime Generation (Prime Video)", n: "Special: doppiaggio annunciato da Yamato Video per l'autunno 2026, data da comunicare.", src: SRC.yamatoAutunno, v: "3 novembre 2026"},
+  {k: ["one piece episode of sabo"], st: "soon", p: "Anime Generation (Prime Video)", n: "Special: doppiaggio annunciato da Yamato Video per l'autunno 2026, data da comunicare.", src: SRC.yamatoAutunno, v: "3 novembre 2026"}
 ];
 
 // STAGIONE IN CORSO: da aggiornare all'inizio di ogni stagione (gennaio, aprile, luglio, ottobre)
