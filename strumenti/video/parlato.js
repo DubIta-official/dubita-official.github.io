@@ -94,7 +94,7 @@ const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
     return {titolo: title(m), generi: (m.genres || []).slice(0, 3).map(g => GENRE_IT[g] || g), ep: m.format !== "MOVIE" ? m.episodes : null, film: m.format === "MOVIE",
       anno: m.seasonYear, voto: m.averageScore, st: e && e.st, p: e && e.p, trama: (document.querySelector("#rplot .desc") || {}).textContent || ""};
   });
-  const frasi = (m.trama.replace(/\s+/g, " ").match(/[^.!?]+[.!?]+/g) || []).reduce((a, f) => (a.join(" ") + f).length < 230 ? [...a, f.trim()] : a, []);
+  const frasi = []; for (const f of m.trama.replace(/\s+/g, " ").match(/[^.!?]+[.!?]+/g) || []) { if (frasi.length && (frasi.join(" ") + f).length > 240) break; frasi.push(f.trim()); }   // le prime frasi, in ordine
   const generi = m.generi.length > 1 ? m.generi.slice(0, -1).join(", ") + " e " + m.generi[m.generi.length - 1] : m.generi[0] || "";
   const piatt = (m.p || "").split(/\s*[·/]\s*/).filter(Boolean).join(" e ");
   const testo3 = [`Oggi ti consiglio: ${m.titolo}.`,
@@ -104,7 +104,7 @@ const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
     m.st === "partial" ? `Il doppiaggio italiano è in corso${piatt ? ", su " + piatt : ""}.` : `E la cosa migliore: è doppiato in italiano${piatt ? ". Lo trovi su " + piatt : ""}.`].filter(Boolean).join(" ");
   const s3 = voce(testo3);
   const cardY = await page.evaluate(() => { const c = document.querySelector("#rcard .rcard").getBoundingClientRect(); return {top: c.top + scrollY, h: c.height}; });
-  const y0 = Math.max(0, cardY.top - 70), y1 = Math.max(y0, cardY.top + cardY.h - 640 + 200);
+  const y0 = Math.max(0, cardY.top - 70), y1 = Math.max(y0, Math.min(cardY.top + cardY.h - 640 + 200, y0 + 520));
   await fase(s3, .4, (lt, D) => ov({sub: subAt(s3, lt), y: y0 + (y1 - y0) * ease(clamp((lt - 1.2) / (D - 2)))}));
 
   // 4. chiusura
