@@ -1,5 +1,38 @@
 {
   "nota": "Anime e personaggi già usati nei quiz: il generatore non li riusa più. Si aggiorna da solo a ogni video creato (non con --prova).",
-  "indovina": ["Naruto", "Dragon Ball Z", "Haikyu!!", "Fullmetal Alchemist", "Made in Abyss", "Pokémon", "L'attacco dei giganti", "Mob Psycho 100", "Code Geass", "Monster", "Death Note", "Sailor Moon", "Hunter x Hunter", "Bleach", "Spy×Family", "Demon Slayer"],
-  "personaggio": ["Goku", "Naruto Uzumaki", "Killua Zoldyck", "Edward Elric", "Thorfinn"]
+  "indovina": [
+    "Naruto",
+    "Dragon Ball Z",
+    "Haikyu!!",
+    "Fullmetal Alchemist",
+    "Made in Abyss",
+    "Pokémon",
+    "L'attacco dei giganti",
+    "Mob Psycho 100",
+    "Code Geass",
+    "Monster",
+    "Death Note",
+    "Sailor Moon",
+    "Hunter x Hunter",
+    "Bleach",
+    "Spy×Family",
+    "Demon Slayer",
+    "One Piece",
+    "Detective Conan",
+    "Blue Lock",
+    "Black Clover",
+    "Erased"
+  ],
+  "personaggio": [
+    "Goku",
+    "Naruto Uzumaki",
+    "Killua Zoldyck",
+    "Edward Elric",
+    "Thorfinn",
+    "Monkey D. Luffy",
+    "Pikachu",
+    "Lelouch",
+    "Mob",
+    "Rintaro Okabe"
+  ]
 }
