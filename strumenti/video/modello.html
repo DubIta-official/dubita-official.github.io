@@ -63,6 +63,15 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0b0820;font-fam
 .vplate{display:inline;padding:.04em .2em;border-radius:.16em;background:rgba(11,8,32,.62);-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .gimg{position:absolute;left:90px;right:90px;top:430px;height:1050px;border-radius:44px;overflow:hidden;border:4px solid rgba(255,255,255,.2);background:#2a2060}
 .gimg .im{position:absolute;inset:0;background:#2a2060 center/cover}
+.sub{position:absolute;left:60px;right:60px;top:1420px;text-align:center;font-weight:900;font-size:62px;line-height:1.12;white-space:normal;
+  padding:22px 30px;border-radius:30px;background:rgba(11,8,32,.82);border:3px solid rgba(255,255,255,.14)}
+.sub:empty{display:none}
+.tbox{position:absolute;left:70px;right:70px;border-radius:36px;background:rgba(255,255,255,.07);border:3px solid rgba(255,255,255,.14);padding:34px 40px;white-space:normal}
+.tk{font-weight:800;font-size:34px;letter-spacing:.08em;opacity:.6}
+.tv{font-weight:900;font-size:64px;line-height:1.05;margin-top:8px}
+.meter{position:absolute;left:90px;right:90px;height:70px;border-radius:999px;background:rgba(255,255,255,.08);border:3px solid rgba(255,255,255,.16);overflow:hidden}
+.meter i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#ff4d6a,#ffc53d,#2ee59d)}
+.rank{position:absolute;width:190px;height:190px;margin-left:-95px;border-radius:40px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:130px;border:6px solid currentColor}
 .ring{position:absolute;left:50%;top:1530px;width:150px;height:150px;margin-left:-75px}
 </style></head>
 <body><div id="stage"></div>
@@ -351,6 +360,42 @@ B.guess = (d, s) => {
 
 /* ---------- montaggio: scene in fila con transizione a frusta ---------- */
 let acc = 0;
+B.talk = (d, s) => {   // video parlato: etichetta, titolo, un elemento grafico e i sottotitoli della voce
+  const chip = el("div", "chip abs", esc(d.label || ""), s); chip.style.cssText += "left:50%;top:250px"; if (!d.label) chip.style.display = "none";
+  const n = (d.title || []).length;
+  const hs = (d.title || []).map((txt, i) => { const big = i === (d.accent ?? n - 1); const h = el("div", "abs c" + (big ? " grad" : ""), esc(txt), s);
+    h.style.cssText += `font-weight:900;letter-spacing:-.02em;top:${380 + i * 150}px;font-size:${big ? fit(txt, 150, 70) : fit(txt, 110, 60)}px;line-height:1`; return h; });
+  const top = 400 + n * 150 + 40, w = d.widget || {}, parts = [];
+  if (w.kind === "meter") {   // da un rango all'altro
+    const m = el("div", "meter", "<i></i>", s); m.style.top = (top + 260) + "px";
+    const a = el("div", "rank", esc(w.from), s), b = el("div", "rank", esc(w.to), s);
+    a.style.cssText += `left:190px;top:${top + 20}px;color:#ff4d6a`; b.style.cssText += `left:890px;top:${top + 20}px;color:#2ee59d`;
+    const lab = el("div", "abs c tk", esc(w.label || ""), s); lab.style.top = (top + 370) + "px";
+    parts.push(lt => { const k = E.out(prog(lt, .6, Math.max(1, d.dur * .55))); m.firstChild.style.width = (k * 100) + "%";
+      set(a, prog(lt, .2, .3), 0, 0, 1); set(b, prog(lt, .6 + Math.max(1, d.dur * .55) - .2, .3), 0, 0, 1 + .25 * (1 - E.back(prog(lt, .6 + Math.max(1, d.dur * .55) - .2, .4)))); lab.style.opacity = prog(lt, .4, .4); });
+  } else if (w.kind === "boxes") {   // riquadri chiave/valore che entrano uno alla volta
+    const bs = w.items.map((it, i) => { const b = el("div", "tbox", `<div class="tk">${esc(it.k)}</div><div class="tv" style="font-size:${fit(it.v, 64, 40, 860, .6)}px">${esc(it.v)}</div>`, s);
+      b.style.top = (top + i * 205) + "px"; return b; });
+    const step = Math.min(1.2, (d.dur - 1) / Math.max(1, bs.length));
+    parts.push(lt => bs.forEach((b, i) => { const k = prog(lt, .3 + i * step, .4); set(b, clamp(k * 2), (1 - E.back(k)) * (i % 2 ? 500 : -500)); }));
+  } else if (w.kind === "pro") {   // sì / no
+    const col = (arr, c, x, t0) => arr.map((t, i) => { const b = el("div", "tbox", `<div class="tv" style="font-size:44px;color:${c}">${x} <span style="color:#fff">${esc(t)}</span></div>`, s);
+      b.style.cssText += `top:${top + (t0 + i) * 150}px;padding:24px 34px`; return b; });
+    const bs = [...col(w.si || [], "#2ee59d", "✓", 0), ...col(w.no || [], "#ff4d6a", "✗", (w.si || []).length + .25)];
+    const step = Math.min(1.1, (d.dur - 1) / Math.max(1, bs.length));
+    parts.push(lt => bs.forEach((b, i) => { const k = prog(lt, .3 + i * step, .35); set(b, clamp(k * 2), 0, (1 - E.out(k)) * 60); }));
+  } else if (w.kind === "big") {   // una parola enorme
+    const g = el("div", "abs c grad", esc(w.text), s); g.style.cssText += `top:${top + 40}px;font-weight:900;font-size:${fit(w.text, 230, 100)}px;line-height:1`;
+    parts.push(lt => { const k = prog(lt, .4, .45); set(g, clamp(k * 2), 0, 0, 2 - E.out(k), (1 - E.out(k)) * 20); });
+  }
+  const sub = el("div", "sub", "", s), chunks = d.sub || [];
+  return {dur: d.dur || 4, ready: .5, draw(lt) {
+    chip.style.opacity = prog(lt, 0, .3); chip.style.transform = `translateX(-50%) translateY(${(1 - E.back(prog(lt, 0, .45))) * -50}px)`;
+    hs.forEach((h, i) => { const k = prog(lt, .1 + i * .25, .35); set(h, clamp(k * 3), 0, 0, 1.5 - .5 * E.out(k), (1 - E.out(k)) * 14); });
+    parts.forEach(p => p(lt));
+    const c = chunks.find(c => lt >= c.a && lt < c.b); sub.textContent = c ? c.x : "";
+  }};
+};
 const S = V.scenes.map(d => { const s = el("div", "scene"); const sc = B[d.type](d, s); const o = {s, start: acc, ...sc}; acc += sc.dur; return o; });
 const TOTAL = acc;
 const mark = el("div", "mark", `Dub<span class="grad">ITA</span>`);
@@ -368,7 +413,7 @@ function render(t) {
     o.s.style.filter = (1 - inK) + outK > .01 ? `blur(${(1 - inK) * 30 + outK * 30}px)` : "none";
     o.draw(first ? lt + (o.ready || 0) : lt);   // la prima scena è già completa al fotogramma 0: chi scorre vede subito di cosa parla
   });
-  mark.style.opacity = S[S.length - 1].start - .3 < t ? 0 : .55;
+  mark.style.opacity = V.noMark || S[S.length - 1].start - .3 < t ? 0 : .55;
 }
 window.render = render; window.TOTAL = TOTAL;
 render(0);
