@@ -1,0 +1,448 @@
+{
+ "scenes": [
+  {
+   "type": "talk",
+   "label": "SOLO LEVELING",
+   "title": [
+    "IL PIÙ DEBOLE",
+    "DIVENTA IL PIÙ FORTE"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "meter",
+    "from": "E",
+    "to": "S",
+    "label": "RANGO DEL CACCIATORE"
+   },
+   "dur": 12.161999999999999,
+   "sub": [
+    {
+     "x": "Il cacciatore più debole del",
+     "a": 0.15,
+     "b": 2.3737974683544305
+    },
+    {
+     "x": "mondo diventa il più forte",
+     "a": 2.3737974683544305,
+     "b": 4.449341772151898
+    },
+    {
+     "x": "di tutti. È la storia",
+     "a": 4.449341772151898,
+     "b": 6.154253164556962
+    },
+    {
+     "x": "di Solo Leveling. Ma vale",
+     "a": 6.154253164556962,
+     "b": 8.15567088607595
+    },
+    {
+     "x": "davvero la pena guardarlo? E",
+     "a": 8.15567088607595,
+     "b": 10.37946835443038
+    },
+    {
+     "x": "com'è in italiano?",
+     "a": 10.37946835443038,
+     "b": 11.862
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "LA STORIA",
+   "title": [
+    "PORTALI PIENI",
+    "DI MOSTRI"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "boxes",
+    "items": [
+     {
+      "k": "DOVE",
+      "v": "Corea del Sud"
+     },
+     {
+      "k": "CHI LI COMBATTE",
+      "v": "I cacciatori"
+     },
+     {
+      "k": "IL PROTAGONISTA",
+      "v": "Sung Jinwoo, rango E"
+     }
+    ]
+   },
+   "dur": 11.681999999999999,
+   "sub": [
+    {
+     "x": "In Corea si aprono portali",
+     "a": 0.15,
+     "b": 1.9784651162790696
+    },
+    {
+     "x": "pieni di mostri, e solo",
+     "a": 1.9784651162790696,
+     "b": 3.6110232558139534
+    },
+    {
+     "x": "i cacciatori possono chiuderli. Sung",
+     "a": 3.6110232558139534,
+     "b": 6.092511627906976
+    },
+    {
+     "x": "Jinwoo è di rango E,",
+     "a": 6.092511627906976,
+     "b": 7.529162790697674
+    },
+    {
+     "x": "il più basso: ogni missione",
+     "a": 7.529162790697674,
+     "b": 9.422930232558139
+    },
+    {
+     "x": "per lui può essere l'ultima.",
+     "a": 9.422930232558139,
+     "b": 11.382
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "MOTIVO 1",
+   "title": [
+    "SALE DI LIVELLO",
+    "COME IN UN GIOCO"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "boxes",
+    "items": [
+     {
+      "k": "IL SISTEMA",
+      "v": "Missioni e ricompense"
+     },
+     {
+      "k": "OGNI EPISODIO",
+      "v": "Un po' più forte"
+     }
+    ]
+   },
+   "dur": 18.426,
+   "sub": [
+    {
+     "x": "Il primo motivo per guardarlo",
+     "a": 0.15,
+     "b": 2.078221453287197
+    },
+    {
+     "x": "è la sensazione di crescita.",
+     "a": 2.078221453287197,
+     "b": 3.9442422145328715
+    },
+    {
+     "x": "Dopo un dungeon quasi mortale,",
+     "a": 3.9442422145328715,
+     "b": 5.934664359861591
+    },
+    {
+     "x": "Jinwoo ottiene un sistema che",
+     "a": 5.934664359861591,
+     "b": 7.862885813148788
+    },
+    {
+     "x": "gli dà missioni e lo",
+     "a": 7.862885813148788,
+     "b": 9.231301038062282
+    },
+    {
+     "x": "fa salire di livello, come",
+     "a": 9.231301038062282,
+     "b": 10.972920415224912
+    },
+    {
+     "x": "in un gioco di ruolo.",
+     "a": 10.972920415224912,
+     "b": 12.403536332179929
+    },
+    {
+     "x": "Episodio dopo episodio lo vedi",
+     "a": 12.403536332179929,
+     "b": 14.393958477508649
+    },
+    {
+     "x": "diventare più forte, e la",
+     "a": 14.393958477508649,
+     "b": 16.073377162629757
+    },
+    {
+     "x": "soddisfazione è proprio quella.",
+     "a": 16.073377162629757,
+     "b": 18.125999999999998
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "MOTIVO 2",
+   "title": [
+    "I COMBATTIMENTI"
+   ],
+   "widget": {
+    "kind": "big",
+    "text": "A-1 PICTURES"
+   },
+   "dur": 10.985999999999999,
+   "sub": [
+    {
+     "x": "Il secondo motivo sono i",
+     "a": 0.15,
+     "b": 1.9288051948051947
+    },
+    {
+     "x": "combattimenti. L'anime è dello studio",
+     "a": 1.9288051948051947,
+     "b": 4.597012987012986
+    },
+    {
+     "x": "A-1 Pictures, e i combattimenti",
+     "a": 4.597012987012986,
+     "b": 6.854727272727272
+    },
+    {
+     "x": "sono il suo punto forte:",
+     "a": 6.854727272727272,
+     "b": 8.633532467532467
+    },
+    {
+     "x": "veloci, cupi e spettacolari.",
+     "a": 8.633532467532467,
+     "b": 10.686
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "ATTENZIONE",
+   "title": [
+    "NON È PER",
+    "TUTTI"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "pro",
+    "si": [
+     "Azione e crescita"
+    ],
+    "no": [
+     "Inizio lento e cupo",
+     "Protagonista poco profondo"
+    ]
+   },
+   "dur": 12.378,
+   "sub": [
+    {
+     "x": "Ma attenzione: i primi episodi",
+     "a": 0.15,
+     "b": 2.2705333333333333
+    },
+    {
+     "x": "sono lenti e molto cupi,",
+     "a": 2.2705333333333333,
+     "b": 3.9934666666666665
+    },
+    {
+     "x": "e all'inizio Jinwoo ha poco",
+     "a": 3.9934666666666665,
+     "b": 5.9152000000000005
+    },
+    {
+     "x": "carattere. Se cerchi personaggi profondi",
+     "a": 5.9152000000000005,
+     "b": 8.698400000000001
+    },
+    {
+     "x": "o una trama complicata, potresti",
+     "a": 8.698400000000001,
+     "b": 10.951466666666668
+    },
+    {
+     "x": "restare deluso.",
+     "a": 10.951466666666668,
+     "b": 12.078000000000001
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "IN ITALIANO",
+   "title": [
+    "È DOPPIATO!"
+   ],
+   "widget": {
+    "kind": "boxes",
+    "items": [
+     {
+      "k": "SUNG JINWOO",
+      "v": "Federico Campaiola"
+     },
+     {
+      "k": "CHE ERA ANCHE",
+      "v": "Ray · The Promised Neverland"
+     },
+     {
+      "k": "CHA HAE-IN",
+      "v": "Jessica Bologna"
+     }
+    ]
+   },
+   "dur": 21.162,
+   "sub": [
+    {
+     "x": "E in italiano? È doppiato,",
+     "a": 0.15,
+     "b": 2.032909090909091
+    },
+    {
+     "x": "sia la prima che la",
+     "a": 2.032909090909091,
+     "b": 3.4450909090909088
+    },
+    {
+     "x": "seconda stagione. Jinwoo ha la",
+     "a": 3.4450909090909088,
+     "b": 5.596987012987013
+    },
+    {
+     "x": "voce di Federico Campaiola, lo",
+     "a": 5.596987012987013,
+     "b": 7.748883116883117
+    },
+    {
+     "x": "stesso di Ray in The",
+     "a": 7.748883116883117,
+     "b": 9.228311688311688
+    },
+    {
+     "x": "Promised Neverland. Una scelta che",
+     "a": 9.228311688311688,
+     "b": 11.649194805194805
+    },
+    {
+     "x": "ha senso: Ray è un",
+     "a": 11.649194805194805,
+     "b": 12.99412987012987
+    },
+    {
+     "x": "ragazzo calmo e calcolatore, e",
+     "a": 12.99412987012987,
+     "b": 15.146025974025974
+    },
+    {
+     "x": "Jinwoo lo diventa sempre di",
+     "a": 15.146025974025974,
+     "b": 17.09618181818182
+    },
+    {
+     "x": "più. Cha Hae-In invece ha",
+     "a": 17.09618181818182,
+     "b": 18.911844155844157
+    },
+    {
+     "x": "la voce di Jessica Bologna.",
+     "a": 18.911844155844157,
+     "b": 20.862000000000002
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "IL VERDETTO",
+   "title": [
+    "LO GUARDO",
+    "O NO?"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "pro",
+    "si": [
+     "Ami i giochi di ruolo",
+     "Vuoi azione spettacolare"
+    ],
+    "no": [
+     "Cerchi una trama complessa"
+    ]
+   },
+   "dur": 14.729999999999999,
+   "sub": [
+    {
+     "x": "Il verdetto: guardalo se ami",
+     "a": 0.15,
+     "b": 2.3469230769230767
+    },
+    {
+     "x": "i giochi di ruolo e",
+     "a": 2.3469230769230767,
+     "b": 3.8847692307692308
+    },
+    {
+     "x": "l'azione spettacolare. Lascialo stare se",
+     "a": 3.8847692307692308,
+     "b": 6.960461538461539
+    },
+    {
+     "x": "cerchi una trama complessa. E",
+     "a": 6.960461538461539,
+     "b": 9.230615384615385
+    },
+    {
+     "x": "tu, l'hai visto in italiano",
+     "a": 9.230615384615385,
+     "b": 11.354307692307692
+    },
+    {
+     "x": "o in giapponese? Scrivilo nei",
+     "a": 11.354307692307692,
+     "b": 13.624461538461539
+    },
+    {
+     "x": "commenti.",
+     "a": 13.624461538461539,
+     "b": 14.43
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "DubITA",
+   "title": [
+    "OGNI ANIME",
+    "IL SUO DOPPIAGGIO"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "LINK IN BIO"
+   },
+   "dur": 6.21,
+   "sub": [
+    {
+     "x": "Su DubITA trovi se ogni",
+     "a": 0.15,
+     "b": 2.122602739726027
+    },
+    {
+     "x": "anime è doppiato e dove",
+     "a": 2.122602739726027,
+     "b": 4.095205479452055
+    },
+    {
+     "x": "vederlo. Link in bio.",
+     "a": 4.095205479452055,
+     "b": 5.91
+    }
+   ]
+  }
+ ],
+ "noMark": true
+}
