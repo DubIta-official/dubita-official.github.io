@@ -28,7 +28,7 @@ jobs:
           node-version: 20
       - name: Strumenti
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-color-emoji > /dev/null
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-color-emoji fonts-inter > /dev/null
           pip install -q edge-tts
           npm i --no-save --silent playwright@1.48.2
           npx playwright install --with-deps chromium > /dev/null

@@ -374,8 +374,9 @@ B.talk = (d, s) => {   // video parlato: etichetta, titolo, un elemento grafico 
     parts.push(lt => { const k = E.out(prog(lt, .6, Math.max(1, d.dur * .55))); m.firstChild.style.width = (k * 100) + "%";
       set(a, prog(lt, .2, .3), 0, 0, 1); set(b, prog(lt, .6 + Math.max(1, d.dur * .55) - .2, .3), 0, 0, 1 + .25 * (1 - E.back(prog(lt, .6 + Math.max(1, d.dur * .55) - .2, .4)))); lab.style.opacity = prog(lt, .4, .4); });
   } else if (w.kind === "boxes") {   // riquadri chiave/valore che entrano uno alla volta
-    const bs = w.items.map((it, i) => { const b = el("div", "tbox", `<div class="tk">${esc(it.k)}</div><div class="tv" style="font-size:${fit(it.v, 64, 40, 860, .6)}px">${esc(it.v)}</div>`, s);
-      b.style.top = (top + i * 205) + "px"; return b; });
+    const col = el("div", "abs", "", s); col.style.cssText += `left:70px;right:70px;top:${top}px;display:flex;flex-direction:column;gap:22px`;   // in colonna: un testo su due righe non copre il riquadro dopo
+    const bs = w.items.map(it => { const b = el("div", "tbox", `<div class="tk">${esc(it.k)}</div><div class="tv" style="font-size:${fit(it.v, 64, 40, 860, .6)}px">${esc(it.v)}</div>`, col);
+      b.style.cssText += "position:relative;left:auto;right:auto"; return b; });
     const step = Math.min(1.2, (d.dur - 1) / Math.max(1, bs.length));
     parts.push(lt => bs.forEach((b, i) => { const k = prog(lt, .3 + i * step, .4); set(b, clamp(k * 2), (1 - E.back(k)) * (i % 2 ? 500 : -500)); }));
   } else if (w.kind === "pro") {   // sì / no

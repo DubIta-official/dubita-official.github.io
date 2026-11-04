@@ -1,0 +1,22 @@
+{
+ "titolo": "Jujutsu Kaisen",
+ "didascalia": "Un ragazzo ingoia il dito di un demone e diventa il suo contenitore: Jujutsu Kaisen fa per te? E com'è in italiano? 🎙️🇮🇹\nE tu chi preferisci: Gojo o Sukuna? Scrivilo nei commenti!\nDoppiaggi verificati di tutti gli anime sul nostro sito, link in bio 🔗\n#DaVedere #anime #jujutsukaisen #doppiaggioitaliano #animeita",
+ "scene": [
+  {"label": "JUJUTSU KAISEN", "title": ["INGOIA UN DITO", "DI UN DEMONE"], "accent": 1, "widget": {"kind": "big", "text": "E ORA?"},
+   "testo": "Un ragazzo ingoia il dito di un demone, e il demone si risveglia dentro di lui. È l'inizio di Jujutsu Kaisen, uno degli anime più famosi di oggi. Ma fa davvero per te? E com'è in italiano?"},
+  {"label": "LA STORIA", "title": ["IL RE DELLE", "MALEDIZIONI"], "accent": 1, "widget": {"kind": "boxes", "items": [{"k": "IL PROTAGONISTA", "v": "Yuji Itadori, studente"}, {"k": "COSA FA", "v": "Ingoia un dito di Sukuna"}, {"k": "DOVE FINISCE", "v": "In una scuola di stregoni"}]},
+   "testo": "Yuji Itadori è uno studente con una forza fuori dal comune. Per salvare i suoi amici ingoia un dito di Sukuna, il re delle maledizioni, e da quel momento lo porta dentro di sé. Così finisce in una scuola di stregoni."},
+  {"label": "MOTIVO 1", "title": ["IL PIÙ FORTE"], "widget": {"kind": "big", "text": "SATORU GOJO"},
+   "testo": "Il primo motivo per guardarlo ha un nome: Satoru Gojo, l'insegnante di Yuji e lo stregone più forte di tutti. È il personaggio di cui parlano tutti, e quando entra in scena cambia il ritmo dell'episodio."},
+  {"label": "MOTIVO 2", "title": ["I COMBATTIMENTI"], "widget": {"kind": "big", "text": "STUDIO MAPPA"},
+   "testo": "Il secondo motivo sono i combattimenti. L'anime è dello studio MAPPA, e ogni potere ha regole precise: gli scontri non sono solo pugni, sono quasi partite a scacchi."},
+  {"label": "ATTENZIONE", "title": ["NON È PER", "TUTTI"], "accent": 1, "widget": {"kind": "pro", "si": ["Azione intensa"], "no": ["Molto violento", "Seconda stagione cupa", "Poteri difficili all'inizio"]},
+   "testo": "Ma attenzione: è molto violento, e la seconda stagione è ancora più cupa. Personaggi a cui ti affezioni possono non sopravvivere. E all'inizio il sistema dei poteri può confondere."},
+  {"label": "IN ITALIANO", "title": ["È DOPPIATO!"], "widget": {"kind": "boxes", "items": [{"k": "YUJI ITADORI", "v": "Dario Sansalone"}, {"k": "SATORU GOJO", "v": "Davide Fumagalli"}, {"k": "RYOMEN SUKUNA", "v": "Mattia Bressan"}]},
+   "testo": "E in italiano? È doppiato, sia la prima che la seconda stagione, e la seconda è arrivata anche in chiaro su Italia 2. Yuji ha la voce di Dario Sansalone, Gojo quella di Davide Fumagalli e Sukuna quella di Mattia Bressan."},
+  {"label": "IL VERDETTO", "title": ["LO GUARDO", "O NO?"], "accent": 1, "widget": {"kind": "pro", "si": ["Ami azione e poteri", "Vuoi personaggi carismatici"], "no": ["Non sopporti la violenza"]},
+   "testo": "Il verdetto: guardalo se ami l'azione, i poteri e i personaggi carismatici. Lascialo stare se non sopporti la violenza. E tu chi preferisci: Gojo o Sukuna? Scrivilo nei commenti."},
+  {"label": "DubITA", "title": ["OGNI ANIME", "IL SUO DOPPIAGGIO"], "accent": 1, "widget": {"kind": "big", "text": "LINK IN BIO"},
+   "testo": "Su DubITA trovi se ogni anime è doppiato e dove vederlo. Link in bio."}
+ ]
+}
