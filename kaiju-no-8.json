@@ -1,0 +1,428 @@
+{
+ "scenes": [
+  {
+   "type": "talk",
+   "label": "KAIJU NO. 8",
+   "title": [
+    "A 32 ANNI",
+    "DIVENTA UN MOSTRO"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "KAIJU N°8"
+   },
+   "dur": 12.809999999999999,
+   "sub": [
+    {
+     "x": "Ha trentadue anni, pulisce i",
+     "a": 0.15,
+     "b": 2.5735294117647056
+    },
+    {
+     "x": "resti dei mostri giganti, e",
+     "a": 2.5735294117647056,
+     "b": 4.916274509803921
+    },
+    {
+     "x": "un giorno diventa lui stesso",
+     "a": 4.916274509803921,
+     "b": 7.3398039215686275
+    },
+    {
+     "x": "un mostro. È Kaiju No.",
+     "a": 7.3398039215686275,
+     "b": 9.278627450980393
+    },
+    {
+     "x": "8. Ma fa per te?",
+     "a": 9.278627450980393,
+     "b": 10.732745098039217
+    },
+    {
+     "x": "E com'è in italiano?",
+     "a": 10.732745098039217,
+     "b": 12.510000000000002
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "LA STORIA",
+   "title": [
+    "MOSTRI",
+    "GIGANTI"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "boxes",
+    "items": [
+     {
+      "k": "IL PROTAGONISTA",
+      "v": "Kafka Hibino, 32 anni"
+     },
+     {
+      "k": "IL SUO LAVORO",
+      "v": "Ripulire i resti dei kaiju"
+     },
+     {
+      "k": "IL SUO SOGNO",
+      "v": "Le Forze di Difesa"
+     }
+    ]
+   },
+   "dur": 15.665999999999999,
+   "sub": [
+    {
+     "x": "In Giappone i kaiju, mostri",
+     "a": 0.15,
+     "b": 2.0277191489361703
+    },
+    {
+     "x": "giganti, attaccano di continuo. Kafka",
+     "a": 2.0277191489361703,
+     "b": 4.552927659574468
+    },
+    {
+     "x": "Hibino sognava di entrare nelle",
+     "a": 4.552927659574468,
+     "b": 6.68964255319149
+    },
+    {
+     "x": "Forze di Difesa per combatterli,",
+     "a": 6.68964255319149,
+     "b": 8.891106382978723
+    },
+    {
+     "x": "ma è finito a ripulire",
+     "a": 8.891106382978723,
+     "b": 10.44508085106383
+    },
+    {
+     "x": "i loro resti. Finché un",
+     "a": 10.44508085106383,
+     "b": 12.063804255319148
+    },
+    {
+     "x": "piccolo kaiju gli entra in",
+     "a": 12.063804255319148,
+     "b": 13.876774468085106
+    },
+    {
+     "x": "corpo e lo trasforma.",
+     "a": 13.876774468085106,
+     "b": 15.366
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "MOTIVO 1",
+   "title": [
+    "IL PROTAGONISTA"
+   ],
+   "widget": {
+    "kind": "big",
+    "text": "È UN ADULTO"
+   },
+   "dur": 12.546,
+   "sub": [
+    {
+     "x": "Il primo motivo è il",
+     "a": 0.15,
+     "b": 1.734
+    },
+    {
+     "x": "protagonista. Non è il solito",
+     "a": 1.734,
+     "b": 3.966
+    },
+    {
+     "x": "ragazzino: è un adulto che",
+     "a": 3.966,
+     "b": 5.982
+    },
+    {
+     "x": "pensava di aver perso la",
+     "a": 5.982,
+     "b": 7.854
+    },
+    {
+     "x": "sua occasione, e ci riprova.",
+     "a": 7.854,
+     "b": 10.014
+    },
+    {
+     "x": "È facilissimo tifare per lui.",
+     "a": 10.014,
+     "b": 12.245999999999999
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "MOTIVO 2",
+   "title": [
+    "I MOSTRI"
+   ],
+   "widget": {
+    "kind": "boxes",
+    "items": [
+     {
+      "k": "L'ANIME",
+      "v": "Production I.G"
+     },
+     {
+      "k": "I KAIJU",
+      "v": "Con lo Studio Khara"
+     },
+     {
+      "k": "LO STUDIO DI",
+      "v": "Evangelion"
+     }
+    ]
+   },
+   "dur": 10.193999999999999,
+   "sub": [
+    {
+     "x": "Il secondo sono i mostri.",
+     "a": 0.15,
+     "b": 2.1133432835820893
+    },
+    {
+     "x": "L'anime è di Production I.G,",
+     "a": 2.1133432835820893,
+     "b": 4.294835820895522
+    },
+    {
+     "x": "e i kaiju sono curati",
+     "a": 4.294835820895522,
+     "b": 5.96731343283582
+    },
+    {
+     "x": "insieme allo Studio Khara, lo",
+     "a": 5.96731343283582,
+     "b": 8.2215223880597
+    },
+    {
+     "x": "stesso di Evangelion.",
+     "a": 8.2215223880597,
+     "b": 9.893999999999998
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "ATTENZIONE",
+   "title": [
+    "NON È PER",
+    "TUTTI"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "pro",
+    "si": [
+     "Azione e umorismo"
+    ],
+    "no": [
+     "Storia abbastanza classica",
+     "Mostri in computer grafica"
+    ]
+   },
+   "dur": 8.202,
+   "sub": [
+    {
+     "x": "Ma attenzione: la storia segue",
+     "a": 0.15,
+     "b": 2.2884827586206895
+    },
+    {
+     "x": "binari abbastanza classici, e i",
+     "a": 2.2884827586206895,
+     "b": 4.493793103448276
+    },
+    {
+     "x": "mostri in computer grafica non",
+     "a": 4.493793103448276,
+     "b": 6.6322758620689655
+    },
+    {
+     "x": "convincono tutti.",
+     "a": 6.6322758620689655,
+     "b": 7.902
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "IN ITALIANO",
+   "title": [
+    "È DOPPIATO!"
+   ],
+   "widget": {
+    "kind": "boxes",
+    "items": [
+     {
+      "k": "KAFKA HIBINO",
+      "v": "Mattia Bressan"
+     },
+     {
+      "k": "CHE È ANCHE",
+      "v": "Sukuna · Jujutsu Kaisen"
+     },
+     {
+      "k": "E ANCHE",
+      "v": "Loid · Spy x Family"
+     }
+    ]
+   },
+   "dur": 18.45,
+   "sub": [
+    {
+     "x": "E in italiano? È doppiato,",
+     "a": 0.15,
+     "b": 2.059090909090909
+    },
+    {
+     "x": "anche la seconda stagione, e",
+     "a": 2.059090909090909,
+     "b": 4.1045454545454545
+    },
+    {
+     "x": "la prima è uscita in",
+     "a": 4.1045454545454545,
+     "b": 5.6045454545454545
+    },
+    {
+     "x": "contemporanea con il Giappone. Kafka",
+     "a": 5.6045454545454545,
+     "b": 8.195454545454545
+    },
+    {
+     "x": "ha la voce di Mattia",
+     "a": 8.195454545454545,
+     "b": 9.695454545454545
+    },
+    {
+     "x": "Bressan, che è anche Sukuna",
+     "a": 9.695454545454545,
+     "b": 11.672727272727272
+    },
+    {
+     "x": "in Jujutsu Kaisen e Loid",
+     "a": 11.672727272727272,
+     "b": 13.445454545454545
+    },
+    {
+     "x": "in Spy x Family. Tre",
+     "a": 13.445454545454545,
+     "b": 14.945454545454545
+    },
+    {
+     "x": "personaggi diversissimi, con la stessa",
+     "a": 14.945454545454545,
+     "b": 17.672727272727272
+    },
+    {
+     "x": "voce.",
+     "a": 17.672727272727272,
+     "b": 18.15
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "IL VERDETTO",
+   "title": [
+    "LO GUARDO",
+    "O NO?"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "pro",
+    "si": [
+     "Ami i mostri giganti",
+     "Vuoi un protagonista diverso"
+    ],
+    "no": [
+     "Cerchi una storia originale"
+    ]
+   },
+   "dur": 17.37,
+   "sub": [
+    {
+     "x": "Il verdetto: guardalo se ami",
+     "a": 0.15,
+     "b": 2.2218367346938774
+    },
+    {
+     "x": "i mostri giganti e vuoi",
+     "a": 2.2218367346938774,
+     "b": 3.9483673469387757
+    },
+    {
+     "x": "un protagonista diverso dal solito.",
+     "a": 3.9483673469387757,
+     "b": 6.503632653061225
+    },
+    {
+     "x": "Lascialo stare se cerchi una",
+     "a": 6.503632653061225,
+     "b": 8.575469387755103
+    },
+    {
+     "x": "storia davvero originale. E secondo",
+     "a": 8.575469387755103,
+     "b": 11.130734693877553
+    },
+    {
+     "x": "te: a trentadue anni è",
+     "a": 11.130734693877553,
+     "b": 12.788204081632655
+    },
+    {
+     "x": "troppo tardi per inseguire un",
+     "a": 12.788204081632655,
+     "b": 14.929102040816328
+    },
+    {
+     "x": "sogno? Scrivilo nei commenti.",
+     "a": 14.929102040816328,
+     "b": 17.07
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "DubITA",
+   "title": [
+    "OGNI ANIME",
+    "IL SUO DOPPIAGGIO"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "LINK IN BIO"
+   },
+   "dur": 6.21,
+   "sub": [
+    {
+     "x": "Su DubITA trovi se ogni",
+     "a": 0.15,
+     "b": 2.122602739726027
+    },
+    {
+     "x": "anime è doppiato e dove",
+     "a": 2.122602739726027,
+     "b": 4.095205479452055
+    },
+    {
+     "x": "vederlo. Link in bio.",
+     "a": 4.095205479452055,
+     "b": 5.91
+    }
+   ]
+  }
+ ],
+ "noMark": true
+}
