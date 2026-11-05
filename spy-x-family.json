@@ -1,0 +1,435 @@
+{
+ "scenes": [
+  {
+   "type": "talk",
+   "label": "SPY x FAMILY",
+   "title": [
+    "UNA FAMIGLIA",
+    "TUTTA FINTA"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "boxes",
+    "items": [
+     {
+      "k": "IL PADRE",
+      "v": "Una spia"
+     },
+     {
+      "k": "LA MADRE",
+      "v": "Un'assassina"
+     },
+     {
+      "k": "LA FIGLIA",
+      "v": "Legge nel pensiero"
+     }
+    ]
+   },
+   "dur": 16.314,
+   "sub": [
+    {
+     "x": "Una spia, un'assassina e una",
+     "a": 0.15,
+     "b": 2.506039603960396
+    },
+    {
+     "x": "bambina che legge nel pensiero",
+     "a": 2.506039603960396,
+     "b": 5.019148514851485
+    },
+    {
+     "x": "formano una famiglia finta, e",
+     "a": 5.019148514851485,
+     "b": 7.453722772277228
+    },
+    {
+     "x": "nessuno sa la verità sugli",
+     "a": 7.453722772277228,
+     "b": 9.652693069306931
+    },
+    {
+     "x": "altri. Tranne la bambina. È",
+     "a": 9.652693069306931,
+     "b": 11.930198019801981
+    },
+    {
+     "x": "Spy x Family. Ma fa",
+     "a": 11.930198019801981,
+     "b": 13.579425742574259
+    },
+    {
+     "x": "per te? E com'è in",
+     "a": 13.579425742574259,
+     "b": 15.150118811881189
+    },
+    {
+     "x": "italiano?",
+     "a": 15.150118811881189,
+     "b": 16.014
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "LA STORIA",
+   "title": [
+    "OPERAZIONE",
+    "STRIX"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "MISSIONE: FAMIGLIA"
+   },
+   "dur": 15.065999999999999,
+   "sub": [
+    {
+     "x": "Loid è una spia che,",
+     "a": 0.15,
+     "b": 1.703391304347826
+    },
+    {
+     "x": "per una missione, deve crearsi",
+     "a": 1.703391304347826,
+     "b": 3.962869565217391
+    },
+    {
+     "x": "una famiglia. Così adotta Anya",
+     "a": 3.962869565217391,
+     "b": 6.222347826086956
+    },
+    {
+     "x": "e sposa Yor. Ma Yor",
+     "a": 6.222347826086956,
+     "b": 7.705130434782609
+    },
+    {
+     "x": "è un'assassina, e Anya legge",
+     "a": 7.705130434782609,
+     "b": 9.823391304347826
+    },
+    {
+     "x": "nel pensiero: è l'unica a",
+     "a": 9.823391304347826,
+     "b": 11.729826086956521
+    },
+    {
+     "x": "sapere tutto, e non può",
+     "a": 11.729826086956521,
+     "b": 13.495043478260868
+    },
+    {
+     "x": "dirlo a nessuno.",
+     "a": 13.495043478260868,
+     "b": 14.765999999999998
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "MOTIVO 1",
+   "title": [
+    "LA STELLA"
+   ],
+   "widget": {
+    "kind": "big",
+    "text": "ANYA"
+   },
+   "dur": 12.306,
+   "sub": [
+    {
+     "x": "Il primo motivo è Anya.",
+     "a": 0.15,
+     "b": 1.7875690607734807
+    },
+    {
+     "x": "Le sue facce sono diventate",
+     "a": 1.7875690607734807,
+     "b": 3.6871491712707183
+    },
+    {
+     "x": "meme ovunque, e quasi tutta",
+     "a": 3.6871491712707183,
+     "b": 5.586729281767956
+    },
+    {
+     "x": "la comicità nasce da lei:",
+     "a": 5.586729281767956,
+     "b": 7.355303867403315
+    },
+    {
+     "x": "conosce i segreti di tutti",
+     "a": 7.355303867403315,
+     "b": 9.189381215469613
+    },
+    {
+     "x": "e prova ad aiutare, combinando",
+     "a": 9.189381215469613,
+     "b": 11.285469613259668
+    },
+    {
+     "x": "disastri.",
+     "a": 11.285469613259668,
+     "b": 12.006
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "MOTIVO 2",
+   "title": [
+    "VA BENE"
+   ],
+   "widget": {
+    "kind": "big",
+    "text": "PER TUTTI"
+   },
+   "dur": 10.77,
+   "sub": [
+    {
+     "x": "Il secondo è che va",
+     "a": 0.15,
+     "b": 1.5216455696202529
+    },
+    {
+     "x": "bene per quasi tutti. Mescola",
+     "a": 1.5216455696202529,
+     "b": 3.546455696202531
+    },
+    {
+     "x": "azione, commedia e momenti teneri:",
+     "a": 3.546455696202531,
+     "b": 5.897848101265822
+    },
+    {
+     "x": "puoi guardarlo da solo, o",
+     "a": 5.897848101265822,
+     "b": 7.661392405063291
+    },
+    {
+     "x": "con qualcuno che di anime",
+     "a": 7.661392405063291,
+     "b": 9.42493670886076
+    },
+    {
+     "x": "non sa niente.",
+     "a": 9.42493670886076,
+     "b": 10.469999999999999
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "ATTENZIONE",
+   "title": [
+    "NON È PER",
+    "TUTTI"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "pro",
+    "si": [
+     "Commedia e famiglia"
+    ],
+    "no": [
+     "Missione principale lenta",
+     "Tanti episodi a sé"
+    ]
+   },
+   "dur": 11.322,
+   "sub": [
+    {
+     "x": "Ma attenzione: la missione principale",
+     "a": 0.15,
+     "b": 2.751276073619632
+    },
+    {
+     "x": "va avanti molto lentamente. Tanti",
+     "a": 2.751276073619632,
+     "b": 5.085754601226994
+    },
+    {
+     "x": "episodi sono piccole storie a",
+     "a": 5.085754601226994,
+     "b": 7.153435582822086
+    },
+    {
+     "x": "sé, e chi cerca una",
+     "a": 7.153435582822086,
+     "b": 8.554122699386504
+    },
+    {
+     "x": "trama che corre potrebbe annoiarsi.",
+     "a": 8.554122699386504,
+     "b": 11.022
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "IN ITALIANO",
+   "title": [
+    "È DOPPIATO!"
+   ],
+   "widget": {
+    "kind": "boxes",
+    "items": [
+     {
+      "k": "LOID",
+      "v": "Mattia Bressan"
+     },
+     {
+      "k": "ANYA",
+      "v": "Valentina Pallavicino"
+     },
+     {
+      "k": "LOID È ANCHE",
+      "v": "Sukuna · Jujutsu Kaisen"
+     }
+    ]
+   },
+   "dur": 20.442,
+   "sub": [
+    {
+     "x": "E in italiano? È doppiato,",
+     "a": 0.15,
+     "b": 2.1072587412587414
+    },
+    {
+     "x": "e la prima stagione doppiata",
+     "a": 2.1072587412587414,
+     "b": 4.204321678321678
+    },
+    {
+     "x": "è arrivata anche su Netflix.",
+     "a": 4.204321678321678,
+     "b": 6.301384615384615
+    },
+    {
+     "x": "Anya ha la voce di",
+     "a": 6.301384615384615,
+     "b": 7.699426573426573
+    },
+    {
+     "x": "Valentina Pallavicino. E Loid è",
+     "a": 7.699426573426573,
+     "b": 10.006195804195803
+    },
+    {
+     "x": "doppiato da Mattia Bressan: la",
+     "a": 10.006195804195803,
+     "b": 12.243062937062936
+    },
+    {
+     "x": "stessa voce di Sukuna in",
+     "a": 12.243062937062936,
+     "b": 14.060517482517481
+    },
+    {
+     "x": "Jujutsu Kaisen. Il padre più",
+     "a": 14.060517482517481,
+     "b": 16.15758041958042
+    },
+    {
+     "x": "premuroso e il demone più",
+     "a": 16.15758041958042,
+     "b": 18.044937062937063
+    },
+    {
+     "x": "crudele, con la stessa voce.",
+     "a": 18.044937062937063,
+     "b": 20.142
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "IL VERDETTO",
+   "title": [
+    "LO GUARDO",
+    "O NO?"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "pro",
+    "si": [
+     "Vuoi ridere",
+     "Cerchi un anime per tutti"
+    ],
+    "no": [
+     "Vuoi una trama veloce"
+    ]
+   },
+   "dur": 14.394,
+   "sub": [
+    {
+     "x": "Il verdetto: guardalo se vuoi",
+     "a": 0.15,
+     "b": 2.449276595744681
+    },
+    {
+     "x": "ridere e cerchi un anime",
+     "a": 2.449276595744681,
+     "b": 4.377702127659575
+    },
+    {
+     "x": "adatto a tutti. Lascialo stare",
+     "a": 4.377702127659575,
+     "b": 6.751148936170213
+    },
+    {
+     "x": "se vuoi una trama veloce.",
+     "a": 6.751148936170213,
+     "b": 8.753744680851064
+    },
+    {
+     "x": "E tu, qual è la",
+     "a": 8.753744680851064,
+     "b": 10.01463829787234
+    },
+    {
+     "x": "tua faccia preferita di Anya?",
+     "a": 10.01463829787234,
+     "b": 12.31391489361702
+    },
+    {
+     "x": "Scrivilo nei commenti.",
+     "a": 12.31391489361702,
+     "b": 14.094
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "DubITA",
+   "title": [
+    "OGNI ANIME",
+    "IL SUO DOPPIAGGIO"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "LINK IN BIO"
+   },
+   "dur": 6.21,
+   "sub": [
+    {
+     "x": "Su DubITA trovi se ogni",
+     "a": 0.15,
+     "b": 2.122602739726027
+    },
+    {
+     "x": "anime è doppiato e dove",
+     "a": 2.122602739726027,
+     "b": 4.095205479452055
+    },
+    {
+     "x": "vederlo. Link in bio.",
+     "a": 4.095205479452055,
+     "b": 5.91
+    }
+   ]
+  }
+ ],
+ "noMark": true
+}
