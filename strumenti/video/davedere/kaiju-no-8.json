@@ -1,0 +1,21 @@
+{
+ "titolo": "Kaiju No. 8",
+ "didascalia": "A 32 anni pulisce i resti dei mostri giganti… finché non diventa lui stesso un mostro: Kaiju No. 8 fa per te? E com'è in italiano? 🎙️🇮🇹\nSecondo te a 32 anni è troppo tardi per inseguire un sogno? Scrivilo nei commenti!\nDoppiaggi verificati di tutti gli anime sul nostro sito, link in bio 🔗\n#DaVedere #anime #kaijuno8 #doppiaggioitaliano #animeita",
+ "scene": [
+  {"label": "KAIJU NO. 8", "title": ["A 32 ANNI", "DIVENTA UN MOSTRO"], "accent": 1, "widget": {"kind": "big", "text": "KAIJU N°8"},
+   "testo": "Ha trentadue anni, pulisce i resti dei mostri giganti, e un giorno diventa lui stesso un mostro. È Kaiju No. 8. Ma fa per te? E com'è in italiano?"},
+  {"label": "LA STORIA", "title": ["MOSTRI", "GIGANTI"], "accent": 1, "widget": {"kind": "boxes", "items": [{"k": "IL PROTAGONISTA", "v": "Kafka Hibino, 32 anni"}, {"k": "IL SUO LAVORO", "v": "Ripulire i resti dei kaiju"}, {"k": "IL SUO SOGNO", "v": "Le Forze di Difesa"}]},
+   "testo": "In Giappone i kaiju, mostri giganti, attaccano di continuo. Kafka Hibino sognava di entrare nelle Forze di Difesa per combatterli, ma è finito a ripulire i loro resti. Finché un piccolo kaiju gli entra in corpo e lo trasforma."},
+  {"label": "MOTIVO 1", "title": ["IL PROTAGONISTA"], "widget": {"kind": "big", "text": "È UN ADULTO"},
+   "testo": "Il primo motivo è il protagonista. Non è il solito ragazzino: è un adulto che pensava di aver perso la sua occasione, e ci riprova. È facilissimo tifare per lui."},
+  {"label": "MOTIVO 2", "title": ["I MOSTRI"], "widget": {"kind": "boxes", "items": [{"k": "L'ANIME", "v": "Production I.G"}, {"k": "I KAIJU", "v": "Con lo Studio Khara"}, {"k": "LO STUDIO DI", "v": "Evangelion"}]},
+   "testo": "Il secondo sono i mostri. L'anime è di Production I.G, e i kaiju sono curati insieme allo Studio Khara, lo stesso di Evangelion."},
+  {"label": "ATTENZIONE", "title": ["NON È PER", "TUTTI"], "accent": 1, "widget": {"kind": "pro", "si": ["Azione e umorismo"], "no": ["Storia abbastanza classica", "Mostri in computer grafica"]},
+   "testo": "Ma attenzione: la storia segue binari abbastanza classici, e i mostri in computer grafica non convincono tutti."},
+  {"label": "IN ITALIANO", "title": ["È DOPPIATO!"], "widget": {"kind": "boxes", "items": [{"k": "KAFKA HIBINO", "v": "Mattia Bressan"}, {"k": "CHE È ANCHE", "v": "Sukuna · Jujutsu Kaisen"}, {"k": "E ANCHE", "v": "Loid · Spy x Family"}]},
+   "testo": "E in italiano? È doppiato, anche la seconda stagione, e la prima è uscita in contemporanea con il Giappone. Kafka ha la voce di Mattia Bressan, che è anche Sukuna in Jujutsu Kaisen e Loid in Spy x Family. Tre personaggi diversissimi, con la stessa voce."},
+  {"label": "IL VERDETTO", "title": ["LO GUARDO", "O NO?"], "accent": 1, "widget": {"kind": "pro", "si": ["Ami i mostri giganti", "Vuoi un protagonista diverso"], "no": ["Cerchi una storia originale"]},
+   "testo": "Il verdetto: guardalo se ami i mostri giganti e vuoi un protagonista diverso dal solito. Lascialo stare se cerchi una storia davvero originale. E secondo te: a trentadue anni è troppo tardi per inseguire un sogno? Scrivilo nei commenti."},
+  {"label": "DubITA", "title": ["OGNI ANIME", "IL SUO DOPPIAGGIO"], "accent": 1, "widget": {"kind": "big", "text": "LINK IN BIO"}, "testo": "Su DubITA trovi se ogni anime è doppiato e dove vederlo. Link in bio."}
+ ]
+}

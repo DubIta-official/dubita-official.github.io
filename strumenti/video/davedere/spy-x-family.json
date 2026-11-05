@@ -1,0 +1,21 @@
+{
+ "titolo": "Spy x Family",
+ "didascalia": "Una spia, un'assassina e una bambina che legge nel pensiero formano una famiglia finta: Spy x Family fa per te? E com'è in italiano? 🎙️🇮🇹\nQual è la tua faccia preferita di Anya? Scrivilo nei commenti!\nDoppiaggi verificati di tutti gli anime sul nostro sito, link in bio 🔗\n#DaVedere #anime #spyxfamily #doppiaggioitaliano #animeita",
+ "scene": [
+  {"label": "SPY x FAMILY", "title": ["UNA FAMIGLIA", "TUTTA FINTA"], "accent": 1, "widget": {"kind": "boxes", "items": [{"k": "IL PADRE", "v": "Una spia"}, {"k": "LA MADRE", "v": "Un'assassina"}, {"k": "LA FIGLIA", "v": "Legge nel pensiero"}]},
+   "testo": "Una spia, un'assassina e una bambina che legge nel pensiero formano una famiglia finta, e nessuno sa la verità sugli altri. Tranne la bambina. È Spy x Family. Ma fa per te? E com'è in italiano?"},
+  {"label": "LA STORIA", "title": ["OPERAZIONE", "STRIX"], "accent": 1, "widget": {"kind": "big", "text": "MISSIONE: FAMIGLIA"},
+   "testo": "Loid è una spia che, per una missione, deve crearsi una famiglia. Così adotta Anya e sposa Yor. Ma Yor è un'assassina, e Anya legge nel pensiero: è l'unica a sapere tutto, e non può dirlo a nessuno."},
+  {"label": "MOTIVO 1", "title": ["LA STELLA"], "widget": {"kind": "big", "text": "ANYA"},
+   "testo": "Il primo motivo è Anya. Le sue facce sono diventate meme ovunque, e quasi tutta la comicità nasce da lei: conosce i segreti di tutti e prova ad aiutare, combinando disastri."},
+  {"label": "MOTIVO 2", "title": ["VA BENE"], "widget": {"kind": "big", "text": "PER TUTTI"},
+   "testo": "Il secondo è che va bene per quasi tutti. Mescola azione, commedia e momenti teneri: puoi guardarlo da solo, o con qualcuno che di anime non sa niente."},
+  {"label": "ATTENZIONE", "title": ["NON È PER", "TUTTI"], "accent": 1, "widget": {"kind": "pro", "si": ["Commedia e famiglia"], "no": ["Missione principale lenta", "Tanti episodi a sé"]},
+   "testo": "Ma attenzione: la missione principale va avanti molto lentamente. Tanti episodi sono piccole storie a sé, e chi cerca una trama che corre potrebbe annoiarsi."},
+  {"label": "IN ITALIANO", "title": ["È DOPPIATO!"], "widget": {"kind": "boxes", "items": [{"k": "LOID", "v": "Mattia Bressan"}, {"k": "ANYA", "v": "Valentina Pallavicino"}, {"k": "LOID È ANCHE", "v": "Sukuna · Jujutsu Kaisen"}]},
+   "testo": "E in italiano? È doppiato, e la prima stagione doppiata è arrivata anche su Netflix. Anya ha la voce di Valentina Pallavicino. E Loid è doppiato da Mattia Bressan: la stessa voce di Sukuna in Jujutsu Kaisen. Il padre più premuroso e il demone più crudele, con la stessa voce."},
+  {"label": "IL VERDETTO", "title": ["LO GUARDO", "O NO?"], "accent": 1, "widget": {"kind": "pro", "si": ["Vuoi ridere", "Cerchi un anime per tutti"], "no": ["Vuoi una trama veloce"]},
+   "testo": "Il verdetto: guardalo se vuoi ridere e cerchi un anime adatto a tutti. Lascialo stare se vuoi una trama veloce. E tu, qual è la tua faccia preferita di Anya? Scrivilo nei commenti."},
+  {"label": "DubITA", "title": ["OGNI ANIME", "IL SUO DOPPIAGGIO"], "accent": 1, "widget": {"kind": "big", "text": "LINK IN BIO"}, "testo": "Su DubITA trovi se ogni anime è doppiato e dove vederlo. Link in bio."}
+ ]
+}

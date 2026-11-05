@@ -1,7 +1,7 @@
 name: Video DaVedere
 
 # Crea un video lungo «#DaVedere» con la voce AI italiana (strumenti/video/davedere.js).
-# Si avvia a mano scegliendo il testo (file in strumenti/video/davedere/); il video finisce nel ramo «video-davedere».
+# Si avvia a mano scegliendo il testo (file in strumenti/video/davedere/); il video finisce nel ramo «video-davedere-<testo>».
 
 on:
   workflow_dispatch:
@@ -36,7 +36,7 @@ jobs:
         run: node strumenti/video/davedere.js "strumenti/video/davedere/${{ github.event.inputs.testo }}.json" "$RUNNER_TEMP/davedere" "${{ github.event.inputs.voce || 'it-IT-DiegoNeural' }}"
       - name: Salva nel ramo video-davedere
         run: |
-          cd "$RUNNER_TEMP/davedere" && git init -q -b video-davedere
+          cd "$RUNNER_TEMP/davedere" && git init -q -b "video-davedere-${{ github.event.inputs.testo }}"
           git config user.name "github-actions[bot]" && git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A && git commit -q -m "Video DaVedere $(date -u +%F)"
-          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" video-davedere
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" "video-davedere-${{ github.event.inputs.testo }}"
