@@ -1,0 +1,431 @@
+{
+ "scenes": [
+  {
+   "type": "talk",
+   "label": "CHAINSAW MAN",
+   "title": [
+    "METÀ RAGAZZO",
+    "METÀ MOTOSEGA"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "E IL SUO SOGNO?"
+   },
+   "dur": 16.721999999999998,
+   "sub": [
+    {
+     "x": "Un ragazzo pieno di debiti",
+     "a": 0.15,
+     "b": 2.3725170731707315
+    },
+    {
+     "x": "si fonde con il suo",
+     "a": 2.3725170731707315,
+     "b": 4.03940487804878
+    },
+    {
+     "x": "cane diavolo e diventa metà",
+     "a": 4.03940487804878,
+     "b": 6.341297560975608
+    },
+    {
+     "x": "uomo e metà motosega. Il",
+     "a": 6.341297560975608,
+     "b": 8.405063414634144
+    },
+    {
+     "x": "suo sogno? Mangiare pane e",
+     "a": 8.405063414634144,
+     "b": 10.627580487804876
+    },
+    {
+     "x": "marmellata. Questo è Chainsaw Man.",
+     "a": 10.627580487804876,
+     "b": 13.485102439024388
+    },
+    {
+     "x": "Ma fa per te? E",
+     "a": 13.485102439024388,
+     "b": 14.834487804878046
+    },
+    {
+     "x": "com'è in italiano?",
+     "a": 14.834487804878046,
+     "b": 16.421999999999997
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "LA STORIA",
+   "title": [
+    "CACCIATORE",
+    "DI DIAVOLI"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "boxes",
+    "items": [
+     {
+      "k": "IL PROTAGONISTA",
+      "v": "Denji, pieno di debiti"
+     },
+     {
+      "k": "IL SUO CANE",
+      "v": "Pochita, il diavolo motosega"
+     },
+     {
+      "k": "CHI LO ARRUOLA",
+      "v": "Makima"
+     }
+    ]
+   },
+   "dur": 16.698,
+   "sub": [
+    {
+     "x": "Denji uccide diavoli per ripagare",
+     "a": 0.15,
+     "b": 2.4430645161290325
+    },
+    {
+     "x": "i debiti del padre, insieme",
+     "a": 2.4430645161290325,
+     "b": 4.343032258064516
+    },
+    {
+     "x": "a Pochita, un piccolo diavolo",
+     "a": 4.343032258064516,
+     "b": 6.374032258064517
+    },
+    {
+     "x": "motosega. Quando Denji viene ucciso,",
+     "a": 6.374032258064517,
+     "b": 8.863645161290323
+    },
+    {
+     "x": "Pochita si fonde con lui",
+     "a": 8.863645161290323,
+     "b": 10.567064516129033
+    },
+    {
+     "x": "e lo riporta in vita.",
+     "a": 10.567064516129033,
+     "b": 12.073935483870969
+    },
+    {
+     "x": "Poi arriva Makima, che lo",
+     "a": 12.073935483870969,
+     "b": 13.842870967741936
+    },
+    {
+     "x": "arruola tra i cacciatori di",
+     "a": 13.842870967741936,
+     "b": 15.74283870967742
+    },
+    {
+     "x": "diavoli.",
+     "a": 15.74283870967742,
+     "b": 16.398
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "MOTIVO 1",
+   "title": [
+    "NON SAI MAI"
+   ],
+   "widget": {
+    "kind": "big",
+    "text": "COSA SUCCEDE"
+   },
+   "dur": 12.402,
+   "sub": [
+    {
+     "x": "Il primo motivo è che",
+     "a": 0.15,
+     "b": 1.6521639344262293
+    },
+    {
+     "x": "è imprevedibile. Il protagonista non",
+     "a": 1.6521639344262293,
+     "b": 4.134
+    },
+    {
+     "x": "vuole salvare il mondo: vuole",
+     "a": 4.134,
+     "b": 6.158655737704919
+    },
+    {
+     "x": "solo una vita normale. E",
+     "a": 6.158655737704919,
+     "b": 7.856754098360657
+    },
+    {
+     "x": "proprio per questo la storia",
+     "a": 7.856754098360657,
+     "b": 9.816098360655738
+    },
+    {
+     "x": "può prendere qualsiasi direzione.",
+     "a": 9.816098360655738,
+     "b": 12.102
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "MOTIVO 2",
+   "title": [
+    "LA REGIA"
+   ],
+   "widget": {
+    "kind": "big",
+    "text": "STUDIO MAPPA"
+   },
+   "dur": 10.937999999999999,
+   "sub": [
+    {
+     "x": "Il secondo è la regia.",
+     "a": 0.15,
+     "b": 1.7330943396226413
+    },
+    {
+     "x": "Lo studio MAPPA lo ha",
+     "a": 1.7330943396226413,
+     "b": 3.250226415094339
+    },
+    {
+     "x": "trattato quasi come un film,",
+     "a": 3.250226415094339,
+     "b": 5.229094339622641
+    },
+    {
+     "x": "con inquadrature curate, silenzi e",
+     "a": 5.229094339622641,
+     "b": 7.603735849056603
+    },
+    {
+     "x": "una sigla finale diversa per",
+     "a": 7.603735849056603,
+     "b": 9.582603773584905
+    },
+    {
+     "x": "ogni episodio.",
+     "a": 9.582603773584905,
+     "b": 10.638
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "ATTENZIONE",
+   "title": [
+    "NON È PER",
+    "TUTTI"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "pro",
+    "si": [
+     "Personaggi fuori di testa"
+    ],
+    "no": [
+     "Violento e pieno di sangue",
+     "Umorismo volgare",
+     "Solo 12 episodi"
+    ]
+   },
+   "dur": 12.282,
+   "sub": [
+    {
+     "x": "Ma attenzione: è violentissimo, pieno",
+     "a": 0.15,
+     "b": 2.896714285714286
+    },
+    {
+     "x": "di sangue, e l'umorismo è",
+     "a": 2.896714285714286,
+     "b": 4.798285714285715
+    },
+    {
+     "x": "spesso volgare. E la serie",
+     "a": 4.798285714285715,
+     "b": 6.7702857142857145
+    },
+    {
+     "x": "ha solo dodici episodi: la",
+     "a": 6.7702857142857145,
+     "b": 8.742285714285714
+    },
+    {
+     "x": "storia continua nel film La",
+     "a": 8.742285714285714,
+     "b": 10.784714285714285
+    },
+    {
+     "x": "storia di Reze.",
+     "a": 10.784714285714285,
+     "b": 11.982
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "IN ITALIANO",
+   "title": [
+    "È DOPPIATO!"
+   ],
+   "widget": {
+    "kind": "boxes",
+    "items": [
+     {
+      "k": "DENJI",
+      "v": "Mosè Singh"
+     },
+     {
+      "k": "POWER",
+      "v": "Martina Felli"
+     },
+     {
+      "k": "MAKIMA",
+      "v": "Benedetta Ponticelli"
+     }
+    ]
+   },
+   "dur": 16.529999999999998,
+   "sub": [
+    {
+     "x": "E in italiano? È doppiato.",
+     "a": 0.15,
+     "b": 2.099090909090909
+    },
+    {
+     "x": "Denji ha la voce di",
+     "a": 2.099090909090909,
+     "b": 3.5609090909090906
+    },
+    {
+     "x": "Mosè Singh, Power quella di",
+     "a": 3.5609090909090906,
+     "b": 5.579610389610389
+    },
+    {
+     "x": "Martina Felli e Makima quella",
+     "a": 5.579610389610389,
+     "b": 7.737532467532467
+    },
+    {
+     "x": "di Benedetta Ponticelli. E Power",
+     "a": 7.737532467532467,
+     "b": 10.104285714285714
+    },
+    {
+     "x": "è il personaggio che si",
+     "a": 10.104285714285714,
+     "b": 11.844545454545454
+    },
+    {
+     "x": "gioca di più il doppiaggio:",
+     "a": 11.844545454545454,
+     "b": 13.863246753246752
+    },
+    {
+     "x": "rumorosa, bugiarda ed esagerata.",
+     "a": 13.863246753246752,
+     "b": 16.23
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "IL VERDETTO",
+   "title": [
+    "LO GUARDO",
+    "O NO?"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "pro",
+    "si": [
+     "Ami le storie folli",
+     "Vuoi qualcosa di diverso"
+    ],
+    "no": [
+     "Non sopporti sangue e volgarità"
+    ]
+   },
+   "dur": 15.857999999999999,
+   "sub": [
+    {
+     "x": "Il verdetto: guardalo se ami",
+     "a": 0.15,
+     "b": 2.3303773584905656
+    },
+    {
+     "x": "le storie folli e vuoi",
+     "a": 2.3303773584905656,
+     "b": 4.0746792452830185
+    },
+    {
+     "x": "qualcosa di diverso dal solito",
+     "a": 4.0746792452830185,
+     "b": 6.400415094339622
+    },
+    {
+     "x": "anime d'azione. Lascialo stare se",
+     "a": 6.400415094339622,
+     "b": 8.944188679245283
+    },
+    {
+     "x": "non sopporti sangue e volgarità.",
+     "a": 8.944188679245283,
+     "b": 11.415283018867925
+    },
+    {
+     "x": "E tu: team Power o",
+     "a": 11.415283018867925,
+     "b": 12.868867924528303
+    },
+    {
+     "x": "team Makima? Scrivilo nei commenti.",
+     "a": 12.868867924528303,
+     "b": 15.558
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "label": "DubITA",
+   "title": [
+    "OGNI ANIME",
+    "IL SUO DOPPIAGGIO"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "LINK IN BIO"
+   },
+   "dur": 6.21,
+   "sub": [
+    {
+     "x": "Su DubITA trovi se ogni",
+     "a": 0.15,
+     "b": 2.122602739726027
+    },
+    {
+     "x": "anime è doppiato e dove",
+     "a": 2.122602739726027,
+     "b": 4.095205479452055
+    },
+    {
+     "x": "vederlo. Link in bio.",
+     "a": 4.095205479452055,
+     "b": 5.91
+    }
+   ]
+  }
+ ],
+ "noMark": true
+}
