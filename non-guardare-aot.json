@@ -1,0 +1,266 @@
+{
+ "scenes": [
+  {
+   "type": "foto",
+   "label": "ATTENZIONE",
+   "title": [
+    "NON GUARDARE",
+    "L'ATTACCO DEI GIGANTI"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/1.jpg",
+    "/home/runner/work/_temp/davedere/img/2.jpg"
+   ],
+   "dur": 9.23,
+   "sub": [
+    {
+     "x": "Non guardare L'attacco dei giganti.",
+     "a": 0.15,
+     "b": 2.9110084033613446
+    },
+    {
+     "x": "Davvero, te lo dico per",
+     "a": 2.9110084033613446,
+     "b": 4.77655462184874
+    },
+    {
+     "x": "il tuo bene. Ecco quattro",
+     "a": 4.77655462184874,
+     "b": 6.791344537815126
+    },
+    {
+     "x": "motivi per stare alla larga.",
+     "a": 6.791344537815126,
+     "b": 9.030000000000001
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "MOTIVO 1",
+   "title": [
+    "TI RUBA",
+    "IL SONNO"
+   ],
+   "sticker": "ANCORA UNO…",
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/4.jpg",
+    "/home/runner/work/_temp/davedere/img/3.jpg"
+   ],
+   "dur": 15.565999999999999,
+   "sub": [
+    {
+     "x": "Uno: ogni episodio finisce con",
+     "a": 0.15,
+     "b": 2.712694736842105
+    },
+    {
+     "x": "un colpo di scena. Ti",
+     "a": 2.712694736842105,
+     "b": 4.554631578947368
+    },
+    {
+     "x": "dici: ancora uno e poi",
+     "a": 4.554631578947368,
+     "b": 6.476652631578947
+    },
+    {
+     "x": "dormo. E sono le tre",
+     "a": 6.476652631578947,
+     "b": 8.238505263157894
+    },
+    {
+     "x": "di notte. Il giorno dopo,",
+     "a": 8.238505263157894,
+     "b": 10.40077894736842
+    },
+    {
+     "x": "al lavoro o a scuola,",
+     "a": 10.40077894736842,
+     "b": 12.242715789473682
+    },
+    {
+     "x": "sei uno zombie. E la",
+     "a": 12.242715789473682,
+     "b": 14.004568421052628
+    },
+    {
+     "x": "sera ricominci.",
+     "a": 14.004568421052628,
+     "b": 15.365999999999996
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "MOTIVO 2",
+   "title": [
+    "NIENTE",
+    "È COME SEMBRA"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/6.jpg",
+    "/home/runner/work/_temp/davedere/img/5.jpg"
+   ],
+   "dur": 13.838,
+   "sub": [
+    {
+     "x": "Due: quello che credi di",
+     "a": 0.15,
+     "b": 1.7735555555555553
+    },
+    {
+     "x": "sapere all'inizio è sbagliato. Più",
+     "a": 1.7735555555555553,
+     "b": 4.021555555555555
+    },
+    {
+     "x": "vai avanti, più capisci che",
+     "a": 4.021555555555555,
+     "b": 5.832444444444444
+    },
+    {
+     "x": "i giganti non sono il",
+     "a": 5.832444444444444,
+     "b": 7.268666666666666
+    },
+    {
+     "x": "vero problema. E a un",
+     "a": 7.268666666666666,
+     "b": 8.704888888888888
+    },
+    {
+     "x": "certo punto non saprai più",
+     "a": 8.704888888888888,
+     "b": 10.453333333333333
+    },
+    {
+     "x": "per chi tifare, perché ognuno",
+     "a": 10.453333333333333,
+     "b": 12.389111111111111
+    },
+    {
+     "x": "ha le sue ragioni.",
+     "a": 12.389111111111111,
+     "b": 13.638
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "MOTIVO 3",
+   "title": [
+    "NESSUNO",
+    "È AL SICURO"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/8.jpg",
+    "/home/runner/work/_temp/davedere/img/7.jpg"
+   ],
+   "dur": 6.59,
+   "sub": [
+    {
+     "x": "Tre: nessuno è al sicuro.",
+     "a": 0.15,
+     "b": 1.9616129032258065
+    },
+    {
+     "x": "Il personaggio che ami di",
+     "a": 1.9616129032258065,
+     "b": 3.773225806451613
+    },
+    {
+     "x": "più potrebbe non arrivare alla",
+     "a": 3.773225806451613,
+     "b": 5.920322580645162
+    },
+    {
+     "x": "fine.",
+     "a": 5.920322580645162,
+     "b": 6.390000000000001
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "MOTIVO 4",
+   "title": [
+    "DOPO, TUTTO",
+    "TI SEMBRA PICCOLO"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/10.jpg",
+    "/home/runner/work/_temp/davedere/img/9.jpg"
+   ],
+   "dur": 7.838,
+   "sub": [
+    {
+     "x": "Quattro: quando finisce, ogni altro",
+     "a": 0.15,
+     "b": 2.739308411214953
+    },
+    {
+     "x": "anime ti sembrerà più piccolo.",
+     "a": 2.739308411214953,
+     "b": 4.978710280373832
+    },
+    {
+     "x": "E per giorni non penserai",
+     "a": 4.978710280373832,
+     "b": 6.868205607476636
+    },
+    {
+     "x": "ad altro.",
+     "a": 6.868205607476636,
+     "b": 7.638
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "SE PROPRIO INSISTI",
+   "title": [
+    "C'È ANCHE",
+    "IN ITALIANO"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/11.jpg",
+    "/home/runner/work/_temp/davedere/img/12.jpg"
+   ],
+   "dur": 13.405999999999999,
+   "sub": [
+    {
+     "x": "Se proprio insisti, sappi che",
+     "a": 0.15,
+     "b": 2.711620253164557
+    },
+    {
+     "x": "esiste anche doppiato in italiano.",
+     "a": 2.711620253164557,
+     "b": 5.686405063291138
+    },
+    {
+     "x": "Ma io ti avevo avvisato.",
+     "a": 5.686405063291138,
+     "b": 7.83486075949367
+    },
+    {
+     "x": "E tu, l'hai visto? Ne",
+     "a": 7.83486075949367,
+     "b": 9.735417721518985
+    },
+    {
+     "x": "è valsa la pena? Scrivilo",
+     "a": 9.735417721518985,
+     "b": 11.96650632911392
+    },
+    {
+     "x": "nei commenti.",
+     "a": 11.96650632911392,
+     "b": 13.205999999999996
+    }
+   ]
+  }
+ ],
+ "noMark": true
+}
