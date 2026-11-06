@@ -18,15 +18,36 @@ function pezzi(testo, d, da = .15) {
   return g.map(x => { const a = acc; acc += (x.length + 2) / tot * d; return {x, a, b: acc}; });
 }
 
+// immagini da AniList: {"a": "titolo anime"} = copertina (o {"id": 21}), {"c": "nome personaggio"} = personaggio
+const IMG = path.join(OUT, "img"); let nImg = 0;
+async function gql(query, variables) {
+  for (let k = 0; k < 4; k++) {
+    const r = await fetch("https://graphql.anilist.co", {method: "POST", headers: {"Content-Type": "application/json", Accept: "application/json", "User-Agent": "DubITA-video"}, body: JSON.stringify({query, variables})});
+    if (r.status === 429) { await new Promise(z => setTimeout(z, 4000)); continue; }
+    return (await r.json()).data;
+  }
+}
+async function immagine(ref) {
+  let url;
+  if (ref.c) { const d = await gql("query($s:String){Page(perPage:1){characters(search:$s,sort:FAVOURITES_DESC){image{large}}}}", {s: ref.c}); url = d?.Page?.characters?.[0]?.image?.large; }
+  else { const d = await gql("query($s:String,$id:Int){Page(perPage:1){media(search:$s,id:$id,type:ANIME,sort:POPULARITY_DESC){coverImage{extraLarge}}}}", ref.id ? {id: ref.id} : {s: ref.a}); url = d?.Page?.media?.[0]?.coverImage?.extraLarge; }
+  if (!url) { console.error("immagine non trovata:", JSON.stringify(ref)); return null; }
+  const f = path.join(IMG, `${++nImg}.jpg`); fs.writeFileSync(f, Buffer.from(await (await fetch(url)).arrayBuffer())); return f;
+}
+
 (async () => {
   let t = 0; const voci = [];
+  if (!PROVA) fs.mkdirSync(IMG, {recursive: true});
+  for (const sc of T.scene) if (sc.img) sc.imgs = PROVA ? [] : await Promise.all(sc.img.map(immagine));
   const scenes = T.scene.map((sc, i) => {
     let d;
     if (PROVA) d = sc.testo.length / 15;
-    else { const f = path.join(AU, `s${i}.mp3`); sh("edge-tts", ["--voice", VOCE, "--rate=+6%", "--text", sc.testo, "--write-media", f]); d = durata(f); voci.push({f, inizio: t + .15}); }
-    const dur = d + .45, o = {type: "talk", label: sc.label, title: sc.title, accent: sc.accent, widget: sc.widget, dur, sub: pezzi(sc.testo, d)};
+    else { const f = path.join(AU, `s${i}.mp3`); sh("edge-tts", ["--voice", VOCE, (T.velocita || "--rate=+6%"), "--text", sc.testo, "--write-media", f]); d = durata(f); voci.push({f, inizio: t + .15}); }
+    const dur = d + .35, o = sc.img ? {type: "foto", label: sc.label, title: sc.title, accent: sc.accent, sticker: sc.sticker, imgs: sc.imgs, dur, sub: pezzi(sc.testo, d)}
+      : {type: "talk", label: sc.label, title: sc.title, accent: sc.accent, widget: sc.widget, dur, sub: pezzi(sc.testo, d)};
     t += dur; return o;
   });
+  if (t < 62) { scenes[scenes.length - 1].dur += 62 - t; t = 62; }   // la sfida chiede almeno un minuto: l'ultima scena resta un po' di più
   const spec = {scenes, noMark: true}, base = path.basename(src, ".json");
   fs.writeFileSync(path.join(OUT, base + ".json"), JSON.stringify(spec, null, 1));
   if (PROVA) { let a = 0; const tempi = scenes.map(s => { const x = +(a + s.dur * .7).toFixed(2); a += s.dur; return x; });
@@ -35,7 +56,7 @@ function pezzi(testo, d, da = .15) {
   const filt = voci.map((v, i) => `[${i}:a]adelay=${Math.round(v.inizio * 1000)}|${Math.round(v.inizio * 1000)}[a${i}]`).join(";") + ";" + voci.map((_, i) => `[a${i}]`).join("") + `amix=inputs=${voci.length}:normalize=0,apad[aout]`;
   sh("ffmpeg", ["-y", "-loglevel", "error", ...voci.flatMap(v => ["-i", v.f]), "-filter_complex", filt, "-map", "[aout]", "-t", String(t), "-ar", "44100", path.join(OUT, "voce.wav")]);
   sh("ffmpeg", ["-y", "-loglevel", "error", "-i", muto, "-i", path.join(OUT, "voce.wav"), "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", path.join(OUT, base + ".mp4")]);
-  fs.rmSync(muto); fs.rmSync(AU, {recursive: true, force: true}); fs.rmSync(path.join(OUT, "voce.wav"));
+  fs.rmSync(muto); fs.rmSync(AU, {recursive: true, force: true}); fs.rmSync(IMG, {recursive: true, force: true}); fs.rmSync(path.join(OUT, "voce.wav"));
   fs.writeFileSync(path.join(OUT, base + ".txt"), `TESTO LETTO\n${T.scene.map(s => s.testo).join("\n")}\n\nDIDASCALIA\n${T.didascalia}\n`);
   console.log(`${base}.mp4 · ${t.toFixed(1)} s`);
 })().catch(e => { console.error(e); process.exit(1); });
