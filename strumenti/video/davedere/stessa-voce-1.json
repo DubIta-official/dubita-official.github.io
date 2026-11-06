@@ -1,0 +1,129 @@
+{
+ "titolo": "Stessa voce",
+ "didascalia": "Questi personaggi hanno la STESSA voce italiana 🤯🇮🇹 Li avevi riconosciuti prima della risposta?\nQuale ti ha sorpreso di più? Scrivilo nei commenti!\nDoppiaggi verificati di tutti gli anime sul nostro sito, link in bio 🔗\n#DaVedere #anime #doppiaggioitaliano #doppiatori #animeita",
+ "scene": [
+  {
+   "type": "talk",
+   "label": "LO SAPEVI?",
+   "title": [
+    "STESSA VOCE",
+    "ITALIANA"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "INDOVINA CHI"
+   },
+   "dur": 3.5
+  },
+  {
+   "type": "trio",
+   "label": "ROUND 1",
+   "title": [
+    "CHI DOPPIA",
+    "TUTTE E TRE?"
+   ],
+   "img": [
+    {
+     "c": "Bulma"
+    },
+    {
+     "c": "Nami",
+     "da": "One Piece"
+    },
+    {
+     "c": "Jessie",
+     "da": "Pocket Monsters"
+    }
+   ],
+   "names": [
+    "Bulma",
+    "Nami",
+    "Jessie"
+   ],
+   "from": [
+    "Dragon Ball",
+    "One Piece",
+    "Pokémon"
+   ],
+   "voice": "Emanuela Pacotto",
+   "dur": 16,
+   "reveal": 8.5
+  },
+  {
+   "type": "trio",
+   "label": "ROUND 2",
+   "title": [
+    "CHI DOPPIA",
+    "TUTTI E TRE?"
+   ],
+   "img": [
+    {
+     "c": "Ryomen Sukuna"
+    },
+    {
+     "c": "Loid Forger"
+    },
+    {
+     "c": "Kafka Hibino"
+    }
+   ],
+   "names": [
+    "Sukuna",
+    "Loid",
+    "Kafka"
+   ],
+   "from": [
+    "Jujutsu Kaisen",
+    "Spy x Family",
+    "Kaiju No. 8"
+   ],
+   "voice": "Mattia Bressan",
+   "dur": 16,
+   "reveal": 8.5
+  },
+  {
+   "type": "trio",
+   "label": "ROUND 3",
+   "title": [
+    "CHI DOPPIA",
+    "TUTTI E DUE?"
+   ],
+   "img": [
+    {
+     "c": "Jinwoo Sung",
+     "da": "Solo Leveling"
+    },
+    {
+     "c": "Ray",
+     "da": "Yakusoku"
+    }
+   ],
+   "names": [
+    "Sung Jinwoo",
+    "Ray"
+   ],
+   "from": [
+    "Solo Leveling",
+    "The Promised Neverland"
+   ],
+   "voice": "Federico Campaiola",
+   "dur": 16,
+   "reveal": 8.5
+  },
+  {
+   "type": "talk",
+   "label": "DubITA",
+   "title": [
+    "QUALE TI HA",
+    "SORPRESO DI PIÙ?"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "COMMENTA!"
+   },
+   "dur": 8
+  }
+ ]
+}

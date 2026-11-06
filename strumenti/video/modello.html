@@ -386,6 +386,29 @@ B.foto = (d, s) => {   // video parlato con immagini: sfondo sfocato, immagine g
     const c = chunks.find(c => lt >= c.a && lt < c.b); sub.textContent = c ? c.x : "";
   }};
 };
+B.trio = (d, s) => {   // «stessa voce»: 2-3 personaggi affiancati, poi il nome del doppiatore
+  const n = (d.imgs || []).length || (d.names || []).length || 3, W = n === 2 ? 420 : 300, gap = 30, x0 = (1080 - n * W - (n - 1) * gap) / 2;
+  const chip = el("div", "chip abs", esc(d.label || ""), s); chip.style.cssText += "left:50%;top:150px"; if (!d.label) chip.style.display = "none";
+  const nt = (d.title || []).length;
+  const hs = (d.title || []).map((txt, i) => { const big = i === (d.accent ?? nt - 1); const h = el("div", "abs c" + (big ? " grad" : ""), esc(txt), s);
+    h.style.cssText += `font-weight:900;letter-spacing:-.02em;top:${250 + i * 100}px;font-size:${big ? fit(txt, 96, 56) : fit(txt, 80, 50)}px;line-height:1`; return h; });
+  const cards = Array.from({length: n}, (_, i) => { const c = el("div", "abs", `<div style="width:${W}px;height:${W * 1.45}px;border-radius:34px;overflow:hidden;border:4px solid rgba(255,255,255,.25);background:#2a2060 center 20%/cover;background-image:url('${imgUrl((d.imgs || [])[i])}');box-shadow:0 24px 60px rgba(0,0,0,.5)"></div>
+    <div style="margin-top:18px;text-align:center;font-weight:900;font-size:${fit((d.names || [])[i] || "", 44, 28, W, .6)}px">${esc((d.names || [])[i] || "")}</div>
+    <div style="text-align:center;font-weight:700;font-size:26px;opacity:.65;white-space:normal;width:${W}px">${esc((d.from || [])[i] || "")}</div>`, s);
+    c.style.cssText += `left:${x0 + i * (W + gap)}px;top:480px;width:${W}px`; return c; });
+  const ask = el("div", "abs c", "?", s); ask.style.cssText += "top:1290px;font-weight:900;font-size:150px";
+  const box = el("div", "tbox", `<div class="tk" style="text-align:center">${esc(d.voiceLabel || "LA VOCE ITALIANA È")}</div><div class="tv grad" style="text-align:center;font-size:${fit(d.voice || "", 96, 56, 860, .6)}px">${esc(d.voice || "")}</div>`, s);
+  box.style.top = "1280px";
+  const R = d.reveal || d.dur * .55;
+  return {dur: d.dur || 12, ready: .9, draw(lt) {
+    chip.style.opacity = prog(lt, 0, .3); chip.style.transform = `translateX(-50%) translateY(${(1 - E.back(prog(lt, 0, .45))) * -40}px)`;
+    hs.forEach((h, i) => { const k = prog(lt, .05 + i * .18, .3); set(h, clamp(k * 3), 0, 0, 1.4 - .4 * E.out(k), 0); });
+    cards.forEach((c, i) => { const k = prog(lt, .2 + i * .22, .4); set(c, clamp(k * 2), (1 - E.back(k)) * 220, 0, 1, (1 - E.out(k)) * (i - 1) * 8); });
+    const cd = Math.ceil(R - lt); ask.textContent = lt < R && cd <= 3 ? String(cd) : "?"; ask.style.opacity = lt < R ? .9 : 0;
+    ask.style.transform = `scale(${1 + .15 * Math.sin(lt * 6)})`;
+    const k = prog(lt, R, .5); set(box, clamp(k * 2), 0, 0, .6 + .4 * E.back(k));
+  }};
+};
 B.talk = (d, s) => {   // video parlato: etichetta, titolo, un elemento grafico e i sottotitoli della voce
   const chip = el("div", "chip abs", esc(d.label || ""), s); chip.style.cssText += "left:50%;top:250px"; if (!d.label) chip.style.display = "none";
   const n = (d.title || []).length;
