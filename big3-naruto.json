@@ -1,0 +1,277 @@
+{
+ "scenes": [
+  {
+   "type": "foto",
+   "label": "BIG 3 · 2/3",
+   "title": [
+    "IL NINJA PIÙ",
+    "RUMOROSO"
+   ],
+   "sticker": "HOKAGE?",
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/2.jpg",
+    "/home/runner/work/_temp/davedere/img/1.jpg"
+   ],
+   "dur": 12.302,
+   "sub": [
+    {
+     "x": "Un ragazzino rumoroso, che tutto",
+     "a": 0.15,
+     "b": 2.4589090909090907
+    },
+    {
+     "x": "il villaggio evita, e che",
+     "a": 2.4589090909090907,
+     "b": 4.292454545454545
+    },
+    {
+     "x": "urla ogni giorno che ne",
+     "a": 4.292454545454545,
+     "b": 5.990181818181818
+    },
+    {
+     "x": "diventerà il capo. Sembra un",
+     "a": 5.990181818181818,
+     "b": 8.027454545454546
+    },
+    {
+     "x": "pessimo inizio. E invece è",
+     "a": 8.027454545454546,
+     "b": 9.928909090909091
+    },
+    {
+     "x": "Naruto, il secondo dei Big",
+     "a": 9.928909090909091,
+     "b": 11.830363636363636
+    },
+    {
+     "x": "3.",
+     "a": 11.830363636363636,
+     "b": 12.101999999999999
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "I BIG 3",
+   "title": [
+    "ONE PIECE",
+    "NARUTO · BLEACH"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/3.jpg",
+    "/home/runner/work/_temp/davedere/img/4.jpg",
+    "/home/runner/work/_temp/davedere/img/5.jpg"
+   ],
+   "dur": 8.581999999999999,
+   "sub": [
+    {
+     "x": "Se ti sei perso il",
+     "a": 0.15,
+     "b": 1.387894736842105
+    },
+    {
+     "x": "primo video: i Big 3",
+     "a": 1.387894736842105,
+     "b": 2.7495789473684207
+    },
+    {
+     "x": "sono One Piece, Naruto e",
+     "a": 2.7495789473684207,
+     "b": 4.358842105263157
+    },
+    {
+     "x": "Bleach, i tre anime che",
+     "a": 4.358842105263157,
+     "b": 5.906210526315789
+    },
+    {
+     "x": "hanno cresciuto un'intera generazione.",
+     "a": 5.906210526315789,
+     "b": 8.382
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "PERCHÉ GUARDARLO",
+   "title": [
+    "NARUTO",
+    "CONTRO SASUKE"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/7.jpg",
+    "/home/runner/work/_temp/davedere/img/6.jpg"
+   ],
+   "dur": 11.414,
+   "sub": [
+    {
+     "x": "Il motivo per guardarlo è",
+     "a": 0.15,
+     "b": 1.917621301775148
+    },
+    {
+     "x": "il rapporto tra Naruto e",
+     "a": 1.917621301775148,
+     "b": 3.619775147928994
+    },
+    {
+     "x": "Sasuke: amici, rivali, quasi fratelli.",
+     "a": 3.619775147928994,
+     "b": 6.2384733727810655
+    },
+    {
+     "x": "È uno dei legami più",
+     "a": 6.2384733727810655,
+     "b": 7.678757396449704
+    },
+    {
+     "x": "famosi di tutti gli anime,",
+     "a": 7.678757396449704,
+     "b": 9.511846153846154
+    },
+    {
+     "x": "e regge l'intera storia.",
+     "a": 9.511846153846154,
+     "b": 11.214
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "IL PROBLEMA",
+   "title": [
+    "I FILLER"
+   ],
+   "sticker": "SALTALI!",
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/9.jpg",
+    "/home/runner/work/_temp/davedere/img/8.jpg"
+   ],
+   "dur": 15.373999999999999,
+   "sub": [
+    {
+     "x": "Il problema sono i filler,",
+     "a": 0.15,
+     "b": 1.8883140495867767
+    },
+    {
+     "x": "gli episodi inventati che non",
+     "a": 1.8883140495867767,
+     "b": 3.812876033057851
+    },
+    {
+     "x": "c'entrano con la storia. Tra",
+     "a": 3.812876033057851,
+     "b": 5.675355371900826
+    },
+    {
+     "x": "Naruto e Shippuden sono tantissimi:",
+     "a": 5.675355371900826,
+     "b": 7.972413223140496
+    },
+    {
+     "x": "prima di iniziare, cerca una",
+     "a": 7.972413223140496,
+     "b": 9.834892561983471
+    },
+    {
+     "x": "guida e saltali. Con i",
+     "a": 9.834892561983471,
+     "b": 11.324876033057851
+    },
+    {
+     "x": "filler il viaggio è lunghissimo,",
+     "a": 11.324876033057851,
+     "b": 13.435685950413223
+    },
+    {
+     "x": "senza scorre molto meglio.",
+     "a": 13.435685950413223,
+     "b": 15.174
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "IN ITALIANO",
+   "title": [
+    "LE VOCI",
+    "ITALIANE"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/10.jpg",
+    "/home/runner/work/_temp/davedere/img/11.jpg"
+   ],
+   "dur": 9.902,
+   "sub": [
+    {
+     "x": "In italiano Naruto ha la",
+     "a": 0.15,
+     "b": 1.6736319018404906
+    },
+    {
+     "x": "voce di Leonardo Graziano, Sasuke",
+     "a": 1.6736319018404906,
+     "b": 3.7246748466257666
+    },
+    {
+     "x": "quella di Alessandro Rigotti, e",
+     "a": 3.7246748466257666,
+     "b": 5.658515337423313
+    },
+    {
+     "x": "Sakura quella di Emanuela Pacotto,",
+     "a": 5.658515337423313,
+     "b": 7.768159509202453
+    },
+    {
+     "x": "che in One Piece è",
+     "a": 7.768159509202453,
+     "b": 8.940184049079754
+    },
+    {
+     "x": "anche Nami.",
+     "a": 8.940184049079754,
+     "b": 9.702
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "E TU?",
+   "title": [
+    "NARUTO",
+    "O SASUKE?"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/12.jpg",
+    "/home/runner/work/_temp/davedere/img/13.jpg"
+   ],
+   "dur": 9.494,
+   "sub": [
+    {
+     "x": "E tu, da che parte",
+     "a": 0.15,
+     "b": 1.782857142857143
+    },
+    {
+     "x": "stai: Naruto o Sasuke? Scrivilo",
+     "a": 1.782857142857143,
+     "b": 4.477071428571429
+    },
+    {
+     "x": "nei commenti. Il prossimo video",
+     "a": 4.477071428571429,
+     "b": 7.171285714285714
+    },
+    {
+     "x": "è sull'ultimo dei Big 3.",
+     "a": 7.171285714285714,
+     "b": 9.294
+    }
+   ]
+  }
+ ],
+ "noMark": true
+}
