@@ -1,0 +1,143 @@
+{
+ "scenes": [
+  {
+   "type": "talk",
+   "label": "GIOCO",
+   "title": [
+    "CHI HA LA",
+    "STESSA VOCE?"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "1, 2 O 3?"
+   },
+   "dur": 3,
+   "sub": []
+  },
+  {
+   "type": "pick",
+   "label": "ROUND 1 · 4",
+   "refName": "BULMA?",
+   "refFrom": "Dragon Ball",
+   "names": [
+    "Anya",
+    "Nami",
+    "Power"
+   ],
+   "from": [
+    "Spy x Family",
+    "One Piece",
+    "Chainsaw Man"
+   ],
+   "answer": 2,
+   "voice": "Emanuela Pacotto",
+   "dur": 13.5,
+   "reveal": 8,
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/3.jpg",
+    "/home/runner/work/_temp/davedere/img/1.jpg",
+    "/home/runner/work/_temp/davedere/img/4.jpg",
+    "/home/runner/work/_temp/davedere/img/2.jpg"
+   ],
+   "sub": []
+  },
+  {
+   "type": "pick",
+   "label": "ROUND 2 · 4",
+   "refName": "SUKUNA?",
+   "refFrom": "Jujutsu Kaisen",
+   "names": [
+    "Gojo",
+    "Denji",
+    "Loid"
+   ],
+   "from": [
+    "Jujutsu Kaisen",
+    "Chainsaw Man",
+    "Spy x Family"
+   ],
+   "answer": 3,
+   "voice": "Mattia Bressan",
+   "dur": 13.5,
+   "reveal": 8,
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/6.jpg",
+    "/home/runner/work/_temp/davedere/img/5.jpg",
+    "/home/runner/work/_temp/davedere/img/7.jpg",
+    "/home/runner/work/_temp/davedere/img/8.jpg"
+   ],
+   "sub": []
+  },
+  {
+   "type": "pick",
+   "label": "ROUND 3 · 4",
+   "refName": "SUNG JINWOO?",
+   "refFrom": "Solo Leveling",
+   "names": [
+    "Ray",
+    "Yuji",
+    "Ichigo"
+   ],
+   "from": [
+    "The Promised Neverland",
+    "Jujutsu Kaisen",
+    "Bleach"
+   ],
+   "answer": 1,
+   "voice": "Federico Campaiola",
+   "dur": 13.5,
+   "reveal": 8,
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/10.jpg",
+    "/home/runner/work/_temp/davedere/img/12.jpg",
+    "/home/runner/work/_temp/davedere/img/9.jpg",
+    "/home/runner/work/_temp/davedere/img/11.jpg"
+   ],
+   "sub": []
+  },
+  {
+   "type": "pick",
+   "label": "ROUND 4 · 4",
+   "refName": "KAFKA?",
+   "refFrom": "Kaiju No. 8",
+   "names": [
+    "Naruto",
+    "Sukuna",
+    "Ichigo"
+   ],
+   "from": [
+    "Naruto",
+    "Jujutsu Kaisen",
+    "Bleach"
+   ],
+   "answer": 2,
+   "voice": "Mattia Bressan",
+   "dur": 13.5,
+   "reveal": 8,
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/13.jpg",
+    "/home/runner/work/_temp/davedere/img/15.jpg",
+    "/home/runner/work/_temp/davedere/img/16.jpg",
+    "/home/runner/work/_temp/davedere/img/14.jpg"
+   ],
+   "sub": []
+  },
+  {
+   "type": "talk",
+   "label": "DubITA",
+   "title": [
+    "QUANTE NE HAI",
+    "INDOVINATE SU 4?"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "COMMENTA!"
+   },
+   "dur": 5,
+   "sub": []
+  }
+ ],
+ "noMark": true
+}
