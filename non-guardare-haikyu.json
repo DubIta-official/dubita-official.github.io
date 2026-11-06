@@ -1,0 +1,247 @@
+{
+ "scenes": [
+  {
+   "type": "foto",
+   "label": "ATTENZIONE",
+   "title": [
+    "NON GUARDARE",
+    "HAIKYU!!"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/1.jpg",
+    "/home/runner/work/_temp/davedere/img/2.jpg"
+   ],
+   "dur": 8.942,
+   "sub": [
+    {
+     "x": "Non guardare Haikyu. Soprattutto se",
+     "a": 0.15,
+     "b": 2.867128205128205
+    },
+    {
+     "x": "pensi che la pallavolo sia",
+     "a": 2.867128205128205,
+     "b": 4.923333333333334
+    },
+    {
+     "x": "noiosa. Ecco quattro motivi per",
+     "a": 4.923333333333334,
+     "b": 7.3467179487179495
+    },
+    {
+     "x": "stare alla larga.",
+     "a": 7.3467179487179495,
+     "b": 8.742
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "MOTIVO 1",
+   "title": [
+    "VORRAI",
+    "GIOCARE"
+   ],
+   "sticker": "DOMANI IN PALESTRA",
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/4.jpg",
+    "/home/runner/work/_temp/davedere/img/3.jpg"
+   ],
+   "dur": 9.254,
+   "sub": [
+    {
+     "x": "Uno: dopo tre episodi vorrai",
+     "a": 0.15,
+     "b": 2.357603305785124
+    },
+    {
+     "x": "iscriverti a una squadra di",
+     "a": 2.357603305785124,
+     "b": 4.491619834710743
+    },
+    {
+     "x": "pallavolo. Anche se non sei",
+     "a": 4.491619834710743,
+     "b": 6.625636363636363
+    },
+    {
+     "x": "altissimo. Proprio come Hinata.",
+     "a": 6.625636363636363,
+     "b": 9.053999999999998
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "MOTIVO 2",
+   "title": [
+    "TIFERAI",
+    "PER TUTTI"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/6.jpg",
+    "/home/runner/work/_temp/davedere/img/5.jpg",
+    "/home/runner/work/_temp/davedere/img/7.jpg"
+   ],
+   "dur": 10.718,
+   "sub": [
+    {
+     "x": "Due: tiferai anche per gli",
+     "a": 0.15,
+     "b": 2.1383835616438356
+    },
+    {
+     "x": "avversari. Ogni squadra ha i",
+     "a": 2.1383835616438356,
+     "b": 4.268794520547945
+    },
+    {
+     "x": "suoi motivi per vincere, e",
+     "a": 4.268794520547945,
+     "b": 6.25717808219178
+    },
+    {
+     "x": "alla fine di ogni partita",
+     "a": 6.25717808219178,
+     "b": 8.174547945205479
+    },
+    {
+     "x": "qualcuno piange. Spesso sei tu.",
+     "a": 8.174547945205479,
+     "b": 10.517999999999999
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "MOTIVO 3",
+   "title": [
+    "UNA PARTITA",
+    "UNA STAGIONE"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/8.jpg",
+    "/home/runner/work/_temp/davedere/img/9.jpg"
+   ],
+   "dur": 12.542,
+   "sub": [
+    {
+     "x": "Tre: una sola partita può",
+     "a": 0.15,
+     "b": 1.9686961325966852
+    },
+    {
+     "x": "durare un'intera stagione. Ed è",
+     "a": 1.9686961325966852,
+     "b": 4.191546961325967
+    },
+    {
+     "x": "proprio la stagione che tutti",
+     "a": 4.191546961325967,
+     "b": 6.2796795580110505
+    },
+    {
+     "x": "ricordano. Dieci episodi per una",
+     "a": 6.2796795580110505,
+     "b": 8.569889502762432
+    },
+    {
+     "x": "partita, e non ti annoi",
+     "a": 8.569889502762432,
+     "b": 10.253867403314919
+    },
+    {
+     "x": "un secondo: ogni punto conta.",
+     "a": 10.253867403314919,
+     "b": 12.342000000000002
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "MOTIVO 4",
+   "title": [
+    "NESSUN",
+    "SUPERPOTERE"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/10.jpg",
+    "/home/runner/work/_temp/davedere/img/11.jpg"
+   ],
+   "dur": 10.262,
+   "sub": [
+    {
+     "x": "Quattro: non ci sono poteri,",
+     "a": 0.15,
+     "b": 2.304782608695652
+    },
+    {
+     "x": "né mostri. Solo ragazzi normali",
+     "a": 2.304782608695652,
+     "b": 4.67504347826087
+    },
+    {
+     "x": "che si allenano. Eppure ti",
+     "a": 4.67504347826087,
+     "b": 6.686173913043479
+    },
+    {
+     "x": "farà emozionare più di tanti",
+     "a": 6.686173913043479,
+     "b": 8.84095652173913
+    },
+    {
+     "x": "anime d'azione.",
+     "a": 8.84095652173913,
+     "b": 10.062
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "SE PROPRIO INSISTI",
+   "title": [
+    "C'È ANCHE",
+    "IN ITALIANO"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/13.jpg",
+    "/home/runner/work/_temp/davedere/img/12.jpg"
+   ],
+   "dur": 12.59,
+   "sub": [
+    {
+     "x": "Se proprio insisti, c'è anche",
+     "a": 0.15,
+     "b": 2.4496363636363636
+    },
+    {
+     "x": "doppiato in italiano. Ma non",
+     "a": 2.4496363636363636,
+     "b": 4.675090909090909
+    },
+    {
+     "x": "dire che non ti avevo",
+     "a": 4.675090909090909,
+     "b": 6.381272727272727
+    },
+    {
+     "x": "avvisato. E tu, di che",
+     "a": 6.381272727272727,
+     "b": 8.161636363636363
+    },
+    {
+     "x": "squadra sei: Karasuno o Nekoma?",
+     "a": 8.161636363636363,
+     "b": 10.609636363636364
+    },
+    {
+     "x": "Scrivilo nei commenti.",
+     "a": 10.609636363636364,
+     "b": 12.39
+    }
+   ]
+  }
+ ],
+ "noMark": true
+}
