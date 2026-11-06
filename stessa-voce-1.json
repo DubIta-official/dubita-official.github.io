@@ -1,0 +1,113 @@
+{
+ "scenes": [
+  {
+   "type": "talk",
+   "label": "LO SAPEVI?",
+   "title": [
+    "STESSA VOCE",
+    "ITALIANA"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "INDOVINA CHI"
+   },
+   "dur": 3.5,
+   "sub": []
+  },
+  {
+   "type": "trio",
+   "label": "ROUND 1",
+   "title": [
+    "CHI DOPPIA",
+    "TUTTE E TRE?"
+   ],
+   "names": [
+    "Bulma",
+    "Nami",
+    "Jessie"
+   ],
+   "from": [
+    "Dragon Ball",
+    "One Piece",
+    "Pokémon"
+   ],
+   "voice": "Emanuela Pacotto",
+   "dur": 16,
+   "reveal": 8.5,
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/1.jpg",
+    "/home/runner/work/_temp/davedere/img/2.jpg",
+    "/home/runner/work/_temp/davedere/img/3.jpg"
+   ],
+   "sub": []
+  },
+  {
+   "type": "trio",
+   "label": "ROUND 2",
+   "title": [
+    "CHI DOPPIA",
+    "TUTTI E TRE?"
+   ],
+   "names": [
+    "Sukuna",
+    "Loid",
+    "Kafka"
+   ],
+   "from": [
+    "Jujutsu Kaisen",
+    "Spy x Family",
+    "Kaiju No. 8"
+   ],
+   "voice": "Mattia Bressan",
+   "dur": 16,
+   "reveal": 8.5,
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/6.jpg",
+    "/home/runner/work/_temp/davedere/img/4.jpg",
+    "/home/runner/work/_temp/davedere/img/5.jpg"
+   ],
+   "sub": []
+  },
+  {
+   "type": "trio",
+   "label": "ROUND 3",
+   "title": [
+    "CHI DOPPIA",
+    "TUTTI E DUE?"
+   ],
+   "names": [
+    "Sung Jinwoo",
+    "Ray"
+   ],
+   "from": [
+    "Solo Leveling",
+    "The Promised Neverland"
+   ],
+   "voice": "Federico Campaiola",
+   "dur": 16,
+   "reveal": 8.5,
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/7.jpg",
+    "/home/runner/work/_temp/davedere/img/8.jpg"
+   ],
+   "sub": []
+  },
+  {
+   "type": "talk",
+   "label": "DubITA",
+   "title": [
+    "QUALE TI HA",
+    "SORPRESO DI PIÙ?"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "COMMENTA!"
+   },
+   "dur": 10.5,
+   "sub": []
+  }
+ ],
+ "noMark": true
+}
