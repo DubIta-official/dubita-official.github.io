@@ -1,0 +1,176 @@
+{
+ "titolo": "Chi ha la stessa voce",
+ "didascalia": "Chi ha la stessa voce italiana? 1, 2 o 3? 🎙️🇮🇹 Rispondi prima che parta il conto alla rovescia!\nQuante ne hai indovinate su 4? Scrivilo nei commenti!\nDoppiaggi verificati di tutti gli anime sul nostro sito, link in bio 🔗\n#DaVedere #anime #doppiaggioitaliano #quizanime #animeita",
+ "scene": [
+  {
+   "type": "talk",
+   "label": "GIOCO",
+   "title": [
+    "CHI HA LA",
+    "STESSA VOCE?"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "1, 2 O 3?"
+   },
+   "dur": 3
+  },
+  {
+   "type": "pick",
+   "label": "ROUND 1 · 4",
+   "refName": "BULMA?",
+   "refFrom": "Dragon Ball",
+   "img": [
+    {
+     "c": "Bulma"
+    },
+    {
+     "c": "Anya Forger"
+    },
+    {
+     "c": "Nami",
+     "da": "One Piece"
+    },
+    {
+     "c": "Power",
+     "da": "Chainsaw"
+    }
+   ],
+   "names": [
+    "Anya",
+    "Nami",
+    "Power"
+   ],
+   "from": [
+    "Spy x Family",
+    "One Piece",
+    "Chainsaw Man"
+   ],
+   "answer": 2,
+   "voice": "Emanuela Pacotto",
+   "dur": 13.5,
+   "reveal": 8
+  },
+  {
+   "type": "pick",
+   "label": "ROUND 2 · 4",
+   "refName": "SUKUNA?",
+   "refFrom": "Jujutsu Kaisen",
+   "img": [
+    {
+     "c": "Sukuna",
+     "da": "Jujutsu"
+    },
+    {
+     "c": "Satoru Gojo"
+    },
+    {
+     "c": "Denji",
+     "da": "Chainsaw"
+    },
+    {
+     "c": "Loid Forger"
+    }
+   ],
+   "names": [
+    "Gojo",
+    "Denji",
+    "Loid"
+   ],
+   "from": [
+    "Jujutsu Kaisen",
+    "Chainsaw Man",
+    "Spy x Family"
+   ],
+   "answer": 3,
+   "voice": "Mattia Bressan",
+   "dur": 13.5,
+   "reveal": 8
+  },
+  {
+   "type": "pick",
+   "label": "ROUND 3 · 4",
+   "refName": "SUNG JINWOO?",
+   "refFrom": "Solo Leveling",
+   "img": [
+    {
+     "c": "Jin-Woo Sung"
+    },
+    {
+     "c": "Ray",
+     "da": "Yakusoku"
+    },
+    {
+     "c": "Yuuji Itadori"
+    },
+    {
+     "c": "Ichigo Kurosaki"
+    }
+   ],
+   "names": [
+    "Ray",
+    "Yuji",
+    "Ichigo"
+   ],
+   "from": [
+    "The Promised Neverland",
+    "Jujutsu Kaisen",
+    "Bleach"
+   ],
+   "answer": 1,
+   "voice": "Federico Campaiola",
+   "dur": 13.5,
+   "reveal": 8
+  },
+  {
+   "type": "pick",
+   "label": "ROUND 4 · 4",
+   "refName": "KAFKA?",
+   "refFrom": "Kaiju No. 8",
+   "img": [
+    {
+     "c": "Kafka Hibino"
+    },
+    {
+     "c": "Naruto Uzumaki"
+    },
+    {
+     "c": "Sukuna",
+     "da": "Jujutsu"
+    },
+    {
+     "c": "Ichigo Kurosaki"
+    }
+   ],
+   "names": [
+    "Naruto",
+    "Sukuna",
+    "Ichigo"
+   ],
+   "from": [
+    "Naruto",
+    "Jujutsu Kaisen",
+    "Bleach"
+   ],
+   "answer": 2,
+   "voice": "Mattia Bressan",
+   "dur": 13.5,
+   "reveal": 8
+  },
+  {
+   "type": "talk",
+   "label": "DubITA",
+   "title": [
+    "QUANTE NE HAI",
+    "INDOVINATE SU 4?"
+   ],
+   "accent": 1,
+   "widget": {
+    "kind": "big",
+    "text": "COMMENTA!"
+   },
+   "dur": 5
+  }
+ ]
+}
