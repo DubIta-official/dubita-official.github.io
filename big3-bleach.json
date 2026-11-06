@@ -1,0 +1,259 @@
+{
+ "scenes": [
+  {
+   "type": "foto",
+   "label": "BIG 3 · 3/3",
+   "title": [
+    "17 ANNI",
+    "DI ATTESA"
+   ],
+   "sticker": "2004 → 2021",
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/1.jpg",
+    "/home/runner/work/_temp/davedere/img/2.jpg"
+   ],
+   "dur": 13.286,
+   "sub": [
+    {
+     "x": "In Giappone è uscito nel",
+     "a": 0.15,
+     "b": 2.5353617021276595
+    },
+    {
+     "x": "2004. In Italia, doppiato, è",
+     "a": 2.5353617021276595,
+     "b": 5.287702127659575
+    },
+    {
+     "x": "arrivato solo nel 2021. Diciassette",
+     "a": 5.287702127659575,
+     "b": 8.682255319148936
+    },
+    {
+     "x": "anni di attesa. È Bleach,",
+     "a": 8.682255319148936,
+     "b": 11.15936170212766
+    },
+    {
+     "x": "l'ultimo dei Big 3.",
+     "a": 11.15936170212766,
+     "b": 13.086
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "PERCHÉ GUARDARLO",
+   "title": [
+    "IL PIÙ COOL",
+    "DEI BIG 3"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/3.jpg",
+    "/home/runner/work/_temp/davedere/img/4.jpg",
+    "/home/runner/work/_temp/davedere/img/5.jpg"
+   ],
+   "dur": 18.038,
+   "sub": [
+    {
+     "x": "Il motivo per guardarlo è",
+     "a": 0.15,
+     "b": 1.9253754646840147
+    },
+    {
+     "x": "lo stile. Ichigo diventa uno",
+     "a": 1.9253754646840147,
+     "b": 3.898014869888476
+    },
+    {
+     "x": "shinigami, un dio della morte,",
+     "a": 3.898014869888476,
+     "b": 6.002163568773234
+    },
+    {
+     "x": "e da lì arrivano spade,",
+     "a": 6.002163568773234,
+     "b": 7.646029739776951
+    },
+    {
+     "x": "mantelli neri e nemici sempre",
+     "a": 7.646029739776951,
+     "b": 9.68442379182156
+    },
+    {
+     "x": "più carismatici. Bleach è il",
+     "a": 9.68442379182156,
+     "b": 11.657063197026021
+    },
+    {
+     "x": "più cool dei Big 3.",
+     "a": 11.657063197026021,
+     "b": 13.037910780669144
+    },
+    {
+     "x": "E le battaglie con le",
+     "a": 13.037910780669144,
+     "b": 14.550267657992563
+    },
+    {
+     "x": "spade sono tra le più",
+     "a": 14.550267657992563,
+     "b": 16.062624535315983
+    },
+    {
+     "x": "belle degli anni Duemila.",
+     "a": 16.062624535315983,
+     "b": 17.837999999999997
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "IL PROBLEMA",
+   "title": [
+    "FERMO",
+    "PER 10 ANNI"
+   ],
+   "sticker": "2012 → 2022",
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/7.jpg",
+    "/home/runner/work/_temp/davedere/img/6.jpg"
+   ],
+   "dur": 12.254,
+   "sub": [
+    {
+     "x": "Il problema? Nel 2012 l'anime",
+     "a": 0.15,
+     "b": 2.3335739644970412
+    },
+    {
+     "x": "si è interrotto, senza un",
+     "a": 2.3335739644970412,
+     "b": 4.235396449704142
+    },
+    {
+     "x": "finale. È ripartito solo dieci",
+     "a": 4.235396449704142,
+     "b": 6.489408284023669
+    },
+    {
+     "x": "anni dopo, con la Guerra",
+     "a": 6.489408284023669,
+     "b": 8.320792899408284
+    },
+    {
+     "x": "dei mille anni, che finalmente",
+     "a": 8.320792899408284,
+     "b": 10.57480473372781
+    },
+    {
+     "x": "conclude la storia.",
+     "a": 10.57480473372781,
+     "b": 12.053999999999998
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "IN ITALIANO",
+   "title": [
+    "LA VOCE",
+    "DI ICHIGO"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/8.jpg",
+    "/home/runner/work/_temp/davedere/img/9.jpg"
+   ],
+   "dur": 13.405999999999999,
+   "sub": [
+    {
+     "x": "In italiano Ichigo ha la",
+     "a": 0.15,
+     "b": 1.6654285714285713
+    },
+    {
+     "x": "voce di Federico Viola, Rukia",
+     "a": 1.6654285714285713,
+     "b": 3.4722857142857144
+    },
+    {
+     "x": "quella di Martina Tamburello e",
+     "a": 3.4722857142857144,
+     "b": 5.337428571428571
+    },
+    {
+     "x": "Orihime quella di Giada Bonanomi.",
+     "a": 5.337428571428571,
+     "b": 7.377428571428571
+    },
+    {
+     "x": "La serie classica è su",
+     "a": 7.377428571428571,
+     "b": 8.776285714285715
+    },
+    {
+     "x": "Prime Video, e la Guerra",
+     "a": 8.776285714285715,
+     "b": 10.291714285714287
+    },
+    {
+     "x": "dei mille anni si sta",
+     "a": 10.291714285714287,
+     "b": 11.632285714285715
+    },
+    {
+     "x": "doppiando su Disney Plus.",
+     "a": 11.632285714285715,
+     "b": 13.206
+    }
+   ]
+  },
+  {
+   "type": "foto",
+   "label": "I BIG 3",
+   "title": [
+    "QUAL È",
+    "IL MIGLIORE?"
+   ],
+   "imgs": [
+    "/home/runner/work/_temp/davedere/img/11.jpg",
+    "/home/runner/work/_temp/davedere/img/12.jpg",
+    "/home/runner/work/_temp/davedere/img/10.jpg"
+   ],
+   "dur": 9.734,
+   "sub": [
+    {
+     "x": "E ora che li abbiamo",
+     "a": 0.15,
+     "b": 1.6906567164179105
+    },
+    {
+     "x": "visti tutti e tre: per",
+     "a": 1.6906567164179105,
+     "b": 3.3713731343283584
+    },
+    {
+     "x": "te qual è il migliore",
+     "a": 3.3713731343283584,
+     "b": 4.982059701492537
+    },
+    {
+     "x": "dei Big 3? One Piece,",
+     "a": 4.982059701492537,
+     "b": 6.592746268656716
+    },
+    {
+     "x": "Naruto o Bleach? Scrivilo nei",
+     "a": 6.592746268656716,
+     "b": 8.763671641791046
+    },
+    {
+     "x": "commenti.",
+     "a": 8.763671641791046,
+     "b": 9.534
+    }
+   ]
+  }
+ ],
+ "noMark": true
+}
