@@ -111,7 +111,7 @@ function lista(r, quale) {
     const items = pesca(r, DUB.filter(x => x.st === "soon"), 5);
     if (items.length < 2) return lista(r, "piattaforma");
     return {nome: "lista-in-arrivo", scenes: [
-      {type: "list", label: "PRESTO IN ITALIANO", title: "IN ARRIVO", color: "#ffc53d", items: items.map(x => [x.titolo + (x.sub ? " – " + x.sub : ""), x.p.split(" · ")[0]])},
+      {type: "list", label: "PRESTO IN ITALIANO", title: "IN ARRIVO", color: "#ffc53d", items: items.map(x => [x.titolo + (x.sub ? " – " + x.sub : ""), x.p.split(" · ")[0].replace(/\s*\(.*\)/, "")])},
       outro],
       didascalia: `Doppiaggi italiani annunciati e in arrivo 🎙️ Quale aspetti di più?\nDate e piattaforme aggiornate sul nostro sito, link in bio 🔗\n${BASE} #novita ${items.map(x => tag(x.titolo)).join(" ")}`};
   }
