@@ -1,0 +1,1 @@
+Copie cifrate per il giro automatico di DubITA (copie.tar.gz.enc) e dati pubblici di AniList per i video (anilist/). Non servono al sito.
