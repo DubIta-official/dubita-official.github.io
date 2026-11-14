@@ -1,0 +1,324 @@
+[
+ {
+  "nome": "Goku",
+  "id": 246,
+  "trovato": "Gokuu Son",
+  "anime_anilist": "Dragon Ball Z"
+ },
+ {
+  "nome": "Naruto Uzumaki",
+  "id": 17,
+  "trovato": "Naruto Uzumaki",
+  "anime_anilist": "Naruto"
+ },
+ {
+  "nome": "Monkey D. Luffy",
+  "id": 40,
+  "trovato": "Luffy Monkey",
+  "anime_anilist": "ONE PIECE"
+ },
+ {
+  "nome": "Pikachu",
+  "id": 3891,
+  "trovato": "Pikachu",
+  "anime_anilist": "Pokémon"
+ },
+ {
+  "nome": "Light Yagami",
+  "id": 80,
+  "trovato": "Light Yagami",
+  "anime_anilist": "Death Note"
+ },
+ {
+  "nome": "Tanjiro Kamado",
+  "id": 126071,
+  "trovato": "Tanjirou Kamado",
+  "anime_anilist": "Demon Slayer: Kimetsu no Yaiba"
+ },
+ {
+  "nome": "Satoru Gojo",
+  "id": 127691,
+  "trovato": "Satoru Gojou",
+  "anime_anilist": "JUJUTSU KAISEN"
+ },
+ {
+  "nome": "Eren Jaeger",
+  "id": 40882,
+  "trovato": "Eren Yeager",
+  "anime_anilist": "Attack on Titan"
+ },
+ {
+  "nome": "Ichigo Kurosaki",
+  "id": 5,
+  "trovato": "Ichigo Kurosaki",
+  "anime_anilist": "Bleach"
+ },
+ {
+  "nome": "Saitama",
+  "id": 73935,
+  "trovato": "Saitama",
+  "anime_anilist": "One-Punch Man"
+ },
+ {
+  "nome": "Anya Forger",
+  "id": 138100,
+  "trovato": "Anya Forger",
+  "anime_anilist": "SPY x FAMILY"
+ },
+ {
+  "nome": "Izuku Midoriya",
+  "id": 89028,
+  "trovato": "Izuku Midoriya",
+  "anime_anilist": "My Hero Academia"
+ },
+ {
+  "nome": "Roronoa Zoro",
+  "id": 62,
+  "trovato": "Zoro Roronoa",
+  "anime_anilist": "ONE PIECE"
+ },
+ {
+  "nome": "Levi",
+  "id": 45627,
+  "trovato": "Levi",
+  "anime_anilist": "Attack on Titan"
+ },
+ {
+  "nome": "L",
+  "id": 71,
+  "trovato": "L Lawliet",
+  "anime_anilist": "Death Note"
+ },
+ {
+  "nome": "Conan Edogawa",
+  "id": 1742,
+  "trovato": "Conan Edogawa",
+  "anime_anilist": "TONIKAWA: Over The Moon For You Season 2"
+ },
+ {
+  "nome": "Vegeta",
+  "id": 913,
+  "trovato": "Vegeta",
+  "anime_anilist": "Dragon Ball Z"
+ },
+ {
+  "nome": "Nezuko Kamado",
+  "id": 127518,
+  "trovato": "Nezuko Kamado",
+  "anime_anilist": "Demon Slayer: Kimetsu no Yaiba"
+ },
+ {
+  "nome": "Killua Zoldyck",
+  "id": 27,
+  "trovato": "Killua Zoldyck",
+  "anime_anilist": "Hunter x Hunter (2011)"
+ },
+ {
+  "nome": "Edward Elric",
+  "id": 11,
+  "trovato": "Edward Elric",
+  "anime_anilist": "Fullmetal Alchemist: Brotherhood"
+ },
+ {
+  "nome": "Lelouch",
+  "id": 417,
+  "trovato": "Lelouch Lamperouge",
+  "anime_anilist": "Code Geass: Lelouch of the Rebellion"
+ },
+ {
+  "nome": "Mob",
+  "id": 89616,
+  "trovato": "Shigeo Kageyama",
+  "anime_anilist": "Mob Psycho 100"
+ },
+ {
+  "nome": "Shoyo Hinata",
+  "id": 64769,
+  "trovato": "Shouyou Hinata",
+  "anime_anilist": "HAIKYU!!"
+ },
+ {
+  "nome": "Denji",
+  "id": 130102,
+  "trovato": "Denji",
+  "anime_anilist": "Chainsaw Man"
+ },
+ {
+  "nome": "Power",
+  "id": 137079,
+  "trovato": "Power",
+  "anime_anilist": "Chainsaw Man"
+ },
+ {
+  "nome": "Sung Jinwoo",
+  "id": 129928,
+  "trovato": "Jin-U Seong",
+  "anime_anilist": "Solo Leveling"
+ },
+ {
+  "nome": "Kakashi Hatake",
+  "id": 85,
+  "trovato": "Kakashi Hatake",
+  "anime_anilist": "Naruto"
+ },
+ {
+  "nome": "Itachi Uchiha",
+  "id": 14,
+  "trovato": "Itachi Uchiha",
+  "anime_anilist": "Naruto"
+ },
+ {
+  "nome": "Mikasa Ackerman",
+  "id": 40881,
+  "trovato": "Mikasa Ackerman",
+  "anime_anilist": "Attack on Titan"
+ },
+ {
+  "nome": "Gon Freecss",
+  "id": 30,
+  "trovato": "Gon Freecss",
+  "anime_anilist": "Hunter x Hunter (2011)"
+ },
+ {
+  "nome": "Rem",
+  "id": 88575,
+  "trovato": "Rem",
+  "anime_anilist": "Re:ZERO -Starting Life in Another World-"
+ },
+ {
+  "nome": "Senku Ishigami",
+  "id": 124142,
+  "trovato": "Senkuu Ishigami",
+  "anime_anilist": "Dr. STONE"
+ },
+ {
+  "nome": "Frieren",
+  "id": 176754,
+  "trovato": "Frieren",
+  "anime_anilist": "Frieren: Beyond Journey’s End"
+ },
+ {
+  "nome": "Kaguya Shinomiya",
+  "id": 120649,
+  "trovato": "Kaguya Shinomiya",
+  "anime_anilist": "Kaguya-sama: Love is War"
+ },
+ {
+  "nome": "Hisoka",
+  "id": 31,
+  "trovato": "Hisoka Morow",
+  "anime_anilist": "Hunter x Hunter (2011)"
+ },
+ {
+  "nome": "Makima",
+  "id": 137080,
+  "trovato": "Makima",
+  "anime_anilist": "Chainsaw Man"
+ },
+ {
+  "nome": "Thorfinn",
+  "id": null
+ },
+ {
+  "nome": "Reigen Arataka",
+  "id": 89334,
+  "trovato": "Arataka Reigen",
+  "anime_anilist": "Mob Psycho 100"
+ },
+ {
+  "nome": "Rintaro Okabe",
+  "id": 35252,
+  "trovato": "Rintarou Okabe",
+  "anime_anilist": "Steins;Gate"
+ },
+ {
+  "nome": "Spike Spiegel",
+  "id": 1,
+  "trovato": "Spike Spiegel",
+  "anime_anilist": "Cowboy Bebop"
+ },
+ {
+  "nome": "Megumin",
+  "id": 89361,
+  "trovato": "Megumin",
+  "anime_anilist": "KONOSUBA -God's blessing on this wonderful world!"
+ },
+ {
+  "nome": "Nanachi",
+  "id": 122445,
+  "trovato": "Nanachi",
+  "anime_anilist": "Made in Abyss"
+ },
+ {
+  "nome": "Johan Liebert",
+  "id": 719,
+  "trovato": "Johan Liebert",
+  "anime_anilist": "Monster"
+ },
+ {
+  "nome": "Violet Evergarden",
+  "id": 90169,
+  "trovato": "Violet Evergarden",
+  "anime_anilist": "Violet Evergarden"
+ },
+ {
+  "nome": "Maomao",
+  "id": 126824,
+  "trovato": "Maomao",
+  "anime_anilist": "The Apothecary Diaries"
+ },
+ {
+  "nome": "Ai Hoshino",
+  "id": 172759,
+  "trovato": "Ai Hoshino",
+  "anime_anilist": "OSHI NO KO"
+ },
+ {
+  "nome": "Hitori Gotoh",
+  "id": 257562,
+  "trovato": "Hitori Gotou",
+  "anime_anilist": "BOCCHI THE ROCK!"
+ },
+ {
+  "nome": "Bojji",
+  "id": 209532,
+  "trovato": "Bojji",
+  "anime_anilist": "Ranking of Kings"
+ },
+ {
+  "nome": "Ken Kaneki",
+  "id": 87275,
+  "trovato": "Ken Kaneki",
+  "anime_anilist": "Tokyo Ghoul"
+ },
+ {
+  "nome": "Kento Nanami",
+  "id": 133704,
+  "trovato": "Kento Nanami",
+  "anime_anilist": "JUJUTSU KAISEN"
+ },
+ {
+  "nome": "Gabimaru",
+  "id": 137260,
+  "trovato": "Gabimaru",
+  "anime_anilist": "Hell’s Paradise"
+ },
+ {
+  "nome": "Guts",
+  "id": 422,
+  "trovato": "Guts",
+  "anime_anilist": "Berserk"
+ },
+ {
+  "nome": "Okarun",
+  "id": 222593,
+  "trovato": "Ken Takakura",
+  "anime_anilist": "DAN DA DAN"
+ },
+ {
+  "nome": "Shinji Ikari",
+  "id": 89,
+  "trovato": "Shinji Ikari",
+  "anime_anilist": "Neon Genesis Evangelion"
+ }
+]
